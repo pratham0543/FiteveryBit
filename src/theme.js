@@ -14,6 +14,9 @@ const theme = createTheme({
     true: {
       main: "#fff",
     },
+    cap:{
+      main:"#7b7b7b"
+    }
   },
   typography: {
     fontFamily: "Outfit, sans-serif",

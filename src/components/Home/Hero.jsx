@@ -1,6 +1,6 @@
 import React from "react";
 import Video from "../../assets/workout.mp4";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import "./hero.css";
 const Hero = () => {
   return (
@@ -11,11 +11,30 @@ const Hero = () => {
           <source src={Video} type="video/mp4" />
         </video>
         <Typography
-          variant="h5"
+          variant="h4"
           className="content"
-          sx={{ color: "true.main" }}
+          fontWeight={700}
+          sx={{ color: "true.main", textTransform: "capitalize" }}
         >
-          Get your Personalized Plan
+          Do the
+          <Typography variant="text" color="secondary.main">
+            {" "}
+            impossible{" "}
+          </Typography>{" "}
+          and you’ll <br />
+          <Typography variant="text" color="secondary.main">
+            never doubt
+          </Typography>{" "}
+          yourself ever again
+          <br />
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ color: "true.main" }}
+            disableElevation
+          >
+            Get Started
+          </Button>
         </Typography>
       </Box>
     </>
