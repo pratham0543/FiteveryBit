@@ -120,6 +120,7 @@ const Navbar = () => {
           <Typography
             variant="h4"
             sx={{
+              fontWeight:600,
               display: { xs: "none", sm: "block", md: "none", lg: "none" },
             }}
           >
@@ -128,14 +129,16 @@ const Navbar = () => {
 
           {/* for small screens */}
           <Typography
-            variant="h5"
+            variant="h4"
+            fontSize={30}
             sx={{
-              display: { xs: "block", sm: "none", md: "none", lg: "none" },
+              fontWeight:600,
+              display: { xs: "block", sm: "none ", md: "none", lg: "none" },
             }}
           >
             FiteveryBit
           </Typography>
-
+         
           {/* Login/signup */}
 
           <Stack direction="row" spacing={1}>
@@ -186,7 +189,7 @@ const Navbar = () => {
           p={1.5}
           variant="h4"
           sx={{
-            fontWeight: 700,
+            fontWeight: 600,
             backgroundColor: "primary.main",
             color: "true.main",
             display: { xs: "none", sm: "none", md: "block", lg: "block" },
@@ -200,31 +203,20 @@ const Navbar = () => {
 
         <Typography
           p={1.5}
-          variant="h5"
+          variant="h4"
+          fontSize={28}
           sx={{
-            fontWeight: 700,
+            fontWeight:600,
             backgroundColor: "primary.main",
             color: "true.main",
-            display: { xs: "none", sm: "block", md: "none", lg: "none" },
+            display: { xs: "block", sm: "block", md: "none", lg: "none" },
           }}
           align="center"
         >
           Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
         </Typography>
 
-        <Typography
-          p={1.5}
-          variant="h6"
-          sx={{
-            fontWeight: 700,
-            backgroundColor: "primary.main",
-            color: "true.main",
-            display: { xs: "block", sm: "none", md: "none", lg: "none" },
-          }}
-          align="center"
-        >
-          Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
-        </Typography>
+       
 
         <Divider />
 

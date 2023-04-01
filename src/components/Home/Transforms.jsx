@@ -1,8 +1,12 @@
 import React from "react";
-import { Grid, Paper, Box, Typography } from "@mui/material";
+import { Grid, Paper, Box, Typography, Button } from "@mui/material";
 import gainImage from "../../assets/arnold.jpg";
 import cutImage from "../../assets/lazar.jpg";
 import maintainImage from "../../assets/cbum.jpg";
+import bicep from "../../assets/bicep.png";
+import cut from "../../assets/cut.png";
+import dumbbell from "../../assets/dumbell.png";
+import "./transform.css";
 
 const styles = {
   gain: {
@@ -12,6 +16,9 @@ const styles = {
     height: "400px",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   cut: {
     backgroundImage: `url(${cutImage})`,
@@ -20,6 +27,9 @@ const styles = {
     height: "400px",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   maintain: {
     backgroundImage: `url(${maintainImage})`,
@@ -28,6 +38,9 @@ const styles = {
     height: "400px",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 };
 const Transforms = () => {
@@ -52,13 +65,33 @@ const Transforms = () => {
           columnSpacing={2}
         >
           <Grid item xs={9} sm={4} md={3}>
-            <Paper elevation={3} style={styles.gain}></Paper>
+            <Paper elevation={3} style={styles.gain}>
+              <Box textAlign="center" sx={{ color: "true.main" }}>
+                <img src={bicep} alt="bicep flex" />
+                {/* <i className="fa-solid fa-person-walking fa-2xl"></i> */}
+                <Typography
+                  color="true.main"
+                  variant="h5"
+                  fontSize={28}
+                  sx={{ fontWeight: 900 }}
+                >
+                  BULK
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ color: "true.main", marginTop: "8px" }}
+                >
+                  Start Gaining
+                </Button>
+              </Box>
+            </Paper>
           </Grid>
           <Grid item xs={9} sm={4} md={8} flexDirection="column" display="flex">
             <Box
               flexDirection="column"
               sx={{
-                transform:{ md:"translateY(80%)",lg:"translateY(100%)"},
+                transform: { md: "translateY(80%)", lg: "translateY(100%)" },
                 display: { xs: "none", sm: "flex" },
               }}
             >
@@ -66,7 +99,11 @@ const Transforms = () => {
                 "The meaning of life is not simply to exist, to survive, but to
                 move ahead, to go up, to conquer."
               </Typography>
-              <Typography color="cap.main" alignSelf={"flex-end"}>
+              <Typography
+                color="cap.main"
+                alignSelf={"flex-end"}
+                variant="subtitle1"
+              >
                 -Arnold Schwarzenegger
               </Typography>
             </Box>
@@ -77,7 +114,7 @@ const Transforms = () => {
           container
           flexDirection="row"
           mt={2}
-          justifyContent={{xs:"center",sm:"flex-end"}}
+          justifyContent={{ xs: "center", sm: "flex-end" }}
           rowSpacing={2}
           columnSpacing={2}
         >
@@ -85,7 +122,7 @@ const Transforms = () => {
             <Box
               flexDirection="column"
               sx={{
-                transform:{ md:"translateY(80%)",lg:"translateY(100%)"},
+                transform: { md: "translateY(80%)", lg: "translateY(100%)" },
                 display: { xs: "none", sm: "flex" },
               }}
             >
@@ -94,13 +131,36 @@ const Transforms = () => {
                 push you forward and to make you go to the gym every day and
                 leave it all there"
               </Typography>
-              <Typography color="cap.main" alignSelf={"flex-end"}>
+              <Typography
+                color="cap.main"
+                alignSelf={"flex-end"}
+                variant="subtitle1"
+              >
                 -Lazar Angelov
               </Typography>
             </Box>
           </Grid>
           <Grid item xs={9} sm={4} md={3}>
-            <Paper elevation={3} style={styles.cut}></Paper>
+            <Paper elevation={3} style={styles.cut} id="paper">
+              <Box textAlign="center" sx={{ color: "true.main" }} id="visible">
+                <img src={cut} alt="cutting" />
+                {/* <i className="fa-solid fa-person-walking fa-2xl"></i> */}
+                <Typography
+                  color="true.main"
+                  variant="h5"
+                  sx={{ fontWeight: 600 }}
+                >
+                  CUT
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ color: "true.main", marginTop: "8px" }}
+                >
+                  Start Cutting
+                </Button>
+              </Box>
+            </Paper>
           </Grid>
         </Grid>
 
@@ -113,20 +173,44 @@ const Transforms = () => {
           columnSpacing={2}
         >
           <Grid item xs={9} sm={4} md={3}>
-            <Paper elevation={3} style={styles.maintain}></Paper>
+            <Paper elevation={3} style={styles.maintain}>
+              <Box textAlign="center" sx={{ color: "true.main" }}>
+                <img src={dumbbell} alt="Maintain" />
+                <Typography
+                  color="true.main"
+                  variant="h5"
+                  sx={{ fontWeight: 600 }}
+                >
+                  MAINTAIN
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ color: "true.main", marginTop: "8px" }}
+                >
+                  Start Maintainence
+                </Button>
+              </Box>
+            </Paper>
           </Grid>
           <Grid item xs={9} sm={4} md={8} flexDirection="column" display="flex">
             <Box
               flexDirection="column"
               sx={{
-                transform:{ md:"translateY(80%)",lg:"translateY(100%)"},
+                transform: { md: "translateY(80%)", lg: "translateY(100%)" },
                 display: { xs: "none", sm: "flex" },
               }}
             >
               <Typography variant="h5">
-              “If when you look in the mirror you don't see the perfect version of yourself, you better see the hardest working version of yourself.”
+                “If when you look in the mirror you don't see the perfect
+                version of yourself, you better see the hardest working version
+                of yourself.”
               </Typography>
-              <Typography color="cap.main" alignSelf={"flex-end"}>
+              <Typography
+                color="cap.main"
+                variant="subtitle1"
+                alignSelf={"flex-end"}
+              >
                 -Chris Bumstead
               </Typography>
             </Box>
