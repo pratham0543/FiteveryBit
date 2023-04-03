@@ -7,7 +7,7 @@ import bicep from "../../assets/bicep.png";
 import cut from "../../assets/cut.png";
 import dumbbell from "../../assets/dumbell.png";
 import "./transform.css";
-
+// we can give css properties in css file by defining classname here and use it in css file or specify here in parent component using &:hover property
 const styles = {
   gain: {
     backgroundImage: `url(${gainImage})`,
@@ -44,6 +44,25 @@ const styles = {
   },
 };
 const Transforms = () => {
+  //transition properties generalized
+  
+  const transitionParent={
+    overflow: "hidden",
+    ":hover .swipeLeftRight": {
+    
+      transform: "translateX(0)"
+    }
+  }
+  
+  const transitionPropertiesPositive={
+    transform: "translateX(300px)",
+    transition: "all 0.4s ease-out", 
+  }
+
+  const transitionPropertiesNegative={
+    transform: "translateX(-300px)",
+    transition: "all 0.4s ease-out", 
+  }
   return (
     <>
       <Box mt={10} p={5}>
@@ -65,22 +84,42 @@ const Transforms = () => {
           columnSpacing={2}
         >
           <Grid item xs={9} sm={4} md={3}>
-            <Paper elevation={3} style={styles.gain}>
-              <Box textAlign="center" sx={{ color: "true.main" }}>
-                <img src={bicep} alt="bicep flex" />
+            <Paper
+              className="parent_image"
+              elevation={3}
+              style={styles.gain}
+              sx={{
+                ...transitionParent
+              }}
+            >
+              <Box
+                textAlign="center"
+              >
+                <div className="transform-image">
+                  <img src={bicep} alt="bicep flex" />
+                </div>
                 {/* <i className="fa-solid fa-person-walking fa-2xl"></i> */}
                 <Typography
                   color="true.main"
                   variant="h5"
+                  className="swipeLeftRight"
                   fontSize={28}
-                  sx={{ fontWeight: 900 }}
+                  sx={{
+                    fontWeight: 900,
+                  ...transitionPropertiesPositive
+                  }}
                 >
                   BULK
                 </Typography>
                 <Button
                   variant="contained"
                   color="secondary"
-                  sx={{ color: "true.main", marginTop: "8px" }}
+                  sx={{
+                    color: "true.main",
+                    marginTop: "8px",
+                  ...transitionPropertiesNegative
+                  }}
+                  className="swipeLeftRight"
                 >
                   Start Gaining
                 </Button>
@@ -141,21 +180,24 @@ const Transforms = () => {
             </Box>
           </Grid>
           <Grid item xs={9} sm={4} md={3}>
-            <Paper elevation={3} style={styles.cut} id="paper">
-              <Box textAlign="center" sx={{ color: "true.main" }} id="visible">
-                <img src={cut} alt="cutting" />
+            <Paper elevation={3} style={styles.cut} className="parent_image" sx={{...transitionParent}}>
+              <Box textAlign="center" sx={{ color: "true.main" }} >
+                <img src={cut} alt="cutting" className="transform-image"/>
                 {/* <i className="fa-solid fa-person-walking fa-2xl"></i> */}
                 <Typography
                   color="true.main"
                   variant="h5"
-                  sx={{ fontWeight: 600 }}
+                  sx={{ fontWeight: 600,...transitionPropertiesNegative  }}
+                  className="swipeLeftRight"
+
                 >
                   CUT
                 </Typography>
                 <Button
                   variant="contained"
                   color="secondary"
-                  sx={{ color: "true.main", marginTop: "8px" }}
+                  className="swipeLeftRight"
+                  sx={{ color: "true.main", marginTop: "8px",...transitionPropertiesPositive,}}
                 >
                   Start Cutting
                 </Button>
@@ -173,20 +215,22 @@ const Transforms = () => {
           columnSpacing={2}
         >
           <Grid item xs={9} sm={4} md={3}>
-            <Paper elevation={3} style={styles.maintain}>
+            <Paper elevation={3} style={styles.maintain} className="parent_image" sx={{...transitionParent}}>
               <Box textAlign="center" sx={{ color: "true.main" }}>
-                <img src={dumbbell} alt="Maintain" />
+                <img src={dumbbell} alt="Maintain" className="transform-image" />
                 <Typography
                   color="true.main"
                   variant="h5"
-                  sx={{ fontWeight: 600 }}
+                  className="swipeLeftRight"
+                  sx={{ fontWeight: 600,...transitionPropertiesPositive }}
                 >
                   MAINTAIN
                 </Typography>
                 <Button
                   variant="contained"
                   color="secondary"
-                  sx={{ color: "true.main", marginTop: "8px" }}
+                  className="swipeLeftRight"
+                  sx={{ color: "true.main", marginTop: "8px",...transitionPropertiesNegative }}
                 >
                   Start Maintainence
                 </Button>
