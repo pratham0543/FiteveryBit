@@ -6,7 +6,7 @@ import {
   Button,
   AppBar,
   Toolbar,
-  Drawer,
+  SwipeableDrawer,
   List,
   ListItem,
   ListItemButton,
@@ -26,7 +26,8 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setisOpen] = useState(false);
-
+  const [anchor,setAnchor]=useState("");
+  
   const openDrawer = () => {
     setisOpen(true);
   };
@@ -179,9 +180,10 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
-      <Drawer
+      < SwipeableDrawer
         anchor="left"
         open={isOpen}
+        onOpen={()=>setAnchor("left")}
         onClose={() => setisOpen(false)}
         sx={{ backgroundColor: "true" }}
       >
@@ -307,7 +309,7 @@ const Navbar = () => {
           </ListItem>
           <Divider />
         </List>
-      </Drawer>
+      </ SwipeableDrawer>
     </>
   );
 };
