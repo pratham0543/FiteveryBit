@@ -21,7 +21,6 @@ import CalculateIcon from "@mui/icons-material/Calculate";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
 import RssFeedIcon from "@mui/icons-material/RssFeed";
-
 import { useState } from "react";
 
 const Navbar = () => {
