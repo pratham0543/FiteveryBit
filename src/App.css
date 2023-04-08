@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  overflow-x:hidden
 }
 
 .App-logo {
@@ -35,4 +36,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+.icon-box i{
+  transition:0.2s ease-in-out;
+}
+.icon-box i:hover{
+  transform: translateY(-5px);
+}
+.map-container{
+  height: 100%;
+  width: 100%;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Paper, Typography, Avatar, Stack, Rating } from "@mui/material";
 import { pink } from "@mui/material/colors";
 
-const Reviews = () => {
+const Reviews = ({name,plan,rating,desc}) => {
   return (
     <Paper
       sx={{
@@ -12,6 +12,7 @@ const Reviews = () => {
         backdropFilter: "blur(30px)",
         padding: "16px",
         color: "true.main",
+        marginLeft:"2em"
       }}
     >
       <Stack spacing={2}>
@@ -20,15 +21,15 @@ const Reviews = () => {
           <Stack>
             <Stack direction="row" spacing={1}>
               <Typography fontWeight={700} color="true.main">
-                John Doe
+                {name}
               </Typography>
               <Typography m={0} color="cap.main" variant="caption">
-                (Weight Loss)
+                ({plan})
               </Typography>
             </Stack>
             <Rating
               name="read-only"
-              value={3.5}
+              value={rating}
               precision={0.5}
               readOnly
               size="small"
@@ -36,10 +37,7 @@ const Reviews = () => {
           </Stack>
         </Stack>
         <Typography variant="body1">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, maiores
-          aperiam! Similique laborum quod rem voluptates debitis perspiciatis
-          vero beatae?Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Perspiciatis esse dolorem dolorum exercitationem blanditiis enim.
+          {desc}
         </Typography>
       </Stack>
     </Paper>
