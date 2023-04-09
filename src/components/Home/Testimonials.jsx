@@ -125,6 +125,7 @@ const Testimonials = () => {
       <Typography ml={5} variant="h4" fontWeight="600">
         Reviews by <span style={{ color: "#0AAE59" }}>You</span>
       </Typography>
+      <Typography ml={5} variant="body1">Trusted by millions</Typography>
       <Box
         mt={2}
         display="flex"
@@ -187,9 +188,10 @@ const Testimonials = () => {
         className="main-review-container"
         backgroundColor="primary.main"
         mt={2}
+        pb={5}
       >
         {/* This is container which is used to give margin to review animation */}
-        <Box className="review-box-1" mx="auto">
+        <Box className="review-box-1" mx="auto" >
           <Box className="reviewbox" mt={5} ml={5} mr={5} p={2} display="flex">
             {/* mapping reviews acc to the data coming from backend */}
             {reviewArr.map((rev) => (

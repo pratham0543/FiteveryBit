@@ -37,57 +37,7 @@ const Navbar = () => {
   //material-ui core breakpoints has function to tell breakpoints (discussed later)
 
   return (
-    // <Box
 
-    //     sx={{ backgroundColor: 'primary.main', padding: 4 }}
-    // >
-    //     <Stack
-    //         justifyContent={'space-between'}
-    //         direction='row'
-
-    //     >
-
-    //         {/* Menu button to open drawer */}
-    //         <IconButton
-    //             aria-label='drawer'
-    //             sx={{
-    //                 border: "1px solid ",
-    //                 borderColor: 'green',
-    //                 borderRadius: '20%'
-    //             }}
-    //             size='medium'
-
-    //         >
-    //             <MenuIcon
-    //                 color='secondary'
-    //             />
-    //         </IconButton>
-
-    //         {/* LOGO */}
-    //         <Typography
-    //             variant='h3'
-    //             color='white'
-    //             sx={{ fontFamily: 'Outfit, sans-serif' }}>
-    //             Fitevery Bit
-    //         </Typography>
-
-    //         {/* Register/Login */}
-    //         <Stack direction='row'>
-    //             <Button
-    //                 color='secondary'
-    //                 variant='contained'
-    //                 size="small"
-    //                 sx={{ color: 'white',backgroundColor:"red" }} >
-    //                 Login
-    //             </Button>
-
-    //             <Button variant='text' color='secondary' size="small">
-    //                 SignUp
-    //             </Button>
-    //         </Stack>
-
-    //     </Stack>
-    // </Box>
     <>
       {/* // This right here is navabar  */}
       <AppBar position="fixed" sx={{ p: 0.5 }}>
@@ -114,7 +64,7 @@ const Navbar = () => {
               display: { xs: "none", sm: "none", md: "block", lg: "block" },
             }}
           >
-            FiteveryBit
+            Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
           </Typography>
           {/* for medium screens */}
           <Typography
@@ -124,7 +74,7 @@ const Navbar = () => {
               display: { xs: "none", sm: "block", md: "none", lg: "none" },
             }}
           >
-            FiteveryBit
+            Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
           </Typography>
 
           {/* for small screens */}
@@ -136,7 +86,7 @@ const Navbar = () => {
               display: { xs: "block", sm: "none ", md: "none", lg: "none" },
             }}
           >
-            FiteveryBit
+            Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
           </Typography>
          
           {/* Login/signup */}
