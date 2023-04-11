@@ -22,7 +22,7 @@ import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
 import RssFeedIcon from "@mui/icons-material/RssFeed";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [isOpen, setisOpen] = useState(false);
   const [anchor,setAnchor]=useState("");
@@ -92,13 +92,16 @@ const Navbar = () => {
           {/* Login/signup */}
 
           <Stack direction="row" spacing={1}>
+            <Link to="/signup">
             <Button
               variant="contained"
               color="secondary"
               sx={{ color: "white", display: { xs: "none", sm: "block" } }}
+              
             >
               Login
             </Button>
+            </Link>
 
             {/* for xtra small screen */}
             <Button
