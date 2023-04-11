@@ -8,6 +8,7 @@ const signupSchema=new mongoose.Schema({
     height:mongoose.Schema.Types.Number,
     weight:mongoose.Schema.Types.Number,
     age:mongoose.Schema.Types.Number,
+    user_type:mongoose.Schema.Types.String,
     mobility: {
         type: Map,
         of: Boolean

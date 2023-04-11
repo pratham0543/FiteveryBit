@@ -19,6 +19,7 @@ const validate = joi.object({
     height: joi.number().required(),
     weight: joi.number().required(),
     age: joi.number().required(),
+    user_type:joi.string().required(),
     mobility:joi.object().required()
 })
 //post request
@@ -61,32 +62,7 @@ router.post('/',(req,res)=>{
 
 
 router.patch('/', (req, res) => {
-    // Forgot Password
-    const oldPassword = req.body.password
-    const newPassword = req.body.newPassword
-    // checking if user exists
-    signupschema.find( {email: req.body.email} )
-        .then(resul => {
-            if(resul.length === 0) {
-                // The user does not exist
-                res.status(400).json( {message: 'Email or password did not match, try again with a different email or password'} )
-            } else {
-                // matching passwords
-                bcrypt.compare(resul[0].password,req.body.password)
-                    .then(result=>{
-                        const updatedUser = {
-                            _id: resul[0]._id,
-                            email: resul[0].email,
-                            password: newPassword
-                        }
-                        signupschema.findByIdAndUpdate(resul[0]._id, updatedUser)
-                            .then(result => res.status(200).json( {message: 'Password Changed', updatedUser: result} ))
-                            .catch(err => res.status(500).json( {message: 'Server Encountered an Error', error: err} ))
-                    })
-                    .catch(err=>res.status(400).json({"message":"The passwords doesn't match",error:err}))
-            }
-        })
-        .catch(err => res.status(500).json( {message: 'Server Encountered an Error', error: err} ))
+    res.status(203).json({"message":"This is a patch request to /signup patch"})
 })
 
 router.delete('/', (req, res) => {
