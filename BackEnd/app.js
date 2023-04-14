@@ -29,5 +29,5 @@ const login=require('./api/routes/login')
 //route handling
 app.use('/signup',signup)
 app.use('/login',login)
-
+app.use('/',(req,res)=>res.status(404).json({message:"File not found"}))
 module.exports=app;

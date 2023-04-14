@@ -17,11 +17,11 @@ const validate = joi.object({
     email: joi.string().required().email(),
     password: joi.string().required().min(8),
     phoneno: joi.number().required(),
-    height: joi.number().required(),
-    weight: joi.number().required(),
+    height: joi.number(),
+    weight: joi.number(),
     age: joi.number().required(),
-    user_type:joi.string().required(),
-    mobility:joi.object().required()
+    user_type:joi.string(),
+    mobility:joi.object()
 })
 //post request
 router.post('/',(req,res)=>{
@@ -42,7 +42,8 @@ router.post('/',(req,res)=>{
                     .then(result=>{
                         const newUser=new signupschema({
                             _id:new mongoose.Types.ObjectId(),
-                            name:req.body.name,
+                            firstname:req.body.firstname,
+                            lastname:req.body.lastname,
                             email:req.body.email,
                             password:result,
                             phoneno:req.body.phoneno,

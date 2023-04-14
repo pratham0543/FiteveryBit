@@ -9,72 +9,93 @@ import {
   IconButton,
   Checkbox,
   Button,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 
 import logImage from "../../assets/registration.jpg";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import axios from "axios";
 const validationSchema = yup.object({
   firstname: yup
-      .string("Enter a valid name")
-      .min(3,'Minimum length is 3')
-      .required("First name required"),
+    .string("Enter a valid name")
+    .min(3, "Minimum length is 3")
+    .required("First name required"),
   lastname: yup
-      .string("Enter a valid name")
-      .min(3,'Minimum length is 3')
-      .required(" last name required"),
+    .string("Enter a valid name")
+    .min(3, "Minimum length is 3")
+    .required(" last name required"),
   age: yup
-      .number("Enter your age")
-      .positive("Age cannot be negative")
-      .min(18,'Minimum age should be 18')
-      .required("Age is required")
-      .integer(),
+    .number("Enter your age")
+    .positive("Age cannot be negative")
+    .min(18, "Minimum age should be 18")
+    .required("Age is required")
+    .integer(),
   email: yup
-      .string("Enter your email")
-      .email("Enter a valid email")
-      .required('Email is required'),
+    .string("Enter your email")
+    .email("Enter a valid email")
+    .required("Email is required"),
   password: yup
-      .string("Enter your password")
-      .required("Password is required")
-      .min(8,'Minimum length is 8'),
-     
-  cnumber: yup
+    .string("Enter your password")
+    .required("Password is required")
+    .min(8, "Minimum length is 8"),
+
+  phoneno: yup
     .string("Enter a 10 digit number")
     .min(10, "Please enter a valid 10 digit number")
-    .max(10,"Number cannot exceed 10 digit limit")
-    .matches('^[0-9]*$',{message:"Please enter only digit"})
+    .max(10, "Number cannot exceed 10 digit limit")
+    .matches("^[0-9]*$", { message: "Please enter only digit" })
     .required("Contact number is required"),
 });
 
 const Signup = (props) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [checked, setchecked] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [erropen,setErropen]=useState(false);
+  const [errormes, seterrormes] = useState('')
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpen(false);
+    setErropen(false);
+  };
   const formik = useFormik({
-        initialValues:{
-          email:'',
-          password:'',
-          cnumber:0,
-          age:0,
-          tname:'',
-          lastname:''
-        },
-        validationSchema:validationSchema,
-        onSubmit:(values)=>
-        {
-          alert(JSON.stringify(values))
-
-        }
+    initialValues: {
+      email: "",
+      password: "",
+      phoneno: 0,
+      age: 0,
+      firstname: "",
+      lastname: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(JSON.stringify(values));
+      axios
+        .post("http://localhost:3200/signup", values)
+        .then((result) => {
+          setOpen(true);
+        })
+        .catch((err) => {
+          seterrormes(err.response.data.message)
+          setErropen(true);
+        });
+    },
   });
 
   return (
@@ -92,18 +113,16 @@ const Signup = (props) => {
       >
         <Grid
           item
-          
           sm={6}
           md={4}
           sx={{
             backgroundImage: `url(${logImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
-           
+
             display: { xs: "none", sm: "block" },
             height: "115.6vh",
           }}
-        
         ></Grid>
         <Grid item xs={12} sm={6} md={5}>
           <Stack spacing={2} sx={{ padding: "15px", mt: "8px" }}>
@@ -115,7 +134,7 @@ const Signup = (props) => {
               sx={{ padding: "10px", paddingBottom: "12px" }}
               elevation={0}
             >
-              <form onSubmit={formik.handleSubmit}> 
+              <form onSubmit={formik.handleSubmit}>
                 <Typography fontSize="14px">First Name</Typography>
                 <TextField
                   color="secondary"
@@ -126,10 +145,14 @@ const Signup = (props) => {
                   }}
                   value={formik.values.firstname}
                   variant="outlined"
-                  id="tname"
+                  id="firstname"
                   onChange={formik.handleChange}
-                  error={formik.touched.tname && Boolean(formik.errors.tname)}
-                  helperText={formik.touched.tname && formik.errors.tname}
+                  error={
+                    formik.touched.firstname && Boolean(formik.errors.firstname)
+                  }
+                  helperText={
+                    formik.touched.firstname && formik.errors.firstname
+                  }
                   fullWidth
                 />
                 <Typography fontSize="14px" mt={2}>
@@ -145,7 +168,9 @@ const Signup = (props) => {
                   variant="outlined"
                   id="lastname"
                   onChange={formik.handleChange}
-                  error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+                  error={
+                    formik.touched.lastname && Boolean(formik.errors.lastname)
+                  }
                   helperText={formik.touched.lastname && formik.errors.lastname}
                   fullWidth
                 />
@@ -197,10 +222,12 @@ const Signup = (props) => {
                     },
                   }}
                   variant="outlined"
-                  id="cnumber"
+                  id="phoneno"
                   onChange={formik.handleChange}
-                  error={formik.touched.cnumber && Boolean(formik.errors.cnumber)}
-                  helperText={formik.touched.cnumber && formik.errors.cnumber}
+                  error={
+                    formik.touched.phoneno && Boolean(formik.errors.phoneno)
+                  }
+                  helperText={formik.touched.phoneno && formik.errors.phoneno}
                   type="number"
                   fullWidth
                 />
@@ -229,13 +256,22 @@ const Signup = (props) => {
                   variant="outlined"
                   id="password"
                   onChange={formik.handleChange}
-                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
                   helperText={formik.touched.password && formik.errors.password}
                   fullWidth
                 />
                 <Box mt={2} sx={{ textAlign: "center" }} display="flex">
-                  <Checkbox color="secondary" />
-                  <Typography variant="body2" sx={{ alignSelf: "center" }}>
+                  <Checkbox
+                    color={checked ? "secondary" : "error"}
+                    onChange={(e) => setchecked(e.target.checked)}
+                  />
+                  <Typography
+                    color={checked ? "" : "error"}
+                    variant="body2"
+                    sx={{ alignSelf: "center" }}
+                  >
                     {" "}
                     I accept the{" "}
                     <Link>
@@ -251,7 +287,7 @@ const Signup = (props) => {
                 </Box>
                 <Box mt={2} display="flex">
                   <Button
-                  type="submit"
+                    type="submit"
                     variant="contained"
                     color="secondary"
                     sx={{ color: "white" }}
@@ -263,7 +299,7 @@ const Signup = (props) => {
                     variant="body2"
                   >
                     Already have an account?{" "}
-                    <Link to='/login'>
+                    <Link to="/login">
                       {" "}
                       <span style={{ color: "#0AAE59" }}>LogIn</span>
                     </Link>
@@ -274,6 +310,32 @@ const Signup = (props) => {
           </Stack>
         </Grid>
       </Grid>
+
+      {/* will show only on successfull user creation  */}
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+        
+          color="secondary"
+          onClose={handleClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+         User Created Successfully
+        </Alert>
+      </Snackbar>
+
+      {/* will show on error */}
+      <Snackbar open={erropen} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+        color="error"
+          onClose={handleClose}
+          
+          sx={{ width: "100%" }}
+        >
+         {errormes}
+        </Alert>
+      </Snackbar>
+
     </>
   );
 };
