@@ -12,7 +12,8 @@ const signupschema=require("../model/signupSchema")
 
 //validating using joi
 const validate = joi.object({
-    name: joi.string().required(),
+    firstname:joi.string().required(),
+    lastname: joi.string().required(),
     email: joi.string().required().email(),
     password: joi.string().required().min(8),
     phoneno: joi.number().required(),

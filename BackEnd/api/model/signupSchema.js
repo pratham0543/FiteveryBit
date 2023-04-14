@@ -1,7 +1,8 @@
 const mongoose=require('mongoose')
 const signupSchema=new mongoose.Schema({
     _id:mongoose.Schema.Types.ObjectId,
-    name:mongoose.Schema.Types.String,
+    firstname:mongoose.Schema.Types.String,
+    lastname:mongoose.Schema.Types.String,
     email:mongoose.Schema.Types.String,
     password:mongoose.Schema.Types.String,
     phoneno:mongoose.Schema.Types.Number,
