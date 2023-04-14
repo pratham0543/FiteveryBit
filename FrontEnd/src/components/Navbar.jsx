@@ -92,7 +92,7 @@ const Navbar = () => {
           {/* Login/signup */}
 
           <Stack direction="row" spacing={1}>
-            <Link to="/signup">
+            <Link to='/login'>
             <Button
               variant="contained"
               color="secondary"
@@ -104,6 +104,7 @@ const Navbar = () => {
             </Link>
 
             {/* for xtra small screen */}
+            <Link to='/login'>
             <Button
               variant="contained"
               color="secondary"
@@ -112,15 +113,18 @@ const Navbar = () => {
             >
               Login
             </Button>
-
+            </Link>
+              <Link to='/signup'>
             <Button
               variant="text"
               sx={{ color: "white", display: { xs: "none", sm: "block" } }}
             >
               SignUp
             </Button>
+            </Link>
 
             {/* for xstra small screen */}
+            <Link to='/signup'>
             <Button
               variant="text"
               size="small"
@@ -128,6 +132,7 @@ const Navbar = () => {
             >
               SignUp
             </Button>
+            </Link>
           </Stack>
         </Toolbar>
       </AppBar>
