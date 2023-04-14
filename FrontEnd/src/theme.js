@@ -16,6 +16,9 @@ const theme = createTheme({
     },
     cap:{
       main:"#7b7b7b"
+    },
+    error:{
+      main:"#E00029"
     }
   },
   typography: {
