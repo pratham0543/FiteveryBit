@@ -55,9 +55,16 @@ const validationSchema = yup.object({
 });
 
 const Signup = (props) => {
+  // to show hide password with eye
   const [showPassword, setShowPassword] = useState(false);
+  //this is the chekcbox state
   const [checked, setchecked] = useState(true);
+
+
+  //successful user snackbar 
   const [open, setOpen] = useState(false);
+
+  //unsuccessfull user snackbar
   const [erropen,setErropen]=useState(false);
   const [errormes, seterrormes] = useState('')
   const handleShowPassword = () => {
@@ -66,6 +73,8 @@ const Signup = (props) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  //handle close for closing snackbars
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

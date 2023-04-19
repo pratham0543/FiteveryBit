@@ -24,6 +24,8 @@ router.post('/',(req,res)=>{
                             const userDetails={
                                 userId:result._id,
                                 email:result.email,
+                                firstname:result.firstname,
+                                lastname:result.lastname,
                                 usertype:result.user_type
                             }
                             //sending json web token
