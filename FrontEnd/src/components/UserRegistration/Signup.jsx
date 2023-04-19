@@ -17,7 +17,7 @@ import logImage from "../../assets/registration.jpg";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -121,10 +121,10 @@ const Signup = (props) => {
             backgroundPosition: "center center",
 
             display: { xs: "none", sm: "block" },
-            height: "115.6vh",
+            height: "128.6vh",
           }}
         ></Grid>
-        <Grid item xs={12} sm={6} md={5}>
+        <Grid item xs={12} sm={5} md={3}>
           <Stack spacing={2} sx={{ padding: "15px", mt: "8px" }}>
             <Typography variant="h4" fontWeight="600">
               Create your Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>{" "}

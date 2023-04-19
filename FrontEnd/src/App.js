@@ -5,18 +5,21 @@ import Navbar from "./components/Navbar";
 import Signup from "./components/UserRegistration/Signup";
 import { Routes, Route } from "react-router";
 import { useLocation } from "react-router";
+import Login from "./components/UserRegistration/Login";
 function App(props) {
   const location=useLocation();
+
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         {/* if i pass props in signup component for path and make a handlechange ducntion which */}
+        <Route path='/login' element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
       </Routes>
-    
-      {location.pathname!=='/signup'?<Footer/>:<></>}
+      {location.pathname!=='/signup' && location.pathname!=='/login'?<Footer/>:<></>}
+      
       
     </>
   );
