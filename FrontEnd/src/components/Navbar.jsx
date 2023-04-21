@@ -26,9 +26,11 @@ import FoodBankIcon from "@mui/icons-material/FoodBank";
 import RssFeedIcon from "@mui/icons-material/RssFeed";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-localStorage.setItem("name", "PM");
-localStorage.clear();
+import { useNavigate} from "react-router-dom";
+
+
 const Navbar = () => {
+  const navigate=useNavigate();
   const [isOpen, setisOpen] = useState(false);
   const [anchor, setAnchor] = useState("");
   const [anchorEl, setanchorEl] = useState(null);
@@ -45,7 +47,7 @@ const Navbar = () => {
   //implementing typography using 2-3 typography components and same for button
 
   //material-ui core breakpoints has function to tell breakpoints (discussed later)
-  console.log(localStorage.getItem("usertype"));
+
 
   return (
     <>
@@ -109,7 +111,7 @@ const Navbar = () => {
                 aria-expanded={open ? "true" : undefined}
                 onClick={openUserMenu}
               >
-                {localStorage.getItem("name")}
+                {localStorage.getItem("fname").at(0).toUpperCase()+localStorage.getItem("lname").at(0).toUpperCase() }
               </Avatar>
               {/* used for displaying menu */}
               <Menu
@@ -230,7 +232,9 @@ const Navbar = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
+            
             <ListItemButton
+            onClick={()=>navigate('/userform')}
               disabled={
                 localStorage.getItem("usertype") === "normal" ? false : true
               }
@@ -245,6 +249,7 @@ const Navbar = () => {
                 }}
               />
             </ListItemButton>
+           
           </ListItem>
           <Divider />
           <ListItem disablePadding>

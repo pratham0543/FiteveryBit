@@ -31,9 +31,11 @@ const UserForm = () => {
         justifyContent: "center",
         flexDirection: "column",
       }}
-      p={4}
-      mb={11}
+      mt={4}
+      mb={11}  
+      mx="auto"
       display="flex"
+      
     >
       <Box mx="auto" display="flex" sx={{flexDirection:"column"}}>
         <Typography variant="h4" fontWeight="600">
@@ -53,7 +55,7 @@ const UserForm = () => {
                 position:"relative",
                 height: "70%",
                 width: "120%",
-                fontSize: "13px",
+                fontSize: "14px",
                 border: "none",
               },
             }}
@@ -72,7 +74,7 @@ const UserForm = () => {
               style: {
                 height: "70%",
                 width: "120%",
-                fontSize: "13px",
+                fontSize: "14px",
                 border:"none"
               },
             }}
@@ -169,7 +171,7 @@ const UserForm = () => {
             color="secondary"
             sx={{ color: "white" }}
           >
-            Signup
+           Submit
           </Button>
           <Button
             variant="lined"

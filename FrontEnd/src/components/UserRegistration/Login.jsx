@@ -32,9 +32,9 @@ const Login = () => {
   //code for redirecting
   const navigate = useNavigate();
 
-  const changeUrl = () => {
-    navigate("/");
-  };
+  
+    
+
 
   const [showPassword, setShowPassword] = useState(false);
   //for snackbar
@@ -63,8 +63,10 @@ const Login = () => {
           const userDetails = jwt_decode(result.data.token);
           localStorage.setItem("email", userDetails.email);
           localStorage.setItem("usertype", userDetails.usertype);
-          localStorage.setItem("name", "PM");
-          setTimeout(() => changeUrl(), 200);
+          localStorage.setItem("fname", userDetails.firstname);
+          localStorage.setItem("lname",userDetails.lastname)
+        
+          setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {
           console.log("error");
@@ -92,6 +94,8 @@ const Login = () => {
         <Grid
           item
           xs={12}
+          sm={6}
+          md="auto"
           lg={3}
           display="flex"
           flexDirection="column"
@@ -172,7 +176,7 @@ const Login = () => {
         <Grid
           item
           sm={7}
-          md={7}
+          md={12}
           lg={8}      
           sx={{
             height: "calc(100vh - 72px)",
@@ -185,8 +189,8 @@ const Login = () => {
          
         
         >
-          <Typography variant="h5" color="true.main" fontWeight="600" sx={{position:"relative",top:"20%",textTransform:'capitalize'}}>
-            Your <span style={{ color: "#0AAE59" }}>Health</span> account, your bank account, they’re the <span style={{ color: "#0AAE59" }}>Same</span> thing<br/> 
+          <Typography variant="body1" color="true.main" fontWeight="600" sx={{position:"relative",top:"20%",textTransform:'capitalize',left:"5%",fontSize:"1.5rem",width:"fit-content"}}>
+            Your <span style={{ color: "#0AAE59" }}>Health</span> account, your bank account, they’re the <br/> <span style={{ color: "#0AAE59" }}>Same</span> thing.<br/> 
             The <span style={{ color: "#0AAE59" }}>More</span> you put in, the more you can take <span style={{ color: "#0AAE59" }}>Out.</span> <br/>
             Exercise is <span style={{ color: "#0AAE59" }}>King</span> and nutition is <span style={{ color: "#0AAE59" }}>Queen.</span> <br/>
             <span style={{ color: "#0AAE59" }}>Together</span> you have a <span style={{ color: "#0AAE59" }}>Kingdom.</span>
