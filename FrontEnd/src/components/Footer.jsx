@@ -6,7 +6,6 @@ import {
   Box,
   TextField,
   IconButton,
-  Button,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Googlemaps from "./Googlemaps";
@@ -57,7 +56,7 @@ const Footer = () => {
       <Grid item xs={12} sm="auto">
         <Stack direction="column" spacing={2}>
           <Typography variant="h5" fontWeight="600">Features</Typography>
-          <Box display="flex" className="icon-box" >
+          <Box display="flex">
             <i className="fa-brands fa-nutritionix" style={{color:"#0AAE59"}} ></i>&nbsp; Nutrition
           </Box>
           <Box >
@@ -83,16 +82,15 @@ const Footer = () => {
           color="true"
           onFocus={()=>setisOutline(false)}
           onBlur={()=>setisOutline(true)}
-
           InputProps={{sx:{outline:isOutline?"1px solid white":"0",color:"white"}}}
           InputLabelProps={{style:{color:"white"}}}
         />
         <IconButton
           variant="contained"
           color="secondary"
-          sx={{borderRadius:"2px",backgroundColor:"secondary.main",color:"white"}}
+          sx={{border:"1px solid white",borderLeft:"0px",borderRadius:"2px",backgroundColor:"secondary.main",color:"white",marginLeft:"-5px",top:"-2px"}}
           >
-        <ArrowForwardIcon />
+        <ArrowForwardIcon style={{height:"1.7em"}} />
         </IconButton>
       </Grid>
     </Grid>
