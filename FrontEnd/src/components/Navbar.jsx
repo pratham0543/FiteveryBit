@@ -13,6 +13,9 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
+  Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArticleIcon from "@mui/icons-material/Article";
@@ -23,10 +26,19 @@ import FoodBankIcon from "@mui/icons-material/FoodBank";
 import RssFeedIcon from "@mui/icons-material/RssFeed";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+
+
 const Navbar = () => {
+  const navigate=useNavigate();
   const [isOpen, setisOpen] = useState(false);
-  const [anchor,setAnchor]=useState("");
-  
+  const [anchor, setAnchor] = useState("");
+  const [anchorEl, setanchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const openUserMenu = (e) => {
+    setanchorEl(e.currentTarget);
+  };
+
   const openDrawer = () => {
     setisOpen(true);
   };
@@ -36,8 +48,8 @@ const Navbar = () => {
 
   //material-ui core breakpoints has function to tell breakpoints (discussed later)
 
-  return (
 
+  return (
     <>
       {/* // This right here is navabar  */}
       <AppBar position="fixed" sx={{ p: 0.5 }}>
@@ -70,7 +82,7 @@ const Navbar = () => {
           <Typography
             variant="h4"
             sx={{
-              fontWeight:600,
+              fontWeight: 600,
               display: { xs: "none", sm: "block", md: "none", lg: "none" },
             }}
           >
@@ -82,65 +94,91 @@ const Navbar = () => {
             variant="h4"
             fontSize={30}
             sx={{
-              fontWeight:600,
+              fontWeight: 600,
               display: { xs: "block", sm: "none ", md: "none", lg: "none" },
             }}
           >
             Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
           </Typography>
-         
+
           {/* Login/signup */}
+          {localStorage.getItem("usertype") !== null ? (
+            <>
+              <Avatar
+                id="dialog-button"
+                aria-controls={open ? "user-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={openUserMenu}
+              >
+                {localStorage.getItem("fname").at(0).toUpperCase()+localStorage.getItem("lname").at(0).toUpperCase() }
+              </Avatar>
+              {/* used for displaying menu */}
+              <Menu
+              id="user-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={() => setanchorEl(null)}
+                aria-labelledby="dialog-button"
+               
+              >
+                <MenuItem onClick={()=>setanchorEl(null)}>Dashboard</MenuItem>
+                <MenuItem onClick={()=>{localStorage.clear(); setanchorEl(null)  }}>Logout</MenuItem>
+                
 
-          <Stack direction="row" spacing={1}>
-            <Link to='/login'>
-            <Button
-              variant="contained"
-              color="secondary"
-              sx={{ color: "white", display: { xs: "none", sm: "block" } }}
-              
-            >
-              Login
-            </Button>
-            </Link>
+              </Menu>
+            </>
+          ) : (
+            <Stack direction="row" spacing={1}>
+              <Link to="/login">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ color: "white", display: { xs: "none", sm: "block" } }}
+                >
+                  Login
+                </Button>
+              </Link>
 
-            {/* for xtra small screen */}
-            <Link to='/login'>
-            <Button
-              variant="contained"
-              color="secondary"
-              size="small"
-              sx={{ color: "white", display: { xs: "block", sm: "none" } }}
-            >
-              Login
-            </Button>
-            </Link>
-              <Link to='/signup'>
-            <Button
-              variant="text"
-              sx={{ color: "white", display: { xs: "none", sm: "block" } }}
-            >
-              SignUp
-            </Button>
-            </Link>
+              {/* for xtra small screen */}
+              <Link to="/login">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="small"
+                  sx={{ color: "white", display: { xs: "block", sm: "none" } }}
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link to="/signup">
+                <Button
+                  variant="text"
+                  sx={{ color: "white", display: { xs: "none", sm: "block" } }}
+                >
+                  SignUp
+                </Button>
+              </Link>
 
-            {/* for xstra small screen */}
-            <Link to='/signup'>
-            <Button
-              variant="text"
-              size="small"
-              sx={{ color: "white", display: { xs: "block", sm: "none" } }}
-            >
-              SignUp
-            </Button>
-            </Link>
-          </Stack>
+              {/* for xstra small screen */}
+              <Link to="/signup">
+                <Button
+                  variant="text"
+                  size="small"
+                  sx={{ color: "white", display: { xs: "block", sm: "none" } }}
+                >
+                  SignUp
+                </Button>
+              </Link>
+            </Stack>
+          )}
         </Toolbar>
       </AppBar>
 
-      < SwipeableDrawer
+      <SwipeableDrawer
         anchor="left"
         open={isOpen}
-        onOpen={()=>setAnchor("left")}
+        onOpen={() => setAnchor("left")}
         onClose={() => setisOpen(false)}
         sx={{ backgroundColor: "true" }}
       >
@@ -165,7 +203,7 @@ const Navbar = () => {
           variant="h4"
           fontSize={28}
           sx={{
-            fontWeight:600,
+            fontWeight: 600,
             backgroundColor: "primary.main",
             color: "true.main",
             display: { xs: "block", sm: "block", md: "none", lg: "none" },
@@ -174,8 +212,6 @@ const Navbar = () => {
         >
           Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
         </Typography>
-
-       
 
         <Divider />
 
@@ -196,7 +232,13 @@ const Navbar = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton disabled>
+            
+            <ListItemButton
+            onClick={()=>navigate('/userform')}
+              disabled={
+                localStorage.getItem("usertype") === "normal" ? false : true
+              }
+            >
               <ListItemIcon>
                 <FitnessCenterIcon color="secondary" />
               </ListItemIcon>
@@ -207,6 +249,7 @@ const Navbar = () => {
                 }}
               />
             </ListItemButton>
+           
           </ListItem>
           <Divider />
           <ListItem disablePadding>
@@ -266,7 +309,7 @@ const Navbar = () => {
           </ListItem>
           <Divider />
         </List>
-      </ SwipeableDrawer>
+      </SwipeableDrawer>
     </>
   );
 };

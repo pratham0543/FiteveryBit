@@ -6,7 +6,6 @@ import {
   Box,
   TextField,
   IconButton,
-  Button,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Googlemaps from "./Googlemaps";
@@ -20,13 +19,19 @@ const Footer = () => {
   const [isOutline, setisOutline] = useState(true);
   
   return (
-    <Grid container bgcolor="primary.main" sx={{ color: "white" }} p={5}>
-      <Grid item xs={2.5}>
+    <Box bgcolor="primary.main" >
+      <Typography variant="h4" color="white" fontWeight="600" p={2}>
+        Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
+
+      </Typography>
+
+    <Grid container bgcolor="primary.main" sx={{ color: "white" }} p={2} pt={1} justifyContent="center" spacing={10}>
+      <Grid item  xs={12} sm="auto">
         <Stack direction="column" spacing={2}>
-          <Typography variant="h4">
-            Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>
+          <Typography variant="h5" fontWeight="600">
+            FollowUs
           </Typography>
-          <Box display="flex" className="icon-box" sx={{color:"highlight.main"}}>
+          <Box display="flex" className="icon-box" sx={{color:"secondary.main"}}>
             <i className="fa-brands fa-instagram"></i>
             <i
               style={{ marginLeft: "5%" }}
@@ -38,49 +43,36 @@ const Footer = () => {
             ></i>
           </Box>
           <Box>
-            <i className="fa-solid fa-envelope"></i>&nbsp; fiteverybit@gmail.com
+            <i className="fa-solid fa-envelope" style={{color:"#0AAE59"}}></i>&nbsp; fiteverybit@gmail.com
           </Box>
           <Box>
-            <i className="fa-solid fa-phone"></i>&nbsp; +917006983887
+            <i className="fa-solid fa-phone" style={{color:"#0AAE59"}}></i>&nbsp; +917006983887
           </Box>
         </Stack>
       </Grid>
 
-      <Grid item xs={1.5}>
-        <Stack direction="column" spacing={2}>
-          <Typography variant="h5">Calculator</Typography>
-          <Box display="flex" className="icon-box">
-            <i className="fa-solid fa-heart"></i>&nbsp; BMI
-          </Box>
-          <Box>
-            <i className="fa-solid fa-heart-circle-check"></i>&nbsp; BMR
-          </Box>
-          <Box>
-            <i className="fa-light fa-weight-scale"></i>&nbsp; BODY FAT %
-          </Box>
-        </Stack>
-      </Grid>
+     
 
-      <Grid item xs={2}>
+      <Grid item xs={12} sm="auto">
         <Stack direction="column" spacing={2}>
-          <Typography variant="h5">Features</Typography>
-          <Box display="flex" className="icon-box">
-            <i className="fa-brands fa-nutritionix"></i>&nbsp; Nutrition
+          <Typography variant="h5" fontWeight="600">Features</Typography>
+          <Box display="flex">
+            <i className="fa-brands fa-nutritionix" style={{color:"#0AAE59"}} ></i>&nbsp; Nutrition
           </Box>
-          <Box>
-            <i className="fa-solid fa-person-walking"></i>&nbsp; Exercise
+          <Box >
+            <i className="fa-solid fa-person-walking" style={{color:"#0AAE59"}}></i>&nbsp; Exercise
             Tutorial
           </Box>
           <Box>
-            <i className="fa-sharp fa-regular fa-dumbbell"></i>&nbsp;
+            <i className="fa-sharp fa-regular fa-dumbbell" style={{color:"#0AAE59"}}></i>&nbsp;
             Transformation Plans
           </Box>
         </Stack>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item  sm={3}   >
         <Googlemaps />
       </Grid>
-      <Grid item xs={3} pl={5}>
+      <Grid item xs={12} sm="auto">
         <Typography variant="h5" mb={2} mt={2} sx={{ color: "secondary.main",fontWeight:600 }}>
          Subscribe to our newsletter
         </Typography>
@@ -90,19 +82,19 @@ const Footer = () => {
           color="true"
           onFocus={()=>setisOutline(false)}
           onBlur={()=>setisOutline(true)}
-
           InputProps={{sx:{outline:isOutline?"1px solid white":"0",color:"white"}}}
           InputLabelProps={{style:{color:"white"}}}
         />
         <IconButton
           variant="contained"
           color="secondary"
-          sx={{borderRadius:"2px",backgroundColor:"secondary.main",color:"white"}}
+          sx={{border:"1px solid white",borderLeft:"0px",borderRadius:"2px",backgroundColor:"secondary.main",color:"white",marginLeft:"-5px",top:"-2px"}}
           >
-        <ArrowForwardIcon />
+        <ArrowForwardIcon style={{height:"1.7em"}} />
         </IconButton>
       </Grid>
     </Grid>
+    </Box>
   );
 };
 
