@@ -7,6 +7,8 @@ import UserForm from "./components/UserForm/UserForm";
 import { Routes, Route } from "react-router";
 import { useLocation } from "react-router";
 import Login from "./components/UserRegistration/Login";
+import MobilityChecker from "./components/MobilityChecker/MobilityChecker";
+
 function App(props) {
   const location=useLocation();
 
@@ -19,6 +21,7 @@ function App(props) {
         <Route path='/login' element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/userform" element={<UserForm/>}/>
+        <Route path="/mobility" element={<MobilityChecker/>}></Route>
       </Routes>
       {location.pathname!=='/signup' && location.pathname!=='/login'?<Footer/>:<></>}
       
