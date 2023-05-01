@@ -124,6 +124,7 @@ const Signup = (props) => {
           item
           sm={6}
           md={4}
+        
           sx={{
             backgroundImage: `url(${logImage})`,
             backgroundSize: "cover",
