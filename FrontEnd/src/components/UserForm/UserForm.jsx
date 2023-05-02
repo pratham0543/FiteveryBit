@@ -32,27 +32,28 @@ const UserForm = () => {
         flexDirection: "column",
       }}
       mt={4}
-      mb={11}  
+      mb={11}
       mx="auto"
       display="flex"
-      
     >
-      <Box mx="auto" display="flex" sx={{flexDirection:"column"}}>
+      <Box mx="auto" display="flex" sx={{ flexDirection: "column" }}>
         <Typography variant="h4" fontWeight="600">
           Please provide us with your{" "}
           <span style={{ color: "#0AAE59" }}>details</span>{" "}
         </Typography>
-        <hr/>
+        <hr />
 
         <Box display="flex" ml={10} mt={5}>
-          <Typography sx={{fontSize:"16px"}} mr={4}>Height:</Typography>
+          <Typography sx={{ fontSize: "16px" }} mr={4}>
+            Height:
+          </Typography>
           <TextField
             color="secondary"
             label="in (cms)"
             InputLabelProps={{ shrink: true }}
             InputProps={{
               style: {
-                position:"relative",
+                position: "relative",
                 height: "70%",
                 width: "120%",
                 fontSize: "14px",
@@ -65,7 +66,9 @@ const UserForm = () => {
         </Box>
 
         <Box display="flex" ml={10} mt={3}>
-          <Typography sx={{fontSize:"16px"}} mr={4}>Weight:</Typography>
+          <Typography sx={{ fontSize: "16px" }} mr={4}>
+            Weight:
+          </Typography>
           <TextField
             color="secondary"
             label="in (kgs)"
@@ -75,7 +78,7 @@ const UserForm = () => {
                 height: "70%",
                 width: "120%",
                 fontSize: "14px",
-                border:"none"
+                border: "none",
               },
             }}
             type="number"
@@ -84,7 +87,9 @@ const UserForm = () => {
         </Box>
 
         <Box display="flex" ml={10} mt={4}>
-          <Typography sx={{fontSize:"16px"}} mr={4}>Shoulder Mobility: </Typography>
+          <Typography sx={{ fontSize: "16px" }} mr={4}>
+            Shoulder Mobility:{" "}
+          </Typography>
           <RadioGroup
             row
             aria-label="ShoulderMobility"
@@ -104,7 +109,9 @@ const UserForm = () => {
           </RadioGroup>
         </Box>
         <Box display="flex" ml={10} mt={4}>
-          <Typography mr={4} sx={{fontSize:"16px"}}>Elbow Mobility: </Typography>
+          <Typography mr={4} sx={{ fontSize: "16px" }}>
+            Elbow Mobility:{" "}
+          </Typography>
           <RadioGroup
             row
             aria-label="ElbowMobility"
@@ -125,7 +132,9 @@ const UserForm = () => {
         </Box>
 
         <Box display="flex" ml={10} mt={4}>
-          <Typography mr={4} sx={{fontSize:"16px"}}>Ankle Mobility: </Typography>
+          <Typography mr={4} sx={{ fontSize: "16px" }}>
+            Ankle Mobility:{" "}
+          </Typography>
           <RadioGroup
             row
             aria-label="AnkleMobility"
@@ -145,7 +154,9 @@ const UserForm = () => {
           </RadioGroup>
         </Box>
         <Box display="flex" ml={10} mt={4}>
-          <Typography mr={4} sx={{fontSize:"16px"}}>Knee Mobility: </Typography>
+          <Typography mr={4} sx={{ fontSize: "16px" }}>
+            Knee Mobility:{" "}
+          </Typography>
           <RadioGroup
             row
             aria-label="KneeMobility"
@@ -171,7 +182,7 @@ const UserForm = () => {
             color="secondary"
             sx={{ color: "white" }}
           >
-           Submit
+            Submit
           </Button>
           <Button
             variant="lined"
