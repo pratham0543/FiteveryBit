@@ -47,7 +47,7 @@ const Navbar = () => {
   //implementing typography using 2-3 typography components and same for button
 
   //material-ui core breakpoints has function to tell breakpoints (discussed later)
-
+  localStorage.clear();
 
   return (
     <>
@@ -154,7 +154,7 @@ const Navbar = () => {
               <Link to="/signup">
                 <Button
                   variant="text"
-                  sx={{ color: "white", display: { xs: "none", sm: "block" } }}
+                  sx={{ color: "white", display: { xs: "none", sm: "block" },"&:hover":{background: "rgba(104, 104, 104, 0.2)" }}}
                 >
                   SignUp
                 </Button>
@@ -165,7 +165,7 @@ const Navbar = () => {
                 <Button
                   variant="text"
                   size="small"
-                  sx={{ color: "white", display: { xs: "block", sm: "none" } }}
+                  sx={{ color: "white", display: { xs: "block", sm: "none" },"&:hover":{background: "rgba(104, 104, 104, 0.2)" } }}
                 >
                   SignUp
                 </Button>
