@@ -322,7 +322,7 @@ const Signup = (props) => {
       </Grid>
 
       {/* will show only on successfull user creation  */}
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert
         
           color="secondary"
@@ -335,7 +335,7 @@ const Signup = (props) => {
       </Snackbar>
 
       {/* will show on error */}
-      <Snackbar open={erropen} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={erropen} autoHideDuration={2000} onClose={handleClose}>
         <Alert
         color="error"
           onClose={handleClose}

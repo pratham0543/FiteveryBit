@@ -20,10 +20,10 @@ router.get('/cardio',(req,res)=>{
 router.get('/chest',(req,res)=>{
     res.status(200).send(chest)
 })
-router.get('/lowerarms',(req,res)=>{
+router.get('/forearms',(req,res)=>{
     res.status(200).send(lowerarms)
 })
-router.get('/lowerlegs',(req,res)=>{
+router.get('/calves',(req,res)=>{
     res.status(200).send(lowerlegs)
 })
 router.get('/neck',(req,res)=>{
@@ -32,14 +32,52 @@ router.get('/neck',(req,res)=>{
 router.get('/shoulder',(req,res)=>{
     res.status(200).send(shoulder)
 })
-router.get('/upperarms',(req,res)=>{
-    res.status(200).send(upperarms)
+router.get('/biceps',(req,res)=>{
+    const biceps=upperarms.filter((entry)=>entry.target==='biceps')
+    res.status(200).send(biceps)
 })
-router.get('/upperlegs',(req,res)=>{
-    res.status(200).send(upperlegs)
+router.get('/triceps',(req,res)=>{
+    const triceps=upperarms.filter((entry)=>entry.target==='triceps')
+    res.status(200).send(triceps)
 })
-router.get('/waist',(req,res)=>{
+router.get('/abs',(req,res)=>{
     res.status(200).send(waist)
 })
+router.get('/traps',(req,res)=>
+{
+    const traps=back.filter((entry)=>entry.target==='traps')
+    res.status(200).send(traps)
+}
+)
+router.get('/quads',(req,res)=>
+{
+    const quads=upperlegs.filter((entry)=>entry.target==='quads')
+    res.status(200).send(quads)
+}
+)
+
+router.get('/glutes',(req,res)=>
+{
+    const glutes=upperlegs.filter((entry)=>entry.target==='glutes')
+    res.status(200).send(glutes)
+}
+)
+router.get('/hamstrings',(req,res)=>
+{
+    const hamstrings=upperlegs.filter((entry)=>entry.target==='hamstrings')
+    res.status(200).send(hamstrings)
+}
+)
+
+router.get('/adductor',(req,res)=>
+{
+    const adductor=upperlegs.filter((entry)=>entry.target==='adductors')
+    res.status(200).send(adductor)
+}
+)
+
+
+
+
 
 module.exports=router

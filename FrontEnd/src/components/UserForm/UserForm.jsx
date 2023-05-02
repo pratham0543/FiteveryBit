@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import {
   Box,
   Button,
@@ -9,6 +10,7 @@ import {
   RadioGroup,
 } from "@mui/material";
 const UserForm = () => {
+  const navigate=useNavigate();
   const styles = {
     RadioGrp: {
       marginLeft: "10px",
@@ -188,6 +190,7 @@ const UserForm = () => {
             variant="lined"
             color="secondary"
             sx={{ color: "#0AAE59", marginLeft: "15%" }}
+            onClick={()=>navigate('/mobility')}
           >
             AI MOBILITY CHECKER
           </Button>

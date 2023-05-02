@@ -47,7 +47,7 @@ const Navbar = () => {
   //implementing typography using 2-3 typography components and same for button
 
   //material-ui core breakpoints has function to tell breakpoints (discussed later)
-  localStorage.clear();
+  // localStorage.clear();
 
   return (
     <>
@@ -267,7 +267,9 @@ const Navbar = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              onClick={()=>navigate('/exerciseDetails')}
+            >
               <ListItemIcon>
                 <CastForEducationIcon color="secondary" />
               </ListItemIcon>

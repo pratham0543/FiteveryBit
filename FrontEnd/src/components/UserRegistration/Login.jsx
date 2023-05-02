@@ -65,7 +65,7 @@ const Login = () => {
           localStorage.setItem("usertype", userDetails.usertype);
           localStorage.setItem("fname", userDetails.firstname);
           localStorage.setItem("lname",userDetails.lastname)
-        
+        console.log(userDetails);
           setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {
@@ -199,13 +199,13 @@ const Login = () => {
       </Grid>
 
       {/* this will show on successful user login */}
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert color="success" onClose={handleClose} sx={{ width: "100%" }}>
           User Login Successful
         </Alert>
       </Snackbar>
       {/* this will show on unsuccessful user login */}
-      <Snackbar open={erropen} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={erropen} autoHideDuration={2000} onClose={handleClose}>
         <Alert color="error" onClose={handleClose} sx={{ width: "100%" }}>
           Email or password is incorrect. Please Try again with correct email or
           password
