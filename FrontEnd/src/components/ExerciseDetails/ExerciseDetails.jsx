@@ -13,11 +13,22 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import './exercisedetails.css'
+import ReactPaginate from 'react-paginate';
 
 const ExerciseDetails = () => {
   const [exerciseData, setexerciseData] = useState([]);
   const [isExercise, setisExercise] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [perPage] = useState(12);
+  const pageCount = Math.ceil(exerciseData.length / perPage);
+  const offset = pageNumber * perPage;
+  const currentData = exerciseData.slice(offset, offset + perPage);
   var exercises = <></>;
+
+
+  function handlePageClick({ selected: selectedPage }) {
+    setPageNumber(selectedPage);
+  }
 
   const changeColor = (muscle) => {
     document.querySelectorAll(`.${muscle}`).forEach((element) => {
@@ -40,9 +51,9 @@ const ExerciseDetails = () => {
       .catch((err) => console.log(err));
   };
   if (isExercise === true && exerciseData.length === 0) {
-    exercises =    <CircularProgress color="success" />
+    exercises = <CircularProgress color="success" />
   } else if (exerciseData.length !== 0) {
-    exercises = exerciseData.reverse().map((exercise) => (
+    exercises = currentData.reverse().map((exercise) => (
       <Grid key={exercise.id} item>
         <Card
           sx={{
@@ -968,7 +979,7 @@ const ExerciseDetails = () => {
               onMouseOver={() => changeColor("reardeltsB")}
               onClick={() => handleMuscleClick("shoulder")}
               onMouseOut={() => changeColorDefault("reardeltsB")}
-              fill="#D9D9D9"  
+              fill="#D9D9D9"
             />
             <path
               d="M216.5 150C218.333 146 221.7 136.2 220.5 129C221 124.667 223.3 115.3 228.5 112.5L241.5 125.5L235 135.5M216.5 150L221.524 151.675M216.5 150C217.439 150.845 219.224 151.376 221.524 151.675M235 135.5L249 127V150C242.347 151.089 230.339 152.493 222.724 151.806M235 135.5C233.52 138.296 228.243 146.964 222.724 151.806M222.724 151.806C222.311 151.768 221.91 151.725 221.524 151.675M222.724 151.806C222.649 151.871 222.575 151.936 222.5 152L221.524 151.675"
@@ -1092,7 +1103,7 @@ const ExerciseDetails = () => {
             />
             <path
               d="M62 204V249.5L56.5 279H59.5L64.5 257.5L69.5 236L65 199L62 204Z"
-                className="forearmsB"
+              className="forearmsB"
               onMouseOver={() => changeColor("forearmsB")}
               onClick={() => handleMuscleClick("forearms")}
               onMouseOut={() => changeColorDefault("forearmsB")}
@@ -1206,6 +1217,17 @@ const ExerciseDetails = () => {
           >
             {exercises}
           </Grid>
+          {exerciseData.length > 0 ? <ReactPaginate
+            previousLabel={'Previous'}
+            nextLabel={'Next'}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            containerClassName={'pagination'}
+            previousLinkClassName={'pagination__link'}
+            nextLinkClassName={'pagination__link'}
+            disabledClassName={'pagination__link--disabled'}
+            activeClassName={'pagination__link--active'}
+          /> : ""}
         </Box>
       </Box>
     </>
