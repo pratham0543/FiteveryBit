@@ -14,16 +14,18 @@ import { useState } from "react";
 import axios from "axios";
 import './exercisedetails.css'
 import ReactPaginate from 'react-paginate';
+import { useNavigate } from "react-router";
 
 const ExerciseDetails = () => {
   const [exerciseData, setexerciseData] = useState([]);
   const [isExercise, setisExercise] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const [perPage] = useState(12);
+  const navigate=useNavigate();
   const pageCount = Math.ceil(exerciseData.length / perPage);
   const offset = pageNumber * perPage;
   const currentData = exerciseData.slice(offset, offset + perPage);
-  var exercises = <></>;
+  var exercises = <Grid item xs={12}><Typography variant="h6" fontWeight="600" sx={{position:"relative",top:"25%"}}>Click on a muscle to display exercises</Typography></Grid>;
 
 
   function handlePageClick({ selected: selectedPage }) {
@@ -95,6 +97,9 @@ const ExerciseDetails = () => {
               color="secondary"
               variant="contained"
               sx={{ color: "true.main" }}
+              onClick={()=>navigate('/videoTutorials',{state:{
+                name:exercise.name
+              }})}
             >
               Open
             </Button>
