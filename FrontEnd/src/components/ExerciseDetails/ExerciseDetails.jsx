@@ -49,7 +49,6 @@ const ExerciseDetails = () => {
       .get(`http://localhost:3200/exercise/${muscle}`)
       .then((res) => {
         setexerciseData(res.data);
-        setCurrentPage(0)
       })
       .catch((err) => console.log(err));
   };
