@@ -9,6 +9,7 @@ import { useLocation } from "react-router";
 import Login from "./components/UserRegistration/Login";
 import MobilityChecker from "./components/MobilityChecker/MobilityChecker";
 import ExerciseDetails from "./components/ExerciseDetails/ExerciseDetails";
+import Videotutorial from "./components/VideoTutorial/Videotutorial";
 function App(props) {
   const location=useLocation();
 
@@ -23,6 +24,7 @@ function App(props) {
         <Route path="/userform" element={<UserForm/>}/>
         <Route path="/mobility" element={<MobilityChecker/>}></Route>
         <Route path='/exerciseDetails' element={<ExerciseDetails/>}/>
+        <Route path='/videoTutorials' element={<Videotutorial/>}/>
       </Routes>
       {location.pathname!=='/signup' && location.pathname!=='/login'?<Footer/>:<></>}
       
