@@ -20,6 +20,7 @@ const ExerciseDetails = () => {
   const [isExercise, setisExercise] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const [perPage] = useState(12);
+  const [currentPage, setCurrentPage] = useState(0);
   const pageCount = Math.ceil(exerciseData.length / perPage);
   const offset = pageNumber * perPage;
   const currentData = exerciseData.slice(offset, offset + perPage);
@@ -47,6 +48,7 @@ const ExerciseDetails = () => {
       .get(`http://localhost:3200/exercise/${muscle}`)
       .then((res) => {
         setexerciseData(res.data);
+        setCurrentPage(0)
       })
       .catch((err) => console.log(err));
   };
@@ -1217,17 +1219,21 @@ const ExerciseDetails = () => {
           >
             {exercises}
           </Grid>
-          {exerciseData.length > 0 ? <ReactPaginate
-            previousLabel={'Previous'}
-            nextLabel={'Next'}
+          <ReactPaginate
+            previousLabel={'< Previous'}
+            nextLabel={'Next >'}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={3}
             pageCount={pageCount}
             onPageChange={handlePageClick}
             containerClassName={'pagination'}
             previousLinkClassName={'pagination__link'}
             nextLinkClassName={'pagination__link'}
-            disabledClassName={'pagination__link--disabled'}
-            activeClassName={'pagination__link--active'}
-          /> : ""}
+            disabledClassName={'disabled'}
+            activeClassName={'active'}
+            renderOnZeroPageCount={null}
+            initialPage={0}
+          />
         </Box>
       </Box>
     </>
