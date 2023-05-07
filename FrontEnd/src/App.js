@@ -10,23 +10,26 @@ import Login from "./components/UserRegistration/Login";
 import MobilityChecker from "./components/MobilityChecker/MobilityChecker";
 import ExerciseDetails from "./components/ExerciseDetails/ExerciseDetails";
 import Videotutorial from "./components/VideoTutorial/Videotutorial";
+import Mobilitycheck from "./components/MobilityChecker/Mobilitycheck";
+
 function App(props) {
   const location=useLocation();
 
   return (
     <>
-      <Navbar />
+      {location.pathname!=='/mobility'?<Navbar/>:<></>}
       <Routes>
         <Route path="/" element={<Home />} />
         {/* if i pass props in signup component for path and make a handlechange ducntion which */}
         <Route path='/login' element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/userform" element={<UserForm/>}/>
-        <Route path="/mobility" element={<MobilityChecker/>}></Route>
+        <Route path="/mobility" element={<Mobilitycheck/>}></Route>
         <Route path='/exerciseDetails' element={<ExerciseDetails/>}/>
         <Route path='/videoTutorials' element={<Videotutorial/>}/>
+        <Route path='/mobilitycheck' element={<MobilityChecker/>} />
       </Routes>
-      {location.pathname!=='/signup' && location.pathname!=='/login'?<Footer/>:<></>}
+      {location.pathname!=='/signup' && location.pathname!=='/login' && location.pathname!=='/mobility'?<Footer/>:<></>}
       
       
     </>
