@@ -30,21 +30,21 @@ const AccordionItem = (props) => {
     }, 1000);
     return () => clearInterval(intervalId);
   }, [stopTimer]);
-  const onclickshoulder1 = () => {
+  const onclick = () => {
     setTimer(5);
     props.start();
     setclassname("");
   };
   return (
     <>
-      <Alert severity={props.severity} display="flex">
+      <Alert severity={props.severity} display="flex" style={{width:"85%"}}>
         <Box display="flex">
           <Typography>{props.title}</Typography>
-          <Typography sx={{ marginLeft: "4em" }}>
+          <Typography sx={{ marginLeft: "4em",width:"2%" }}>
             {Timer}
             <i
               style={{ marginLeft: "0em", color: "#0AAE59" }}
-              onClick={onclickshoulder1}
+              onClick={onclick}
               className={classname}
             ></i>
           </Typography>
