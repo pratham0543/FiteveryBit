@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { Link } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -10,7 +11,7 @@ import {
   RadioGroup,
 } from "@mui/material";
 const UserForm = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const styles = {
     RadioGrp: {
       marginLeft: "10px",
@@ -186,14 +187,17 @@ const UserForm = () => {
           >
             Submit
           </Button>
-          <Button
-            variant="lined"
-            color="secondary"
-            sx={{ color: "#0AAE59", marginLeft: "15%" }}
-            onClick={()=>navigate('/mobility')}
-          >
-            AI MOBILITY CHECKER
-          </Button>
+
+          <Link to="/mobility">
+            <Button
+              variant="lined"
+              color="secondary"
+              sx={{ color: "#0AAE59", marginLeft: "15%" }}
+              onClick={() => navigate("/mobility")}
+            >
+              AI MOBILITY CHECKER
+            </Button>
+          </Link>
         </Box>
       </Box>
     </Box>

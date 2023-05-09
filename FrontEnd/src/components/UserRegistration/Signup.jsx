@@ -238,7 +238,7 @@ const Signup = (props) => {
                     formik.touched.phoneno && Boolean(formik.errors.phoneno)
                   }
                   helperText={formik.touched.phoneno && formik.errors.phoneno}
-                  type="number"
+                  type="tel"
                   fullWidth
                 />
 

@@ -27,9 +27,11 @@ mongoose.connect(url)
 const signup=require('./api/routes/signup')
 const login=require('./api/routes/login')
 const exercise=require('./api/routes/exercise')
+const userexercise=require('./api/routes/UserExercise')
 //route handling
 app.use('/signup',signup)
 app.use('/login',login)
 app.use('/exercise',exercise)
+app.use('/userexercise',userexercise)
 app.use('/',(req,res)=>res.status(404).json({message:"File not found"}))
 module.exports=app;
