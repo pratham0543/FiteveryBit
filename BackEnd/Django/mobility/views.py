@@ -189,8 +189,8 @@ def shoulder_estimation2(request):
 
                     evaluation = "FAIL"
 
-                    if 80 < left_upper < 100 and 80 < left_middle < 100 and 170 < left_bottom < 190:
-                        if 80 < right_upper < 100 and 80 < right_middle < 100 and 170 < right_bottom < 190:
+                    if 75 < left_upper < 100 and 75 < left_middle < 100 and 170 < left_bottom < 190:
+                        if 75 < right_upper < 100 and 75 < right_middle < 100 and 170 < right_bottom < 190:
                             evaluation = "PASS"
 
                 except:
@@ -203,7 +203,7 @@ def shoulder_estimation2(request):
 
 
 @csrf_exempt
-def knee_estimation(request):
+def active_knee_extension(request):
     if request.method == 'POST':
         # get the video feed from the frontend
         video = request.FILES.get('video')
@@ -239,36 +239,35 @@ def knee_estimation(request):
                     #           Get coordinates
 
                     #             LEFT SIDE
+                    left_shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,
+                                     landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
                     left_hip = [landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].x,
                                 landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].y]
                     left_knee = [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x,
                                  landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y]
-                    left_ankle = [landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].x,
-                                  landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].y]
                     left_heel = [landmarks[mp_pose.PoseLandmark.LEFT_HEEL.value].x,
                                  landmarks[mp_pose.PoseLandmark.LEFT_HEEL.value].y]
-                    left_foot_index = [landmarks[mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value].x,
-                                       landmarks[mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value].y]
 
                     #             RIGHT SIDE
+                    right_shoulder = [landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].x,
+                                      landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].y]
                     right_hip = [landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].x,
                                  landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].y]
                     right_knee = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x,
                                   landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
-                    right_ankle = [landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].x,
-                                   landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].y]
                     right_heel = [landmarks[mp_pose.PoseLandmark.RIGHT_HEEL.value].x,
                                   landmarks[mp_pose.PoseLandmark.RIGHT_HEEL.value].y]
-                    right_foot_index = [landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].x,
-                                        landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].y]
 
                     # Calculate angle
-
-                    knee_upper = calculate_angle(left_hip, left_knee, left_ankle)
-                    knee_lower = calculate_angle(left_ankle, left_heel, left_foot_index)
+                    left_knee_estimate = calculate_angle(left_hip, left_knee, left_heel)
+                    left_back_estimate = calculate_angle(left_shoulder, left_hip, left_knee)
+                    right_knee_estimate = calculate_angle(right_hip, right_knee, right_heel)
+                    right_back_estimate = calculate_angle(right_shoulder, right_hip, right_knee)
 
                     evaluation = "FAIL"
-
+                    if 170 < left_knee_estimate < 190 and 80 < left_back_estimate < 100:
+                        if 170 < right_knee_estimate < 190 and 80 < right_back_estimate < 100:
+                            evaluation = "PASS"
 
                 except:
                     pass
@@ -394,6 +393,259 @@ def right_elbow_flexicon(request):
 
                     evaluation = "FAIL"
                     if 133 < elbow_main < 152 and 80 < elbow_support < 100:
+                        evaluation = "PASS"
+
+                except:
+                    pass
+                break
+
+        return JsonResponse({"status": 200, "result": evaluation})
+    else:
+        return JsonResponse({"status": 400, "msg": 'Invalid request method'})
+
+
+@csrf_exempt
+def left_ankle_dorsiflexion(request):
+    if request.method == 'POST':
+        # get the video feed from the frontend
+        video = request.FILES.get('video')
+        with open('temp_video.webm', 'wb') as f:
+            f.write(video.read())
+
+        cap = cv2.VideoCapture('temp_video.webm')
+
+        # Setup mediapipe instance
+        with mp_pose.Pose(min_detection_confidence=0.5,
+                          min_tracking_confidence=0.5) as pose:
+            # accuracy currently set to 50%. this line is going to be accessible by 'pose'
+
+            while cap.isOpened():
+                ret, frame = cap.read()
+                if not ret:
+                    break
+                # Recolor image to RGB. in opencv our image feed is in bgr format by default. we are just reordering the 3 layers
+                image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                image.flags.writeable = False
+
+                # Make detection
+                results = pose.process(image)
+
+                # Recolor back to BGR
+                image.flags.writeable = True
+                # image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # opencv accepts img in bgr format
+
+                # Extract Landmarks
+                try:
+                    landmarks = results.pose_landmarks.landmark
+
+                    #           Get coordinates
+
+                    #             LEFT SIDE
+                    left_hip = [landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].x,
+                                landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].y]
+                    left_knee = [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x,
+                                 landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y]
+                    left_ankle = [landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].x,
+                                  landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].y]
+                    left_foot_index = [landmarks[mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value].x,
+                                       landmarks[mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value].y]
+
+                    # Calculate angle
+                    ankle_main = calculate_angle(left_knee, left_ankle, left_foot_index)
+                    ankle_support = calculate_angle(left_hip, left_knee, left_ankle)
+
+                    evaluation = "FAIL"
+                    if 8 < ankle_main < 12 and 170 < ankle_support < 190:
+                        evaluation = "PASS"
+
+                except:
+                    pass
+                break
+
+        return JsonResponse({"status": 200, "result": evaluation})
+    else:
+        return JsonResponse({"status": 400, "msg": 'Invalid request method'})
+
+
+@csrf_exempt
+def right_ankle_dorsiflexion(request):
+    if request.method == 'POST':
+        # get the video feed from the frontend
+        video = request.FILES.get('video')
+        with open('temp_video.webm', 'wb') as f:
+            f.write(video.read())
+
+        cap = cv2.VideoCapture('temp_video.webm')
+
+        # Setup mediapipe instance
+        with mp_pose.Pose(min_detection_confidence=0.5,
+                          min_tracking_confidence=0.5) as pose:
+            # accuracy currently set to 50%. this line is going to be accessible by 'pose'
+
+            while cap.isOpened():
+                ret, frame = cap.read()
+                if not ret:
+                    break
+                # Recolor image to RGB. in opencv our image feed is in bgr format by default. we are just reordering the 3 layers
+                image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                image.flags.writeable = False
+
+                # Make detection
+                results = pose.process(image)
+
+                # Recolor back to BGR
+                image.flags.writeable = True
+                # image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # opencv accepts img in bgr format
+
+                # Extract Landmarks
+                try:
+                    landmarks = results.pose_landmarks.landmark
+
+                    #           Get coordinates
+
+                    #             RIGHT SIDE
+                    right_hip = [landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].x,
+                                 landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].y]
+                    right_knee = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x,
+                                  landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
+                    right_ankle = [landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].x,
+                                   landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].y]
+                    right_foot_index = [landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].x,
+                                        landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].y]
+
+                    # Calculate angle
+                    ankle_main = calculate_angle(right_knee, right_ankle, right_foot_index)
+                    ankle_support = calculate_angle(right_hip, right_knee, right_ankle)
+
+                    evaluation = "FAIL"
+                    if 8 < ankle_main < 12 and 170 < ankle_support < 190:
+                        evaluation = "PASS"
+
+                except:
+                    pass
+                break
+
+        return JsonResponse({"status": 200, "result": evaluation})
+    else:
+        return JsonResponse({"status": 400, "msg": 'Invalid request method'})
+
+
+@csrf_exempt
+def left_ankle_plantar_flexion(request):
+    if request.method == 'POST':
+        # get the video feed from the frontend
+        video = request.FILES.get('video')
+        with open('temp_video.webm', 'wb') as f:
+            f.write(video.read())
+
+        cap = cv2.VideoCapture('temp_video.webm')
+
+        # Setup mediapipe instance
+        with mp_pose.Pose(min_detection_confidence=0.5,
+                          min_tracking_confidence=0.5) as pose:
+            # accuracy currently set to 50%. this line is going to be accessible by 'pose'
+
+            while cap.isOpened():
+                ret, frame = cap.read()
+                if not ret:
+                    break
+                # Recolor image to RGB. in opencv our image feed is in bgr format by default.
+                # we are just reordering the 3 layers
+                image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                image.flags.writeable = False
+
+                # Make detection
+                results = pose.process(image)
+
+                # Recolor back to BGR
+                image.flags.writeable = True
+                # image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # opencv accepts img in bgr format
+
+                # Extract Landmarks
+                try:
+                    landmarks = results.pose_landmarks.landmark
+
+                    #           Get coordinates
+
+                    #             LEFT SIDE
+                    left_hip = [landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].x,
+                                landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].y]
+                    left_knee = [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x,
+                                 landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y]
+                    left_ankle = [landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].x,
+                                  landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].y]
+                    left_foot_index = [landmarks[mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value].x,
+                                       landmarks[mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value].y]
+
+                    # Calculate angle
+                    ankle_main = calculate_angle(left_knee, left_ankle, left_foot_index)
+                    ankle_support = calculate_angle(left_hip, left_knee, left_ankle)
+
+                    evaluation = "FAIL"
+                    if 38 < ankle_main < 52 and 170 < ankle_support < 190:
+                        evaluation = "PASS"
+
+                except:
+                    pass
+                break
+
+        return JsonResponse({"status": 200, "result": evaluation})
+    else:
+        return JsonResponse({"status": 400, "msg": 'Invalid request method'})
+
+
+@csrf_exempt
+def right_ankle_plantar_flexion(request):
+    if request.method == 'POST':
+        # get the video feed from the frontend
+        video = request.FILES.get('video')
+        with open('temp_video.webm', 'wb') as f:
+            f.write(video.read())
+
+        cap = cv2.VideoCapture('temp_video.webm')
+
+        # Setup mediapipe instance
+        with mp_pose.Pose(min_detection_confidence=0.5,
+                          min_tracking_confidence=0.5) as pose:
+            # accuracy currently set to 50%. this line is going to be accessible by 'pose'
+
+            while cap.isOpened():
+                ret, frame = cap.read()
+                if not ret:
+                    break
+                # Recolor image to RGB. in opencv our image feed is in bgr format by default. we are just reordering the 3 layers
+                image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                image.flags.writeable = False
+
+                # Make detection
+                results = pose.process(image)
+
+                # Recolor back to BGR
+                image.flags.writeable = True
+                # image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # opencv accepts img in bgr format
+
+                # Extract Landmarks
+                try:
+                    landmarks = results.pose_landmarks.landmark
+
+                    #           Get coordinates
+
+                    #             RIGHT SIDE
+                    right_hip = [landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].x,
+                                 landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].y]
+                    right_knee = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x,
+                                  landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
+                    right_ankle = [landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].x,
+                                   landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].y]
+                    right_foot_index = [landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].x,
+                                        landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].y]
+
+                    # Calculate angle
+                    ankle_main = calculate_angle(right_knee, right_ankle, right_foot_index)
+                    ankle_support = calculate_angle(right_hip, right_knee, right_ankle)
+
+                    evaluation = "FAIL"
+                    if 38 < ankle_main < 52 and 170 < ankle_support < 190:
                         evaluation = "PASS"
 
                 except:
