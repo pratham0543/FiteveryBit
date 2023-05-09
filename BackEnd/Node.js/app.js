@@ -16,7 +16,7 @@ app.use( bodyParser.urlencoded( {extended: true} ) )
 app.use( bodyParser.json() )
 
 //getiing url through .env file
-dotenv.config({path:"./.env"})
+dotenv.config({path:"../.env"})
 const url = process.env.URL
 //connecting to mongo database
 mongoose.connect(url)
