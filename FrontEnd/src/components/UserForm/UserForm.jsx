@@ -1,17 +1,21 @@
 import React from "react";
-import { useNavigate } from "react-router";
-import { Link } from 'react-router-dom'
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
   Typography,
   TextField,
   Radio,
+  FormControl,
   FormControlLabel,
   RadioGroup,
+  Select,
+  InputLabel,
+  MenuItem,
 } from "@mui/material";
 const UserForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const styles = {
     RadioGrp: {
       marginLeft: "10px",
@@ -23,6 +27,26 @@ const UserForm = () => {
         color: "#0AAE59",
       },
     },
+  };
+  var height;
+  var weight;
+  // console.log(location.state)
+  if (location.state === null) {
+    height = 0;
+    weight = 0;
+  } else {
+    height = location.state.height;
+    weight = location.state.weight;
+  }
+  const [level, setlevel] = React.useState("");
+
+  const handlelevelChange = (e) => {
+    setlevel(e.target.value);
+  };
+  const [workoutplan, setworkoutplan] = React.useState("");
+
+  const handleworkoutplanChange = (e) => {
+    setworkoutplan(e.target.value);
   };
   return (
     <Box
@@ -52,7 +76,8 @@ const UserForm = () => {
           </Typography>
           <TextField
             color="secondary"
-            label="in (cms)"
+            label="in (meters)"
+            value={height}
             InputLabelProps={{ shrink: true }}
             InputProps={{
               style: {
@@ -75,7 +100,8 @@ const UserForm = () => {
           <TextField
             color="secondary"
             label="in (kgs)"
-            InputLabelProps={{ shrink: "true" }}
+            value={weight}
+            InputLabelProps={{ shrink: true }}
             InputProps={{
               style: {
                 height: "70%",
@@ -178,6 +204,28 @@ const UserForm = () => {
             />
           </RadioGroup>
         </Box>
+        <Box display="flex" ml={10} mt={4}>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel>Level</InputLabel>
+              <Select value={level} onChange={handlelevelChange} label="Level">
+                <MenuItem value="beginner">Beginner</MenuItem>
+                <MenuItem value="intermediate">Intermediate</MenuItem>
+                <MenuItem value="advanced">Advanced</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{ minWidth: 120,marginLeft:"3em" }}>
+            <FormControl fullWidth>
+              <InputLabel>Workout Plan</InputLabel>
+              <Select sx={{width:"10em"}} value={workoutplan} onChange={handleworkoutplanChange} label="Workout Plan">
+                <MenuItem value="musclegain">Muscle Gain</MenuItem>
+                <MenuItem value="maintainweight">Maintain Weight</MenuItem>
+                <MenuItem value="weightloss">Weight Loss</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </Box>
         <Box mt={4} ml={10}>
           <Button
             type="submit"
@@ -187,17 +235,14 @@ const UserForm = () => {
           >
             Submit
           </Button>
-
-          <Link to="/mobility">
-            <Button
-              variant="lined"
-              color="secondary"
-              sx={{ color: "#0AAE59", marginLeft: "15%" }}
-              onClick={() => navigate("/mobility")}
-            >
-              AI MOBILITY CHECKER
-            </Button>
-          </Link>
+          <Button
+            variant="lined"
+            color="secondary"
+            sx={{ color: "#0AAE59", marginLeft: "15%" }}
+            onClick={() => navigate("/mobility")}
+          >
+            AI MOBILITY CHECKER
+          </Button>
         </Box>
       </Box>
     </Box>
