@@ -15,7 +15,7 @@ import axios from "axios";
 import './exercisedetails.css'
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from "react-router";
-
+console.log("arrived at execises details");
 const ExerciseDetails = () => {
   const [exerciseData, setexerciseData] = useState([]);
   const [isExercise, setisExercise] = useState(false);

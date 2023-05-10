@@ -1,0 +1,8 @@
+
+.deadlift img{
+    transition: all 1s ease-out;
+}
+.deadlift:hover img{
+        
+    transform: scale(1.2,1.2);
+}

@@ -102,7 +102,7 @@ const Navbar = () => {
           </Typography>
 
           {/* Login/signup */}
-          {localStorage.getItem("usertype") !== null ? (
+         {localStorage.getItem("usertype") !== 'normal' && localStorage.getItem("usertype") !== null  ? (
             <>
               <Avatar
                 id="dialog-button"
@@ -234,7 +234,7 @@ const Navbar = () => {
           <ListItem disablePadding>
             
             <ListItemButton
-            onClick={()=>navigate('/userform')}
+            onClick={localStorage.getItem("usertype") === "normal"? ()=>navigate('/userform'):  ()=>navigate('/workoutplanner') }
               disabled={
                 localStorage.getItem("usertype") === "normal" ? false : true
               }

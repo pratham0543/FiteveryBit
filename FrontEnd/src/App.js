@@ -11,6 +11,7 @@ import MobilityChecker from "./components/MobilityChecker/MobilityChecker";
 import ExerciseDetails from "./components/ExerciseDetails/ExerciseDetails";
 import Videotutorial from "./components/VideoTutorial/Videotutorial";
 import Mobilitycheck from "./components/MobilityChecker/Mobilitycheck";
+import Userdetails from "./components/Trainer/Userdetails/Userdetails";
 
 function App(props) {
   const location=useLocation();
@@ -28,6 +29,7 @@ function App(props) {
         <Route path='/exerciseDetails' element={<ExerciseDetails/>}/>
         <Route path='/videoTutorials' element={<Videotutorial/>}/>
         <Route path='/mobilitycheck' element={<MobilityChecker/>} />
+        <Route path="/workoutplanner" element={<Userdetails/>} />
       </Routes>
       {location.pathname!=='/signup' && location.pathname!=='/login' && location.pathname!=='/mobility'?<Footer/>:<></>}
       
