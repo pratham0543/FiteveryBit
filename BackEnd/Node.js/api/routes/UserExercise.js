@@ -10,18 +10,17 @@ const userschema=require("../model/userExerciseSchema")
 
 //validating using joi
 const validate = joi.object({
-    firstname:joi.string().required(),
-    lastname: joi.string().required(),
-    email: joi.string().required().email(),
-    height: joi.number(),
-    weight: joi.number(),
-    user_type:joi.string(),
-    mobility:joi.object(),
-    exercises:joi.object()
+    userid:joi.string(),
+    chest:joi.object(),
+    legs:joi.object(),
+    biceps:joi.object(),
+    triceps:joi.object(),
+    abs:joi.object(),
+    shoulder:joi.object(),
 })
 //post request
 router.post('/',(req,res)=>{
-    userschema.find({email:req.body.email})
+    userschema.find({_id:req.body.user_id})
         .then(result=>{
                 const error = validate.validate(req.body)
                 if (error.error) {
@@ -29,20 +28,17 @@ router.post('/',(req,res)=>{
                 }
                     const newUserExercise=new userschema({
                         _id:new mongoose.Types.ObjectId(),
-                        firstname:req.body.firstname,
-                        lastname:req.body.lastname,
-                        email:req.body.email,
-                        password:result,
-                        phoneno:req.body.phoneno,
-                        height:req.body.height,
-                        weight:req.body.weight,
-                        age:req.body.age,
-                        mobility:req.body.mobility,
-                        exercises:req.body.exercises
+                        userid:req.body.userid,
+                        chest:req.body.chest,
+                        legs:req.body.legs,
+                        biceps:req.body.biceps,
+                        triceps:req.body.triceps,
+                        abs:req.body.abs,
+                        shoulder:req.body.shoulder
                         })
                     newUserExercise.save()
                         .then(result => res.status(201).json( {message: 'Posted SuccessfulL', userDetails: result} ))
-                        .catch(err => res.status(500).json( {message: 'Server Encountered an Error', error: err} ))
+                        .catch(err => res.status(500).json( {message: 'Server Encountered an Error1', error: err} ))
         })
         .catch(err=>res.status(500).json({message:"Server Encountered an Error",error:err}))
 })
