@@ -61,7 +61,7 @@ const Hero = () => {
             color: "true.main",
             textTransform: "capitalize",
             position: "absolute",
-            top: "30%",
+            top: "17%",
             left: "8%",
             letterSpacing:{xs:"0",sm:"0.1rem"},
             display:{xs:"block",sm:"none"}

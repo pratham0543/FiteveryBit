@@ -21,7 +21,7 @@ const Videotutorial = () => {
   const [videoDetails, setvideoDetails] = useState([]);
   const [exerciseName, setexerciseName] = useState(location.state.name);
   console.log(exerciseName);
-  var video = <CircularProgress color="success" />;;
+  var video = <CircularProgress color="success" />;
   if (videoDetails.length === 0 && videoDetails === true) {
     video = <CircularProgress color="success" />;
   } else if (videoDetails.length !== 0 && videoDetails !== true) {
