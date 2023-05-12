@@ -78,10 +78,10 @@ const Footer = () => {
               &nbsp; Nutrition
             </Box>
             <Box>
-              <i
+              <a
                 className="fa-solid fa-person-walking"
                 style={{ color: "#0AAE59" }}
-              ></i>
+              ></a>
               &nbsp; Exercise Tutorial
             </Box>
             <Box>
@@ -98,9 +98,11 @@ const Footer = () => {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19248.1024129652!2d76.65443557704324!3d30.51579444741287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fc32344a6e2d7%3A0x81b346dee91799ca!2sChitkara%20University!5e0!3m2!1sen!2sin!4v1683548126733!5m2!1sen!2sin"
             style={{border:0}}
             title="google-maps"
-            allowFullScreen=""
+            allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            height="100%"
+            width="100%"
           ></iframe>
         </Grid>
         <Grid item xs={12} sm="auto">

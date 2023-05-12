@@ -12,10 +12,11 @@ const Userdetails = () => {
       age: "21",
       height: "1.98",
       weight: "86",
-      aiMobility: "true",
+      aiMobility: false,
       plantype:"Weight Gain",
       level:"Intermediate",
-      phoneno:"9896906866"
+      phoneno:"9896906866",
+      mobility:{shoulder:true,ankle:false,elbow:true,knee:true} 
     },
   ]);
   return (
@@ -55,7 +56,7 @@ const Userdetails = () => {
       <Box mt={3} p={2}>
         <Typography variant="h4" mb={3}>Client Information</Typography>
         <Box p={2}>
-          <Grid container>
+          <Grid container justifyContent="center">
           <Usercard
       name={users[0].firstname + " " + users[0].lastname}
       height={users[0].height}
@@ -65,6 +66,7 @@ const Userdetails = () => {
       planType={users[0].plantype}
       level={users[0].level}
       contactno={users[0].phoneno}
+      userinfo={users[0]}
     />
           </Grid>
         </Box>
