@@ -4,9 +4,10 @@ const bcrypt=require('bcrypt')
 const jwt = require("jsonwebtoken")
 
 //importing the schema
-const signupschema=require('../model/signupSchema')
+const trainerschema=require('../model/trainerSchema')
+
 router.get('/',(req,res)=>{
-    signupschema.find()
+    trainerschema.find()
         .then(result=>res.status(200).json({result:result}))
         .catch(err=>res.status(400).json({error:err}))
 })
@@ -15,10 +16,10 @@ router.post('/',(req,res)=>{
     const email=req.body.email
     const password=req.body.password
     //checking if the email exists
-    signupschema.findOne({email:email})
+    trainerschema.findOne({email:email})
         .then(result=>{
             if(result===null){
-                res.status(400).json({"message":"User doesn't exist"})
+                res.status(400).json({"message":"Trainer doesn't exist"})
             }
             else{
                 //comparing the password using hashing 
@@ -30,7 +31,9 @@ router.post('/',(req,res)=>{
                                 email:result.email,
                                 firstname:result.firstname,
                                 lastname:result.lastname,
-                                usertype:result.user_type
+                                phoneno:result.phoneno,
+                                age:result.age,
+                                user_assigned:result.user_assigned
                             }
                             //sending json web token
                             const jwt_token=jwt.sign(userDetails,process.env.ACCESS_KEY)
@@ -51,7 +54,7 @@ router.patch('/', (req, res) => {
     const oldPassword = req.body.password
     const newPassword = req.body.newPassword
     // checking if user exists
-    signupschema.find( {email: req.body.email} )
+    trainerschema.find( {email: req.body.email} )
         .then(resul => {
             if(resul.length === 0) {
                 // The user does not exist
@@ -65,7 +68,7 @@ router.patch('/', (req, res) => {
                             email: resul[0].email,
                             password: newPassword
                         }
-                        signupschema.findByIdAndUpdate(resul[0]._id, updatedUser)
+                        trainerschema.findByIdAndUpdate(resul[0]._id, updatedUser)
                             .then(result => res.status(200).json( {message: 'Password Changed', updatedUser: result} ))
                             .catch(err => res.status(500).json( {message: 'Server Encountered an Error', error: err} ))
                     })
@@ -75,13 +78,13 @@ router.patch('/', (req, res) => {
         .catch(err => res.status(500).json( {message: 'Server Encountered an Error', error: err} ))
 })
 router.delete('/',(req,res)=>{
-    signupschema.find({ email: req.body.email })
+    trainerschema.find({ email: req.body.email })
         .then(result => {
             if (result.length === 0) {
                 res.status(400).json({ msg: "Email doesn't exist" })
             } else {
-                signupschema.findByIdAndDelete(result[0]._id)
-                    .then(result => res.status(200).json({ msg: 'User deleted successfully', deletedUser: result }))
+                trainerschema.findByIdAndDelete(result[0]._id)
+                    .then(result => res.status(200).json({ msg: 'Trainer deleted successfully', deletedUser: result }))
                     .catch(err => res.status(500).json({ msg: 'Unable to delete user at the moment. Please try again', error: err }))
             }
         })
