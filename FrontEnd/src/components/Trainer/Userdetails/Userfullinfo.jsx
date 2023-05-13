@@ -1,37 +1,44 @@
-import { Box, Grid, Typography, Paper, Stack, Card,CardMedia,CardContent,CardActions, CardActionArea } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Paper,
+  Stack,
+  Card,
+  CardMedia,
+  CardContent,
+  
+  CardActionArea,
+} from "@mui/material";
 import React from "react";
 import back from "../../../assets/backview.jpg";
 import front from "../../../assets/frontview.jpg";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { useLocation } from "react-router";
-import chest from '../../../assets/chest.png'
-import chestWhite from '../../../assets/chestWhite.png'
-import arms from '../../../assets/arms.png'
-import armsWhite from '../../../assets/armsWhite.png'
-import legs from '../../../assets/legs.png'
-import legsWhite from '../../../assets/legsWhite.png'
-import absWhite from '../../../assets/abswhite.png'
-import abs from '../../../assets/abs.png'
-import shoulders from '../../../assets/shoulders.png'
-import shouldersWhite from '../../../assets/shouldersWhite.png'
-import backmuscle from '../../../assets/back.png'
-import backWhite from '../../../assets/backWhite.png'
+import chest from "../../../assets/chest.png";
+import chestWhite from "../../../assets/chestWhite.png";
+import arms from "../../../assets/arms.png";
+import armsWhite from "../../../assets/armsWhite.png";
+import legs from "../../../assets/legs.png";
+import legsWhite from "../../../assets/legsWhite.png";
+import absWhite from "../../../assets/abswhite.png";
+import abs from "../../../assets/abs.png";
+import shoulders from "../../../assets/shoulders.png";
+import shouldersWhite from "../../../assets/shouldersWhite.png";
+import backmuscle from "../../../assets/back.png";
+import backWhite from "../../../assets/backWhite.png";
 import { useState } from "react";
-import './userfullInfo.css'
+import "./userfullInfo.css";
 const Userfullinfo = () => {
   const location = useLocation();
   const user = location.state;
   const userMobility = location.state.mobility;
-  const [hover, sethover] = useState(false)
+  const [hoverid, sethoverid] = useState("");
 
- const handleMouseOver=()=>
+  const handleMouseOver = (id) => sethoverid(id);
 
-  sethover(true);
- 
-
- const handleMouseOut=()=>
-  sethover(false);
+  const handleMouseOut = () => sethoverid("");
   return (
     <Box mt="73px" p={2}>
       <Typography variant="h4">Client Details</Typography>
@@ -154,49 +161,88 @@ const Userfullinfo = () => {
                   userMobility.shoulder === true ? "success.main" : "error.main"
                 }
               >
-                Shoulder {
-                  userMobility.shoulder===true?(
-                    <TaskAltIcon sx={{transform:"translateY(5px)"}} color="success.main" />
-                  ):
-                  <CancelOutlinedIcon sx={{transform:"translateY(5px)"}} color="error.main" />
-                }
+                Shoulder{" "}
+                {userMobility.shoulder === true ? (
+                  <TaskAltIcon
+                    sx={{ transform: "translateY(5px)" }}
+                    color="success.main"
+                  />
+                ) : (
+                  <CancelOutlinedIcon
+                    sx={{ transform: "translateY(5px)" }}
+                    color="error.main"
+                  />
+                )}
               </Typography>
             </Grid>
             <Grid item xs={3}>
-              <Typography variant="body1" fontWeight="600" fontSize="18px"  color={
+              <Typography
+                variant="body1"
+                fontWeight="600"
+                fontSize="18px"
+                color={
                   userMobility.elbow === true ? "success.main" : "error.main"
-                }>
-                Elbow  {
-                  userMobility.elbow===true?(
-                    <TaskAltIcon sx={{transform:"translateY(5px)"}} color="success.main" />
-                  ):
-                  <CancelOutlinedIcon sx={{transform:"translateY(5px)"}} color="error.main" />
                 }
+              >
+                Elbow{" "}
+                {userMobility.elbow === true ? (
+                  <TaskAltIcon
+                    sx={{ transform: "translateY(5px)" }}
+                    color="success.main"
+                  />
+                ) : (
+                  <CancelOutlinedIcon
+                    sx={{ transform: "translateY(5px)" }}
+                    color="error.main"
+                  />
+                )}
               </Typography>
             </Grid>
             <Grid item xs={3}>
-              <Typography variant="body1" fontWeight="600" fontSize="18px"  color={
+              <Typography
+                variant="body1"
+                fontWeight="600"
+                fontSize="18px"
+                color={
                   userMobility.knee === true ? "success.main" : "error.main"
-                }>
-                Knee  {
-                  userMobility.knee===true?(
-                    <TaskAltIcon sx={{transform:"translateY(5px)"}} color="success.main" />
-                  ):
-                  <CancelOutlinedIcon sx={{transform:"translateY(5px)"}} color="error.main" />
                 }
+              >
+                Knee{" "}
+                {userMobility.knee === true ? (
+                  <TaskAltIcon
+                    sx={{ transform: "translateY(5px)" }}
+                    color="success.main"
+                  />
+                ) : (
+                  <CancelOutlinedIcon
+                    sx={{ transform: "translateY(5px)" }}
+                    color="error.main"
+                  />
+                )}
               </Typography>
             </Grid>
             <Grid item xs={3}>
               {" "}
-              <Typography variant="body1" fontWeight="600" fontSize="18px"  color={
+              <Typography
+                variant="body1"
+                fontWeight="600"
+                fontSize="18px"
+                color={
                   userMobility.ankle === true ? "success.main" : "error.main"
-                }>
-                Ankle  {
-                  userMobility.ankle===true?(
-                    <TaskAltIcon sx={{transform:"translateY(5px)"}} color="success.main" />
-                  ):
-                  <CancelOutlinedIcon sx={{transform:"translateY(5px)"}} color="error.main" />
                 }
+              >
+                Ankle{" "}
+                {userMobility.ankle === true ? (
+                  <TaskAltIcon
+                    sx={{ transform: "translateY(5px)" }}
+                    color="success.main"
+                  />
+                ) : (
+                  <CancelOutlinedIcon
+                    sx={{ transform: "translateY(5px)" }}
+                    color="error.main"
+                  />
+                )}
               </Typography>
             </Grid>
           </Grid>
@@ -206,135 +252,182 @@ const Userfullinfo = () => {
         Design a workout plan
       </Typography>
       <Grid container justifyContent="center" spacing={2} mt={2}>
-          <Grid item sx={{width:"28%"}}>
-                <Card className="card" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
-                  <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image={!hover?chest:chestWhite}
-                    alt="chest" 
-                    sx={{
-                      height:"187px",
-                      objectFit:"contain"
-                    }}
-                   
-                  />
-                  <CardContent>
-                    <Typography variant="body1" fontWeight="600" fontSize="18px" textAlign="center"> 
-                   Chest Workout
-                    </Typography>
-                  </CardContent>
-                  </CardActionArea>
-                </Card>
-          </Grid>
-          <Grid item sx={{width:"28%"}}>
-          <Card className="card" > <CardActionArea>
-
-                  <CardMedia
-                    component="img"
-                    image={backmuscle}
-                    alt="back" 
-                    sx={{
-                      height:"187px",
-                      objectFit:"contain"
-                    }}
-                   
-                  />
-                  <CardContent>
-                    <Typography variant="body1" fontWeight="600" fontSize="18px" textAlign="center">
-                        Back Workout
-                    </Typography>
-                  </CardContent>
-                  </CardActionArea>
-                </Card>
-          </Grid>
-          <Grid item sx={{width:"28%"}}>
-          <Card className="card"> <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image={shoulders}
-                    alt="Shoulder" 
-                    sx={{
-                      height:"187px",
-                      objectFit:"contain"
-                    }}
-                   
-                  />
-                  <CardContent>
-                    <Typography variant="body1" fontWeight="600" fontSize="18px" textAlign="center">
-                        Shoulder Workout
-                    </Typography>
-                  </CardContent>
-                  </CardActionArea>
-                </Card>
-          </Grid>
-          <Grid item xs={12}>
-
-          </Grid>
-          <Grid item sx={{width:"28%"}}>
-          <Card className="card"> <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image={legs}
-                    alt="Legs" 
-                    sx={{
-                      height:"187px",
-                      objectFit:"contain",
-                     
-                    }}
-                   
-                  />
-                  <CardContent>
-                    <Typography variant="body1" fontWeight="600" fontSize="18px" textAlign="center">
-                        Legs Workout
-                    </Typography>
-                  </CardContent>
-                  </CardActionArea>
-                </Card>
-          </Grid>
-          <Grid item sx={{width:"28%"}}>
-          <Card className="card" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}> <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image={!hover?arms:armsWhite}
-                    alt="Arms" 
-                    sx={{
-                      height:"187px",
-                      objectFit:"contain"
-                    }}
-                   
-                  />
-                  <CardContent>
-                    <Typography variant="body1" fontWeight="600" fontSize="18px" textAlign="center">
-                        Arms Workout
-                    </Typography>
-                  </CardContent>
-                  </CardActionArea>
-                </Card>
-          </Grid>
-          <Grid item sx={{width:"28%"}}>
-          <Card className="card"> <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image={abs}
-                    alt="abdominals" 
-                    sx={{
-                      height:"187px",
-                      objectFit:"contain"
-                    }}
-                   
-                  />
-                  <CardContent>
-                    <Typography  variant="body1" fontWeight="600" fontSize="18px" textAlign="center">
-                        Abdominals Workout
-                    </Typography>
-                  </CardContent>
-                  </CardActionArea>
-                </Card>
-          </Grid>
+        <Grid item sx={{ width: "28%" }}>
+          <Card
+            className="card"
+            onMouseOver={() => handleMouseOver("chest")}
+            onMouseOut={handleMouseOut}
+          >
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                image={hoverid === "chest" ? chestWhite : chest}
+                alt="chest"
+                sx={{
+                  height: "187px",
+                  objectFit: "contain",
+                }}
+              />
+              <CardContent>
+                <Typography
+                  variant="body1"
+                  fontWeight="600"
+                  fontSize="18px"
+                  textAlign="center"
+                >
+                  Chest Workout
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+        <Grid item sx={{ width: "28%" }}>
+          <Card
+            className="card"
+            onMouseOver={() => handleMouseOver("back")}
+            onMouseOut={handleMouseOut}
+          >
+            {" "}
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                image={hoverid==='back'?backWhite:backmuscle}
+                alt="back"
+                sx={{
+                  height: "187px",
+                  objectFit: "contain",
+                }}
+              />
+              <CardContent>
+                <Typography
+                  variant="body1"
+                  fontWeight="600"
+                  fontSize="18px"
+                  textAlign="center"
+                >
+                  Back Workout
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+        <Grid item sx={{ width: "28%" }}>
+          <Card className="card"
+          onMouseOver={()=>handleMouseOver('shoulders')}
+          onMouseOut={handleMouseOut}>
+            {" "}
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                image={hoverid==='shoulders'?shouldersWhite:shoulders}
+                alt="Shoulder"
+                sx={{
+                  height: "187px",
+                  objectFit: "contain",
+                }}
+              />
+              <CardContent>
+                <Typography
+                  variant="body1"
+                  fontWeight="600"
+                  fontSize="18px"
+                  textAlign="center"
+                >
+                  Shoulder Workout
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+        <Grid item xs={12}></Grid>
+        <Grid item sx={{ width: "28%" }}>
+          <Card className="card"
+          onMouseOver={()=>handleMouseOver('legs')}
+          onMouseOut={handleMouseOut}>
+            {" "}
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                image={hoverid==='legs'?legsWhite:legs}
+                alt="Legs"
+                sx={{
+                  height: "187px",
+                  objectFit: "contain",
+                }}
+              />
+              <CardContent>
+                <Typography
+                  variant="body1"
+                  fontWeight="600"
+                  fontSize="18px"
+                  textAlign="center"
+                >
+                  Legs Workout
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+        <Grid item sx={{ width: "28%" }}>
+          <Card
+            className="card"
+            onMouseOver={()=>handleMouseOver('arms')}
+            onMouseOut={handleMouseOut}
+          >
+            {" "}
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                image={hoverid==='arms' ? armsWhite : arms}
+                alt="Arms"
+                sx={{
+                  height: "187px",
+                  objectFit: "contain",
+                }}
+              />
+              <CardContent>
+                <Typography
+                  variant="body1"
+                  fontWeight="600"
+                  fontSize="18px"
+                  textAlign="center"
+                >
+                  Arms Workout
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+        <Grid item sx={{ width: "28%" }}>
+          <Card className="card"
+          onMouseOver={()=>handleMouseOver('abs')}
+          onMouseOut={handleMouseOut}
+          >
+            {" "}
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                image={hoverid==='abs'?absWhite:abs}
+                alt="abdominals"
+                sx={{
+                  height: "187px",
+                  objectFit: "contain",
+                }}
+              />
+              <CardContent>
+                <Typography
+                  variant="body1"
+                  fontWeight="600"
+                  fontSize="18px"
+                  textAlign="center"
+                >
+                  Abdominals Workout
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
       </Grid>
-
-
     </Box>
   );
 };
