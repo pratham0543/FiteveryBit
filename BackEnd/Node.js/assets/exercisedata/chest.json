@@ -1071,14 +1071,7 @@
         "name": "push-up (bosu ball)",
         "target": "pectorals"
     },
-    {
-        "bodyPart": "chest",
-        "equipment": "stability ball",
-        "gifUrl": "http://d205bpvrqc9yn1.cloudfront.net/0655.gif",
-        "id": "0655",
-        "name": "push-up (on stability ball)",
-        "target": "pectorals"
-    },
+    
     {
         "bodyPart": "chest",
         "equipment": "stability ball",

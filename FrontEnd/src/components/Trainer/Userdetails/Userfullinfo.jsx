@@ -29,9 +29,11 @@ import shouldersWhite from "../../../assets/shouldersWhite.png";
 import backmuscle from "../../../assets/back.png";
 import backWhite from "../../../assets/backWhite.png";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import "./userfullInfo.css";
 const Userfullinfo = () => {
   const location = useLocation();
+  const navigate=useNavigate();
   const user = location.state;
   const userMobility = location.state.mobility;
   const [hoverid, sethoverid] = useState("");
@@ -254,6 +256,7 @@ const Userfullinfo = () => {
       <Grid container justifyContent="center" spacing={2} mt={2}>
         <Grid item sx={{ width: "28%" }}>
           <Card
+            onClick={()=>navigate('/createworkout/muscle',{state:{name:"chest"}})}
             className="card"
             onMouseOver={() => handleMouseOver("chest")}
             onMouseOut={handleMouseOut}
@@ -286,6 +289,7 @@ const Userfullinfo = () => {
             className="card"
             onMouseOver={() => handleMouseOver("back")}
             onMouseOut={handleMouseOut}
+            onClick={()=>navigate('/createworkout/muscle',{state:{name:"back"}})}
           >
             {" "}
             <CardActionArea>
@@ -314,7 +318,9 @@ const Userfullinfo = () => {
         <Grid item sx={{ width: "28%" }}>
           <Card className="card"
           onMouseOver={()=>handleMouseOver('shoulders')}
-          onMouseOut={handleMouseOut}>
+          onMouseOut={handleMouseOut}
+          onClick={()=>navigate('/createworkout/muscle',{state:{name:"shoulder"}})}
+          >
             {" "}
             <CardActionArea>
               <CardMedia
@@ -343,8 +349,11 @@ const Userfullinfo = () => {
         <Grid item sx={{ width: "28%" }}>
           <Card className="card"
           onMouseOver={()=>handleMouseOver('legs')}
-          onMouseOut={handleMouseOut}>
-            {" "}
+          onMouseOut={handleMouseOut}
+          onClick={()=>navigate('/createworkout/muscle',{state:{name:"legs"}})}
+          
+          >
+         
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -373,6 +382,8 @@ const Userfullinfo = () => {
             className="card"
             onMouseOver={()=>handleMouseOver('arms')}
             onMouseOut={handleMouseOut}
+            onClick={()=>navigate('/createworkout/muscle',{state:{name:"arms"}})}
+            
           >
             {" "}
             <CardActionArea>
@@ -402,6 +413,7 @@ const Userfullinfo = () => {
           <Card className="card"
           onMouseOver={()=>handleMouseOver('abs')}
           onMouseOut={handleMouseOut}
+          onClick={()=>navigate('/createworkout/muscle',{state:{name:"abs"}})}
           >
             {" "}
             <CardActionArea>
