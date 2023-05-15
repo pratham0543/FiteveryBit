@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useState } from "react";
@@ -29,6 +29,7 @@ const validationSchema = new yup.object({
   password: yup.string("Enter your password").required("Password is required"),
 });
 
+
 const Login = () => {
   //code for redirecting
   const navigate = useNavigate();
@@ -51,18 +52,12 @@ const Login = () => {
   const handleSlide=(e)=>
   {
     setisTrainer(e.target.checked);
+
   }
 
-  var userDetails;
 
 
-  // useEffect(()=> { localStorage.setItem("id", userDetails.userId);
-  // localStorage.setItem("email", userDetails.email);
-  // localStorage.setItem("usertype", userDetails.user_type);
-  // localStorage.setItem("fname", userDetails.firstname);
-  // localStorage.setItem("lname", userDetails.lastname);
-  // if(isTrainer)
-  // localStorage.setItem("usersAssigned",userDetails.user_assigned)},  [open])
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -78,10 +73,7 @@ const Login = () => {
         .post(`http://localhost:3200/${usercall}`, values)
         .then((result) => {
           setopen(true);
-           userDetails = jwt_decode(result.data.token);
-          
-      
-          
+          const userDetails = jwt_decode(result.data.token);
           localStorage.setItem("id", userDetails.userId);
           localStorage.setItem("email", userDetails.email);
           localStorage.setItem("usertype", userDetails.user_type);
@@ -89,8 +81,6 @@ const Login = () => {
           localStorage.setItem("lname", userDetails.lastname);
           if(isTrainer)
           localStorage.setItem("usersAssigned",userDetails.user_assigned)
-          console.log(userDetails);
-          console.log(localStorage);
           setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {

@@ -218,12 +218,12 @@ const Navbar = () => {
         {/* In Listitemtext we cannot set font size becuase it overrides typography so to set size we have primary typography props */}
         <List disablePadding>
           <ListItem disableGutters disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={()=>navigate('/')}>
               <ListItemIcon>
                 <ArticleIcon color="secondary" />
               </ListItemIcon>
               <ListItemText
-                primary="About"
+                primary="Home"
                 primaryTypographyProps={{
                   fontSize: { sx: "16px", md: "14px" },
                 }}

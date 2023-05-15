@@ -9,9 +9,6 @@ import { BrowserRouter } from "react-router-dom";
 
 
 //function to clear local storage when window gets closed
-window.onbeforeunload = function() {
-  localStorage.clear();
-}
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

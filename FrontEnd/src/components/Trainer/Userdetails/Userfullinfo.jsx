@@ -40,17 +40,7 @@ const Userfullinfo = () => {
   const userMobility = location.state.mobility;
   const [hoverid, sethoverid] = useState("");
 
-  //to make an entry to userExercise database 
-  useEffect(()=>
-  {
-    const id={user_id:user._id}
-      axios.post('http://localhost:3200/userexercise',id)
-      .then((result)=>console.log(result.data))
-      .catch((err)=>console.log(err.message))
-  }
-  ,
-  []
-  )
+
   
   
   const handleMouseOver = (id) => sethoverid(id);

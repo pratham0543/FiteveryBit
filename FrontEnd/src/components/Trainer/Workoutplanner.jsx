@@ -15,7 +15,7 @@ import { useLocation } from "react-router";
 import chest from "../../assets/chest-workout.jpg";
 import axios from "axios";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { LocalSeeRounded } from "@mui/icons-material";
+
 class Workout {
   constructor(name, reps, sets, workout) {
     this.name = name;
@@ -102,11 +102,29 @@ const Workoutplanner = () => {
   //sending workout
   const sendWorkout = () => {
     console.log(userid);
+    console.log(muscleName);
     const userWorkout = {
       
       userid: userid,
-      chest: workout,
-    };
+       
+    }
+if(muscleName==='arms')
+{
+  userWorkout.arms=workout;
+}
+else if(muscleName==='shoulder')
+userWorkout.shoulder=workout;
+
+else if(muscleName==='chest')
+userWorkout.chest=workout;
+else if(muscleName==='abs')
+userWorkout.abs=workout;
+else if(muscleName==='back')
+userWorkout.back=workout;
+else if(muscleName==='legs')
+userWorkout.legs=workout;
+
+    console.log(userWorkout);
     axios.patch(`http://localhost:3200/userexercise/${muscleName}`,userWorkout)
     .then((result)=>console.log(result.data))
     .catch((err)=>console.log(err.message))
