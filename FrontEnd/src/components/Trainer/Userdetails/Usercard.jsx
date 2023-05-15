@@ -9,7 +9,7 @@ import {
   Button,
  
 } from "@mui/material";
-import { orange } from "@mui/material/colors";
+import { pink } from "@mui/material/colors";
 import testImage from '../../../assets/lazar.jpg'
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
@@ -31,10 +31,9 @@ const Usercard = (props) => {
           borderRadius:"20px"
         }}
       >
-        <Avatar sx={{ width: 70, height: 70, bgcolor: `${orange[800]}`,position:"relative",bottom:"25px",border:"1px solid black" }} alt={props.name}
-            src={testImage}
+        <Avatar sx={{ width: 70, height: 70, bgcolor: `${pink[400]}`,position:"relative",bottom:"25px" }} alt={props.name}
         >
-         
+         {props.userinfo.firstname.charAt(0)+" "+props.userinfo.lastname.charAt(0)}
         </Avatar>
         <Stack width="100%" spacing={3}>
           <Stack sx={{ alignItems: "center" }}>
@@ -48,7 +47,7 @@ const Usercard = (props) => {
           <Grid container justifyContent="space-between" rowSpacing={2}>
             <Grid item xs={5}>
               <Typography variant="body1" fontWeight="600">
-                Goal: <span style={{fontWeight:"400"}}>{" " + props.planType}</span>
+                Goal: <span style={{fontWeight:"400"}}>{" " + props.userinfo.workoutgoal}</span>
                 
               </Typography>
             </Grid>

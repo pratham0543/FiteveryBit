@@ -14,6 +14,7 @@ import {
   Button,
   Snackbar,
   Alert,
+  Switch,
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import loginImage from "../../assets/loginImage.jpg";
@@ -28,14 +29,12 @@ const validationSchema = new yup.object({
   password: yup.string("Enter your password").required("Password is required"),
 });
 
+
 const Login = () => {
   //code for redirecting
   const navigate = useNavigate();
-
-  
-    
-
-
+  //state for checking trainer or not
+  const [isTrainer,setisTrainer]=useState(false);
   const [showPassword, setShowPassword] = useState(false);
   //for snackbar
   const [open, setopen] = useState(false);
@@ -48,6 +47,17 @@ const Login = () => {
 
     seterrOpen(false);
   };
+
+
+  const handleSlide=(e)=>
+  {
+    setisTrainer(e.target.checked);
+
+  }
+
+
+
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -56,17 +66,21 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       // console.log(JSON.stringify(values));
+      var usercall='login'
+      if(isTrainer===true)
+        usercall='trainerlogin'
       axios
-        .post("http://localhost:3200/login", values)
+        .post(`http://localhost:3200/${usercall}`, values)
         .then((result) => {
           setopen(true);
           const userDetails = jwt_decode(result.data.token);
-          localStorage.setItem("id",userDetails.userId);
+          localStorage.setItem("id", userDetails.userId);
           localStorage.setItem("email", userDetails.email);
-          localStorage.setItem("usertype", userDetails.usertype);
+          localStorage.setItem("usertype", userDetails.user_type);
           localStorage.setItem("fname", userDetails.firstname);
-          localStorage.setItem("lname",userDetails.lastname)
-        console.log(localStorage);
+          localStorage.setItem("lname", userDetails.lastname);
+          if(isTrainer)
+          localStorage.setItem("usersAssigned",userDetails.user_assigned)
           setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {
@@ -90,7 +104,6 @@ const Login = () => {
         direction="row"
         sx={{ position: "relative", top: "72px" }}
         justifyContent="space-evenly"
-        
       >
         <Grid
           item
@@ -104,15 +117,12 @@ const Login = () => {
           alignItems="center"
           padding={2}
           mx="auto"
-      
-          
-
         >
-          <Typography variant="h4" fontWeight="600" textAlign="center" >
+          <Typography variant="h4" fontWeight="600" textAlign="center">
             Login to your Fitevery<span style={{ color: "#0AAE59" }}>Bit</span>{" "}
             account
           </Typography>
-          <form onSubmit={formik.handleSubmit} style={{width:"100%"}}>
+          <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
             <Stack mt={2} spacing={2}>
               <Box>
                 <Typography fontSize="14px">Email</Typography>
@@ -163,6 +173,17 @@ const Login = () => {
                   fullWidth
                 />
               </Box>
+              <Box>
+                <Typography fontSize="14px">Are u a trainer?</Typography>
+                <Typography fontSize="14px" component="span">No</Typography>
+                <Switch
+                  checked={isTrainer}
+                 color="secondary"
+                 onChange={handleSlide}
+                />
+            <Typography fontSize="14px" component="span">Yes</Typography>
+            
+              </Box>
             </Stack>
             <Button
               variant="contained"
@@ -178,23 +199,40 @@ const Login = () => {
           item
           sm={7}
           md={12}
-          lg={8}      
+          lg={8}
           sx={{
             height: "calc(100vh - 72px)",
             backgroundImage: `url(${loginImage})`,
             backgroundPosition: "center center",
             backgroundSize: "cover",
-            padding:"16px",
-            display:{xs:"none",md:"block"}  
+            padding: "16px",
+            display: { xs: "none", md: "block" },
           }}
-         
-        
         >
-          <Typography variant="body1" color="true.main" fontWeight="600" sx={{position:"relative",top:"20%",textTransform:'capitalize',left:"5%",fontSize:"1.5rem",width:"fit-content"}}>
-            Your <span style={{ color: "#0AAE59" }}>Health</span> account, your bank account, they’re the <br/> <span style={{ color: "#0AAE59" }}>Same</span> thing.<br/> 
-            The <span style={{ color: "#0AAE59" }}>More</span> you put in, the more you can take <span style={{ color: "#0AAE59" }}>Out.</span> <br/>
-            Exercise is <span style={{ color: "#0AAE59" }}>King</span> and nutrition is <span style={{ color: "#0AAE59" }}>Queen.</span> <br/>
-            <span style={{ color: "#0AAE59" }}>Together</span> you have a <span style={{ color: "#0AAE59" }}>Kingdom.</span>
+          <Typography
+            variant="body1"
+            color="true.main"
+            fontWeight="600"
+            sx={{
+              position: "relative",
+              top: "20%",
+              textTransform: "capitalize",
+              left: "5%",
+              fontSize: "1.5rem",
+              width: "fit-content",
+            }}
+          >
+            Your <span style={{ color: "#0AAE59" }}>Health</span> account, your
+            bank account, they’re the <br />{" "}
+            <span style={{ color: "#0AAE59" }}>Same</span> thing.
+            <br />
+            The <span style={{ color: "#0AAE59" }}>More</span> you put in, the
+            more you can take <span style={{ color: "#0AAE59" }}>Out.</span>{" "}
+            <br />
+            Exercise is <span style={{ color: "#0AAE59" }}>King</span> and
+            nutrition is <span style={{ color: "#0AAE59" }}>Queen.</span> <br />
+            <span style={{ color: "#0AAE59" }}>Together</span> you have a{" "}
+            <span style={{ color: "#0AAE59" }}>Kingdom.</span>
           </Typography>
         </Grid>
       </Grid>

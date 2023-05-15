@@ -39,7 +39,7 @@ router.post("/", (req, res) => {
                 email: result.email,
                 firstname: result.firstname,
                 lastname: result.lastname,
-                usertype: result.user_type,
+                user_type: result.user_type,
               };
               //sending json web token
               const jwt_token = jwt.sign(userDetails, process.env.ACCESS_KEY);

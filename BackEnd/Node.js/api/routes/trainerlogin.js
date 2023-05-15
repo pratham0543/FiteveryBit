@@ -27,13 +27,14 @@ router.post('/',(req,res)=>{
                     .then(passres=>{
                         if(passres){
                             const userDetails={
-                                userId:result._id,
+                                trainerId:result._id,
                                 email:result.email,
                                 firstname:result.firstname,
                                 lastname:result.lastname,
                                 phoneno:result.phoneno,
                                 age:result.age,
-                                user_assigned:result.user_assigned
+                                user_assigned:result.user_assigned,
+                                user_type:result.user_type
                             }
                             //sending json web token
                             const jwt_token=jwt.sign(userDetails,process.env.ACCESS_KEY)

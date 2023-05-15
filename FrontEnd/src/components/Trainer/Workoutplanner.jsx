@@ -15,6 +15,7 @@ import { useLocation } from "react-router";
 import chest from "../../assets/chest-workout.jpg";
 import axios from "axios";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 class Workout {
   constructor(name, reps, sets, workout) {
     this.name = name;
@@ -27,14 +28,14 @@ const Workoutplanner = () => {
   //superset array for handling superset exercises for main exercises
   const [superset, setsuperset] = useState([[null]]);
   //main workout which will be sent to backend
-  const [workout, setworkout] = useState([])
+  const [workout, setworkout] = useState([]);
   const [muscleData, setmuscleData] = useState([]);
   const [exerciseNumber, setexerciseNumber] = useState([1]);
   const [expanded, setexpanded] = useState(false);
   var exercises = [];
   const location = useLocation();
-  const muscleName=location.state.name;
-
+  const muscleName = location.state.name;
+  const userid = localStorage.getItem("usersAssigned");
   //handle expanded accordion
   const handleExpandedAccordion = (panel) => (e, isExpanded) => {
     setexpanded(isExpanded ? panel : false);
@@ -56,50 +57,80 @@ const Workoutplanner = () => {
     num.push(null);
     sup[index] = num;
     setsuperset(sup);
-   
   };
 
   //superset fetching exercises
-  const fetchSupersetExercises = (index,obj) => {
-for (let i = 1; i < superset[index].length; i++) {
-  
-  
-
-    const name = document.querySelector(`#super-${index}${i}`).value.trim();
-    const sets = document.querySelector(`#supersets-${index}${i}`).value.trim();
-    const reps = document.querySelector(`#superreps-${index}${i}`).value.trim();
-    console.log(name.length,sets.length,reps.length);
-    if(name.length!==0 && sets.length!==0 && reps.length!==0) {
-    const superExercise=new Workout(name,sets,reps);
-    obj.superset.push(superExercise);
+  const fetchSupersetExercises = (index, obj) => {
+    for (let i = 1; i < superset[index].length; i++) {
+      const name = document.querySelector(`#super-${index}${i}`).value.trim();
+      const sets = document
+        .querySelector(`#supersets-${index}${i}`)
+        .value.trim();
+      const reps = document
+        .querySelector(`#superreps-${index}${i}`)
+        .value.trim();
+      // console.log(name.length,sets.length,reps.length);
+      if (name.length !== 0 && sets.length !== 0 && reps.length !== 0) {
+        const superExercise = new Workout(name, sets, reps);
+        obj.superset.push(superExercise);
+      }
     }
-
-}
   };
 
   //main exercises calculator
   const saveExercise = (index) => {
     //These are for main exercises
-    
+
     const name = document.querySelector(`#exercise-${index}`).value.trim();
     const sets = document.querySelector(`#exercisesets-${index}`).value.trim();
     const reps = document.querySelector(`#exercisereps-${index}`).value.trim();
-    console.log(name.length===0,sets.length===0,reps.length===0,sets.length);
-    if((name.length!==0) && (sets.length!==0) && (reps.length!==0)) {
-      console.log(name,sets,reps);
-    const obj = new Workout(name, sets, reps);
-    obj.superset = new Array();
-    fetchSupersetExercises(index,obj);
-    console.log("OBJECT",obj); 
-    const w=[...workout];
-    w[index]=obj;
-    setworkout(w)
-    console.log("state",workout);   
-  }
-   
-  }
+    // console.log(name.length===0,sets.length===0,reps.length===0,sets.length);
+    if (name.length !== 0 && sets.length !== 0 && reps.length !== 0) {
+      // console.log(name,sets,reps);
+      const obj = new Workout(name, sets, reps);
+      obj.superset = new Array();
+      fetchSupersetExercises(index, obj);
+      // console.log("OBJECT",obj);
+      const w = [...workout];
+      w[index] = obj;
+      setworkout(w);
+      console.log("state", workout);
+    }
+  };
   console.log(workout);
- 
+
+  //sending workout
+  const sendWorkout = () => {
+    console.log(userid);
+    console.log(muscleName);
+    const userWorkout = {
+      
+      userid: userid,
+       
+    }
+if(muscleName==='arms')
+{
+  userWorkout.arms=workout;
+}
+else if(muscleName==='shoulder')
+userWorkout.shoulder=workout;
+
+else if(muscleName==='chest')
+userWorkout.chest=workout;
+else if(muscleName==='abs')
+userWorkout.abs=workout;
+else if(muscleName==='back')
+userWorkout.back=workout;
+else if(muscleName==='legs')
+userWorkout.legs=workout;
+
+    console.log(userWorkout);
+    axios.patch(`http://localhost:3200/userexercise/${muscleName}`,userWorkout)
+    .then((result)=>console.log(result.data))
+    .catch((err)=>console.log(err.message))
+
+
+  };
 
   useEffect(() => {
     axios
@@ -121,7 +152,12 @@ for (let i = 1; i < superset[index].length; i++) {
     <Box mt="72px">
       <Stack direction="row" justifyContent="center">
         <Box width="40%" height="auto">
-          <Typography variant="h4" textAlign="center" mt={2} textTransform="capitalize">
+          <Typography
+            variant="h4"
+            textAlign="center"
+            mt={2}
+            textTransform="capitalize"
+          >
             {muscleName} Workout
           </Typography>
           <Box
@@ -185,7 +221,6 @@ for (let i = 1; i < superset[index].length; i++) {
                               : "supersets-" + index + ind
                           }
                           color="secondary"
-                  
                         />
                         <TextField
                           type="number"
@@ -197,7 +232,6 @@ for (let i = 1; i < superset[index].length; i++) {
                               : "superreps-" + index + ind
                           }
                           color="secondary"
-                          
                         />
                       </Stack>
                     </Stack>
@@ -232,14 +266,22 @@ for (let i = 1; i < superset[index].length; i++) {
             >
               Add Exercise
             </Button>
+            <Button
+              variant="contained"
+              sx={{ mt: 3 }}
+              size="large"
+              onClick={sendWorkout}
+            >
+              Save Workout
+            </Button>
           </Box>
         </Box>
-        
+
         <Box
           width="60%"
           sx={{
             backgroundImage: `url(${chest})`,
-            backgroundPosition:"right",
+            backgroundPosition: "right",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
           }}

@@ -102,7 +102,7 @@ const Navbar = () => {
           </Typography>
 
           {/* Login/signup */}
-         {localStorage.getItem("usertype") !== 'normal' && localStorage.getItem("usertype") !== null  ? (
+         { localStorage.getItem("usertype") !== null  ? (
             <>
               <Avatar
                 id="dialog-button"
@@ -218,12 +218,12 @@ const Navbar = () => {
         {/* In Listitemtext we cannot set font size becuase it overrides typography so to set size we have primary typography props */}
         <List disablePadding>
           <ListItem disableGutters disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={()=>navigate('/')}>
               <ListItemIcon>
                 <ArticleIcon color="secondary" />
               </ListItemIcon>
               <ListItemText
-                primary="About"
+                primary="Home"
                 primaryTypographyProps={{
                   fontSize: { sx: "16px", md: "14px" },
                 }}
@@ -236,7 +236,7 @@ const Navbar = () => {
             <ListItemButton
             onClick={localStorage.getItem("usertype") === "normal"? ()=>navigate('/userform',{state:{height:"",weight:"",workoutplan:"",level:"",shouldermobility:"",anklemobility:"",elbowmobility:"",kneemobility:"",visitedmobility:false}}):  ()=>navigate('/workoutplanner') }
               disabled={
-                localStorage.getItem("usertype") === "normal" ? false : true
+                localStorage.getItem("usertype") !== null ? false : true
               }
             >
               <ListItemIcon>

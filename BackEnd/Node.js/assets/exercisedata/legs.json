@@ -1394,22 +1394,6 @@
     {
         "bodyPart": "upper legs",
         "equipment": "body weight",
-        "gifUrl": "http://d205bpvrqc9yn1.cloudfront.net/0697.gif",
-        "id": "0697",
-        "name": "self assisted inverse leg curl",
-        "target": "hamstrings"
-    },
-    {
-        "bodyPart": "upper legs",
-        "equipment": "body weight",
-        "gifUrl": "http://d205bpvrqc9yn1.cloudfront.net/1766.gif",
-        "id": "1766",
-        "name": "self assisted inverse leg curl",
-        "target": "hamstrings"
-    },
-    {
-        "bodyPart": "upper legs",
-        "equipment": "body weight",
         "gifUrl": "http://d205bpvrqc9yn1.cloudfront.net/0696.gif",
         "id": "0696",
         "name": "self assisted inverse leg curl (on floor)",
@@ -1874,14 +1858,6 @@
     {
         "bodyPart": "lower legs",
         "equipment": "barbell",
-        "gifUrl": "http://d205bpvrqc9yn1.cloudfront.net/1371.gif",
-        "id": "1371",
-        "name": "barbell seated calf raise",
-        "target": "calves"
-    },
-    {
-        "bodyPart": "lower legs",
-        "equipment": "barbell",
         "gifUrl": "http://d205bpvrqc9yn1.cloudfront.net/1372.gif",
         "id": "1372",
         "name": "barbell standing calf raise",
@@ -2220,14 +2196,6 @@
         "equipment": "smith machine",
         "gifUrl": "http://d205bpvrqc9yn1.cloudfront.net/0763.gif",
         "id": "0763",
-        "name": "smith reverse calf raises",
-        "target": "calves"
-    },
-    {
-        "bodyPart": "lower legs",
-        "equipment": "smith machine",
-        "gifUrl": "http://d205bpvrqc9yn1.cloudfront.net/1394.gif",
-        "id": "1394",
         "name": "smith reverse calf raises",
         "target": "calves"
     },
