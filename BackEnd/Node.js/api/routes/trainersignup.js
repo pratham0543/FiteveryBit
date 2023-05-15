@@ -12,7 +12,7 @@ const trainerschema = require("../model/trainerSchema");
 //validating using joi
 const validate = joi.object({
   firstname: joi.string().required(),
-  lastname: joi.string(),
+  lastname: joi.string().required(),
   email: joi.string().required(),
   password: joi.string().required().min(8),
   phoneno: joi.number().required(),
@@ -53,7 +53,7 @@ router.post("/", (req, res) => {
               .save()
               .then((result) =>
                 res.status(201).json({
-                  message: "User Signup SuccessfulL",
+                  message: "Trainer Signup Successfull",
                   userDetails: result,
                 })
               )

@@ -7,6 +7,10 @@ const trainerSchema=new mongoose.Schema({
   password: mongoose.Schema.Types.String,
   phoneno: mongoose.Schema.Types.Number,
   age: mongoose.Schema.Types.Number,
+  user_type:{
+    type:mongoose.Schema.Types.String,
+    default:"trainer"
+  },
   user_assigned:{type:mongoose.Schema.Types.Array,default:[]}
 })
 module.exports=mongoose.model("trainerSchema",trainerSchema);

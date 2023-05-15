@@ -17,7 +17,7 @@ router.get('/:id',(req,res)=>{
 })
 //post request
 router.post('/',(req,res)=>{
-    userschema.find({_id:req.body.user_id})
+    userschema.find({_id:req.body.userid})
         .then(result=>{
                 const error = validate.validate(req.body)
                 if (error.error) {
@@ -28,7 +28,7 @@ router.post('/',(req,res)=>{
                         userid:req.body.userid,
                         })
                     newUserExercise.save()
-                        .then(result => res.status(201).json( {message: 'Posted SuccessfulL', userDetails: result} ))
+                        .then(reslt => res.status(201).json( {message: 'Posted SuccessfulL', userDetails: reslt} ))
                         .catch(err => res.status(500).json( {message: 'Server Encountered an Error1', error: err} ))
         })
         .catch(err=>res.status(500).json({message:"Server Encountered an Error",error:err}))

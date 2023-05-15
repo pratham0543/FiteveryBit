@@ -102,7 +102,7 @@ const Navbar = () => {
           </Typography>
 
           {/* Login/signup */}
-         {localStorage.getItem("usertype") !== 'normal' && localStorage.getItem("usertype") !== null  ? (
+         { localStorage.getItem("usertype") !== null  ? (
             <>
               <Avatar
                 id="dialog-button"
@@ -236,7 +236,7 @@ const Navbar = () => {
             <ListItemButton
             onClick={localStorage.getItem("usertype") === "normal"? ()=>navigate('/userform',{state:{height:"",weight:"",workoutplan:"",level:"",shouldermobility:"",anklemobility:"",elbowmobility:"",kneemobility:"",}}):  ()=>navigate('/workoutplanner') }
               disabled={
-                localStorage.getItem("usertype") === "normal" ? false : true
+                localStorage.getItem("usertype") !== null ? false : true
               }
             >
               <ListItemIcon>

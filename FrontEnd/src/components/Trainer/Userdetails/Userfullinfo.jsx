@@ -10,7 +10,7 @@ import {
   
   CardActionArea,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import back from "../../../assets/backview.jpg";
 import front from "../../../assets/frontview.jpg";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
@@ -31,14 +31,32 @@ import backWhite from "../../../assets/backWhite.png";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./userfullInfo.css";
+import axios from "axios";
 const Userfullinfo = () => {
   const location = useLocation();
   const navigate=useNavigate();
   const user = location.state;
+  console.log(user);
   const userMobility = location.state.mobility;
   const [hoverid, sethoverid] = useState("");
 
+  //to make an entry to userExercise database 
+  useEffect(()=>
+  {
+    const id={user_id:user._id}
+      axios.post('http://localhost:3200/userexercise',id)
+      .then((result)=>console.log(result.data))
+      .catch((err)=>console.log(err.message))
+  }
+  ,
+  []
+  )
+  
+  
   const handleMouseOver = (id) => sethoverid(id);
+
+
+
 
   const handleMouseOut = () => sethoverid("");
   return (
@@ -53,8 +71,9 @@ const Userfullinfo = () => {
           color="cap.main"
           fontWeight="600"
           textAlign="center"
+          textTransform="capitalize"
         >
-          {user.plantype + "-" + user.level}
+          {user.workoutgoal + "-" + user.level}
         </Typography>
       </Box>
       <Grid container mt={8} justifyContent="space-around">
