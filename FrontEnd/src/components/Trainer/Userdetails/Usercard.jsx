@@ -7,10 +7,16 @@ import {
   Grid,
   Stack,
   Button,
+ 
 } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import testImage from '../../../assets/lazar.jpg'
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import { useNavigate } from "react-router";
 const Usercard = (props) => {
+  const navigate=useNavigate();
+  console.log(props.userinfo);
   return (
     <Grid item xs={12} sm={3}>
       <Paper
@@ -25,7 +31,7 @@ const Usercard = (props) => {
           borderRadius:"20px"
         }}
       >
-        <Avatar sx={{ width: 70, height: 70, bgcolor: `${orange[800]}`,position:"relative",bottom:"25px" }} alt={props.name}
+        <Avatar sx={{ width: 70, height: 70, bgcolor: `${orange[800]}`,position:"relative",bottom:"25px",border:"1px solid black" }} alt={props.name}
             src={testImage}
         >
          
@@ -42,10 +48,8 @@ const Usercard = (props) => {
           <Grid container justifyContent="space-between" rowSpacing={2}>
             <Grid item xs={5}>
               <Typography variant="body1" fontWeight="600">
-                Goal:
-                <Typography varint="subtitle1" sx={{ display: "inline-block" }}>
-                  {" " + props.planType}
-                </Typography>
+                Goal: <span style={{fontWeight:"400"}}>{" " + props.planType}</span>
+                
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -53,30 +57,23 @@ const Usercard = (props) => {
                 variant="body1"
                 fontWeight="600"
               >
-                Contact:
-                <Typography
-                  varint="subtitle1"
-                  sx={{ display: "inline-block" }}
-                  color="primary.main"
-                >
-                  {"+91-" + props.contactno}
-                </Typography>
+                Contact: <span style={{fontWeight:"400"}}>{" " + props.contactno}</span>
+                
               </Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Typography variant="body1" fontWeight="600">
-                AiMobility:
-                <Typography varint="subtitle1" sx={{ display: "inline-block" }}>
-                  {" " + props.isAiMobility}
-                </Typography>
+              <Typography variant="body1" fontWeight="600" color={props.isAiMobility===true?'success.main':'error.main'}>
+                Aimobility:{
+                  props.isAiMobility===true?(
+                    <TaskAltIcon sx={{transform:"translateY(5px)"}} color="success.main" />
+                  ):
+                  <CancelOutlinedIcon sx={{transform:"translateY(5px)"}} color="error.main" />
+                }
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant="body1" fontWeight="600">
-                Age:
-                <Typography varint="subtitle1" sx={{ display: "inline-block" }}>
-                  {" " + props.age}
-                </Typography>
+                Age:<span style={{fontWeight:"400"}}>{" " + props.age}</span>
               </Typography>
             </Grid>
           </Grid>
@@ -87,6 +84,7 @@ const Usercard = (props) => {
               variant="contained"
               color="secondary"
               sx={{ color: "true.main", width: "50%" }}
+              onClick={()=>navigate('/createworkout',{state:props.userinfo})}
             >
               Create
             </Button>
