@@ -568,6 +568,7 @@ export default function MobilityChecker() {
                 elbowmobility: elbowcheck,
                 anklemobility: anklecheck,
                 kneemobility: kneecheck,
+                visitedmobility:true
               },
             });
           }}

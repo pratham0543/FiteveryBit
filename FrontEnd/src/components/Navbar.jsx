@@ -234,7 +234,7 @@ const Navbar = () => {
           <ListItem disablePadding>
             
             <ListItemButton
-            onClick={localStorage.getItem("usertype") === "normal"? ()=>navigate('/userform',{state:{height:"",weight:"",workoutplan:"",level:"",shouldermobility:"",anklemobility:"",elbowmobility:"",kneemobility:"",}}):  ()=>navigate('/workoutplanner') }
+            onClick={localStorage.getItem("usertype") === "normal"? ()=>navigate('/userform',{state:{height:"",weight:"",workoutplan:"",level:"",shouldermobility:"",anklemobility:"",elbowmobility:"",kneemobility:"",visitedmobility:false}}):  ()=>navigate('/workoutplanner') }
               disabled={
                 localStorage.getItem("usertype") === "normal" ? false : true
               }

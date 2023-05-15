@@ -72,12 +72,15 @@ const UserForm = () => {
     height:height,
     weight:weight,
     level:level,
+    visitedmobility:location.state.visitedmobility,
     workoutgoal:workoutgoal,
     mobility:{shoulder:shouldermobility,ankle:anklemobility,elbow:elbowmobility,knee:kneemobility}
   }
   const onsubmithandler=()=>{
       axios.patch("http://localhost:3200/login/update",info)
-        .then(result=>console.log(result))
+        .then(result=>{console.log(result)
+          navigate("/",{state:{visitedmobility:true}})
+        })
         .catch(err=>console.log(err))
   }
   return (
@@ -274,7 +277,9 @@ const UserForm = () => {
             variant="contained"
             color="secondary"
             sx={{ color: "white" }}
-            onClick={onsubmithandler}
+            onClick={()=>{
+              onsubmithandler();
+            }}
           >
             Submit
           </Button>

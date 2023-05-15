@@ -120,7 +120,8 @@ router.patch("/update", (req, res) => {
     weight:req.body.weight,
     workoutgoal:req.body.workoutgoal,
     level:req.body.level,
-    mobility:req.body.mobility
+    mobility:req.body.mobility,
+    visitedmobility:req.body.visitedmobility
   }
   signupschema
     .findByIdAndUpdate(req.body.id, updatedUser)
