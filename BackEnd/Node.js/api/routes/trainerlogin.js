@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 
 //importing the schema
 const trainerschema=require('../model/trainerSchema')
-
+//this get request is for admin to access all the trainers
 router.get('/',(req,res)=>{
     trainerschema.find()
         .then(result=>res.status(200).json({result:result}))

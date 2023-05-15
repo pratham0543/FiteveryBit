@@ -22,6 +22,9 @@ const theme = createTheme({
     },
     success:{
       main:"#0AAE59"
+    },
+    info:{
+      main:"#fff"
     }
   },
   typography: {

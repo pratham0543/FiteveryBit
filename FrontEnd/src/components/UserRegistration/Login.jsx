@@ -55,17 +55,18 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values));
+      // console.log(JSON.stringify(values));
       axios
         .post("http://localhost:3200/login", values)
         .then((result) => {
           setopen(true);
           const userDetails = jwt_decode(result.data.token);
+          localStorage.setItem("id",userDetails.userId);
           localStorage.setItem("email", userDetails.email);
           localStorage.setItem("usertype", userDetails.usertype);
           localStorage.setItem("fname", userDetails.firstname);
           localStorage.setItem("lname",userDetails.lastname)
-        console.log(userDetails);
+        console.log(localStorage);
           setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {

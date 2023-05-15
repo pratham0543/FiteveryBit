@@ -8,20 +8,19 @@ import {
   DialogTitle,
   Typography,
   Checkbox,
-  Stack
+  Stack,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const Mobilitycheck = () => {
   const [open, setOpen] = useState(true);
   const [checkbox, setcheckbox] = useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
   useEffect(() => {
     handleClickOpen();
   }, []);
@@ -30,57 +29,67 @@ const Mobilitycheck = () => {
     "The AI model is still in development and results might not be 100% accurate",
     "The AI model is still in development and results might not be 100% accurate",
   ];
-  const instructionsListItems = instructions.map((myList) => {
-    return <li>{myList}</li>;
+  const instructionsListItems = instructions.map((myList,index) => {
+    return <li key={index}>{myList}</li>;
   });
   const oncheckboxclick = () => {
     setcheckbox(!checkbox);
   };
+  const navigate = useNavigate();
+  const location = useLocation();
   const button = checkbox ? (
-    <Link to="/mobilitycheck">
-      <Button
-        onClick={handleClose}
-        autoFocus
-        style={{ marginRight: "10%" }}
-        variant="contained"
-        color="secondary"
-        sx={{ color: "white" }}
-      >
-        Agree
-      </Button>
-    </Link>
+    <Button
+      // onClick={handleClose}
+      autoFocus
+      style={{ marginRight: "10%" }}
+      variant="contained"
+      color="secondary"
+      sx={{ color: "white" }}
+      onClick={() =>
+        navigate("/mobilitycheck", {
+          state: {
+            height: location.state.height,
+            weight: location.state.weight,
+            workoutgoal: location.state.workoutgoal,
+            level: location.state.level,
+            shouldermobility: location.state.shouldermobility,
+            anklemobility: location.state.anklemobility,
+            elbowmobility: location.state.elbowmobility,
+            kneemobility: location.state.kneemobility,
+          },
+        })
+      }
+    >
+      Agree
+    </Button>
   ) : (
-    <Link to="/mobilitycheck">
-      <Button
-        onClick={handleClose}
-        autoFocus
-        style={{ marginRight: "10%" }}
-        variant="contained"
-        color="secondary"
-        sx={{ color: "white" }}
-        disabled
-      >
-        Agree
-      </Button>
-    </Link>
+    <Button
+      // onClick={handleClose}
+      autoFocus
+      style={{ marginRight: "10%" }}
+      variant="contained"
+      color="secondary"
+      sx={{ color: "white" }}
+      disabled
+    >
+      Agree
+    </Button>
   );
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      // onClose={handleClose}
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description"
     >
       <DialogTitle id="dialog-title">Instruction!</DialogTitle>
       <DialogContent>
-        <DialogContentText id="dialog-description">
           <ul>{instructionsListItems}</ul>
-        </DialogContentText>
         <Stack direction="row">
-        <Checkbox onChange={oncheckboxclick} />
-        <Typography sx={{ color: "highlight.main" }} mt={1} >
-          Please check this checkbox to continue
-        </Typography>
+          <Checkbox onChange={oncheckboxclick} />
+          <Typography sx={{ color: "highlight.main" }} mt={1}>
+            Please check this checkbox to continue
+          </Typography>
         </Stack>
       </DialogContent>
 

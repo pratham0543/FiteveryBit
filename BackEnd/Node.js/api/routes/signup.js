@@ -18,6 +18,8 @@ const validate = joi.object({
     password: joi.string().required().min(8),
     phoneno: joi.number().required(),
     height: joi.number(),
+    workoutgoal:joi.string(),
+    level:joi.string(),
     weight: joi.number(),
     age: joi.number().required(),
     user_type:joi.string(),
@@ -47,10 +49,7 @@ router.post('/',(req,res)=>{
                             email:req.body.email,
                             password:result,
                             phoneno:req.body.phoneno,
-                            height:req.body.height,
-                            weight:req.body.weight,
                             age:req.body.age,
-                            mobility:req.body.mobility
                         })
                         newUser.save()
                             .then(result => res.status(201).json( {message: 'User Signup SuccessfulL', userDetails: result} ))

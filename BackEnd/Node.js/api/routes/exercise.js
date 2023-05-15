@@ -10,6 +10,8 @@ const shoulder =require('../../assets/exercisedata/shoulder.json')
 const upperarms =require('../../assets/exercisedata/upperarms.json')
 const upperlegs =require('../../assets/exercisedata/upperlegs.json')
 const waist =require('../../assets/exercisedata/waist.json')
+const legs=require('../../assets/exercisedata/legs.json')
+const arms=require('../../assets/exercisedata/arms.json')
 
 router.get('/back',(req,res)=>{
     res.status(200).send(back)
@@ -68,6 +70,14 @@ router.get('/hamstrings',(req,res)=>
     res.status(200).send(hamstrings)
 }
 )
+router.get('/legs',(req,res)=>
+{
+    res.status(200).send(legs)
+}
+)
+router.get('/arms',(req,res)=>{
+    res.status(200).send(arms)
+})
 
 router.get('/adductor',(req,res)=>
 {

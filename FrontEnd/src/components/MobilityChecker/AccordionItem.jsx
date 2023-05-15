@@ -35,24 +35,45 @@ const AccordionItem = (props) => {
     props.start();
     setclassname("");
   };
+
+  var render = props.severity=="" ? (
+    <Alert severity="info" display="flex" style={{ width: "85%" }}>
+      <Box display="flex">
+        <Typography>{props.title}</Typography>
+        <Typography sx={{ marginLeft: "4em", width: "2%" }}>
+          {Timer}
+          <i
+            style={{ marginLeft: "0em", color: "#0AAE59" }}
+            onClick={onclick}
+            className={classname}
+          ></i>
+        </Typography>
+        <Typography sx={{ marginLeft: "2em" }}>
+          <i className={recording}></i>
+        </Typography>
+      </Box>
+    </Alert>
+  ) : (
+    <Alert severity={props.severity} display="flex" style={{ width: "85%" }}>
+      <Box display="flex">
+        <Typography>{props.title}</Typography>
+        <Typography sx={{ marginLeft: "4em", width: "2%" }}>
+          {Timer}
+          <i
+            style={{ marginLeft: "0em", color: "#0AAE59" }}
+            onClick={onclick}
+            className={classname}
+          ></i>
+        </Typography>
+        <Typography sx={{ marginLeft: "2em" }}>
+          <i className={recording}></i>
+        </Typography>
+      </Box>
+    </Alert>
+  );
   return (
     <>
-      <Alert severity={props.severity} display="flex" style={{width:"85%"}}>
-        <Box display="flex">
-          <Typography>{props.title}</Typography>
-          <Typography sx={{ marginLeft: "4em",width:"2%" }}>
-            {Timer}
-            <i
-              style={{ marginLeft: "0em", color: "#0AAE59" }}
-              onClick={onclick}
-              className={classname}
-            ></i>
-          </Typography>
-          <Typography sx={{ marginLeft: "2em" }}>
-            <i class={recording}></i>
-          </Typography>
-        </Box>
-      </Alert>
+      {render}
     </>
   );
 };

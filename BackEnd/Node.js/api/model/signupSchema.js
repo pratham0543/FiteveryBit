@@ -10,7 +10,7 @@ const signupSchema = new mongoose.Schema({
   height: mongoose.Schema.Types.Number,
   weight: mongoose.Schema.Types.Number,
   age: mongoose.Schema.Types.Number,
-  workout_goal:mongoose.Schema.Types.String,
+  workoutgoal:mongoose.Schema.Types.String,
   level:mongoose.Schema.Types.String,
   user_type: {
     type: mongoose.Schema.Types.String,

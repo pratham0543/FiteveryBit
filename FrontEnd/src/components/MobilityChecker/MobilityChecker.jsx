@@ -9,13 +9,14 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import RecordRTC from "recordrtc";
 import axios from "axios";
 import AccordionItem from "./AccordionItem";
 
 export default function MobilityChecker() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [shoulderFlexsioncheck, setshoulderFlexsioncheck] = useState("");
   const [shoulderExtensioncheck, setshoulderExtensioncheck] = useState("");
   const [LeftKneecheck, setLeftKneecheck] = useState("");
@@ -24,11 +25,10 @@ export default function MobilityChecker() {
   const [AnkleRightDorsicheck, setAnkleRightDorsicheck] = useState("");
   const [AnkleLeftPlantarcheck, setAnkleLeftPlantarcheck] = useState("");
   const [AnkleRightPlantarcheck, setAnkleRightPlantarcheck] = useState("");
-  const[ElbowLeftFlexsioncheck,setElbowLeftFlexsioncheck]=useState("");
-  const[ElbowRightFlexsioncheck,setElbowRightFlexsioncheck]=useState("");
-  const[ElbowLeftExtensioncheck,setElbowLeftExtensioncheck]=useState("");
-  const[ElbowRightExtensioncheck,setElbowRightExtensioncheck]=useState("");
-  const[videostate,setvideostate]=useState(true);
+  const [ElbowLeftFlexsioncheck, setElbowLeftFlexsioncheck] = useState("");
+  const [ElbowRightFlexsioncheck, setElbowRightFlexsioncheck] = useState("");
+  const [ElbowLeftExtensioncheck, setElbowLeftExtensioncheck] = useState("");
+  const [ElbowRightExtensioncheck, setElbowRightExtensioncheck] = useState("");
 
   const videoRef = useRef(null);
   const recorderRef = useRef(null);
@@ -38,8 +38,8 @@ export default function MobilityChecker() {
       videoRef.current.srcObject = stream;
       recorderRef.current = new RecordRTC(stream, { type: "video" });
     });
-  //start-stop tests functions
 
+  //start-stop tests functions
   //shoulder flexsion
   function stopRecordingShoulderFlexsion() {
     recorderRef.current.stopRecording(() => {
@@ -49,10 +49,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/shoulder1/", formData)
         .then((response) => {
-          // alert(`The test ${response.data.result}!!`);
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setshoulderFlexsioncheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setshoulderFlexsioncheck("error");
           }
         })
@@ -81,9 +80,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/shoulder2/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setshoulderExtensioncheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setshoulderExtensioncheck("error");
           }
         })
@@ -101,7 +100,7 @@ export default function MobilityChecker() {
       startRecordingShoulderExtension();
     }, 5000);
   };
-  //left knee extension test 
+  //left knee extension test
   function stopRecordingLeftKnee() {
     recorderRef.current.stopRecording(() => {
       const blob = recorderRef.current.getBlob();
@@ -110,9 +109,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/knee/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setLeftKneecheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setLeftKneecheck("error");
           }
         })
@@ -139,9 +138,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/knee/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setRightKneecheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setRightKneecheck("error");
           }
         })
@@ -168,9 +167,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/leftankle1/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setAnkleLeftDorsicheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setAnkleLeftDorsicheck("error");
           }
         })
@@ -197,9 +196,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/rightankle1/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setAnkleRightDorsicheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setAnkleRightDorsicheck("error");
           }
         })
@@ -226,9 +225,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/leftankle2/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setAnkleLeftPlantarcheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setAnkleLeftPlantarcheck("error");
           }
         })
@@ -255,9 +254,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/rightankle2/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setAnkleRightPlantarcheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setAnkleRightPlantarcheck("error");
           }
         })
@@ -284,9 +283,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/leftelbow1/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setElbowLeftFlexsioncheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setElbowLeftFlexsioncheck("error");
           }
         })
@@ -314,9 +313,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/rightelbow1/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setElbowRightFlexsioncheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setElbowRightFlexsioncheck("error");
           }
         })
@@ -343,9 +342,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/leftelbow1/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setElbowLeftExtensioncheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setElbowLeftExtensioncheck("error");
           }
         })
@@ -372,9 +371,9 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/rightelbow2/", formData)
         .then((response) => {
-          if (response.data.result === "PASSED") {
+          if (response.data.result === "PASS") {
             setElbowRightExtensioncheck("success");
-          } else if (response.data.result === "FAILED") {
+          } else if (response.data.result === "FAIL") {
             setElbowRightExtensioncheck("error");
           }
         })
@@ -392,7 +391,47 @@ export default function MobilityChecker() {
       startRecordingElbowRightExtension();
     }, 5000);
   };
+  var shouldercheck = location.state.shouldermobility;
+  var anklecheck = location.state.anklemobility;
+  var kneecheck = location.state.kneemobility;
+  var elbowcheck = location.state.elbowmobility;
+  // const [shouldercheck, setshouldercheck] = useState(
+  //   location.state.shouldermobility
+  // );
+  // const [anklecheck, setanklecheck] = useState(location.state.anklemobility);
+  // const [elbowcheck, setelbowcheck] = useState(location.state.elbowmobility);
+  // const [kneecheck, setkneecheck] = useState(location.state.kneemobility);
 
+  if (shouldercheck === null) {
+    shoulderFlexsioncheck === "success" &&
+    shoulderExtensioncheck === "success"
+      ? (shouldercheck = "true")
+      : (shouldercheck = "false");
+  }
+  if (kneecheck === null) {
+    LeftKneecheck === "success" &&
+    RightKneecheck === "success"
+      ? (kneecheck = "true")
+      : (kneecheck = "false");
+  }
+
+  if (anklecheck === null) {
+    AnkleLeftDorsicheck === "success" &&
+    AnkleRightDorsicheck === "success" &&
+    AnkleLeftPlantarcheck === "success" &&
+    AnkleRightPlantarcheck === "success"
+      ? (anklecheck = "true")
+      : (anklecheck = "false");
+  }
+
+  if (elbowcheck === null) {
+    ElbowLeftExtensioncheck === "success" &&
+    ElbowLeftFlexsioncheck === "success" &&
+    ElbowRightExtensioncheck === "success" &&
+    ElbowRightFlexsioncheck === "success"
+      ? (elbowcheck = "true")
+      : (elbowcheck = "false");
+  }
   return (
     <Grid container mt={12} mb={10} ml={5}>
       <Grid item xs={6}>
@@ -400,7 +439,7 @@ export default function MobilityChecker() {
       </Grid>
       <Grid item xs={5} mt={2}>
         <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <AccordionSummary sx={{backgroundColor:"primary.main",color:"white"}} expandIcon={<ExpandMoreIcon sx={{color:"white"}}/>}>
             <Typography>Shoulder Tests</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -418,7 +457,7 @@ export default function MobilityChecker() {
         </Accordion>
 
         <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary sx={{backgroundColor:"primary.main",color:"white"}} expandIcon={<ExpandMoreIcon sx={{color:"white"}}/>}>
             <Typography>Knee Tests</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -427,7 +466,7 @@ export default function MobilityChecker() {
               start={startRecordDelayLeftKnee}
               title="Left Knee Extension"
             />
-            <AccordionItem 
+            <AccordionItem
               severity={RightKneecheck}
               start={startRecordDelayRightKnee}
               title="Right Knee Extension"
@@ -435,11 +474,7 @@ export default function MobilityChecker() {
           </AccordionDetails>
         </Accordion>
         <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
+        <AccordionSummary sx={{backgroundColor:"primary.main",color:"white"}} expandIcon={<ExpandMoreIcon sx={{color:"white"}}/>}>
             <Typography>Ankle Tests</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -481,7 +516,7 @@ export default function MobilityChecker() {
           </AccordionDetails>
         </Accordion>
         <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary sx={{backgroundColor:"primary.main",color:"white"}} expandIcon={<ExpandMoreIcon sx={{color:"white"}}/>}>
             <Typography>Elbow Tests</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -523,8 +558,18 @@ export default function MobilityChecker() {
         </Accordion>
         <Button
           onClick={() => {
-            navigate(-2, { state: { height: 40, weight: 40 }, replace: false });
-            setvideostate(false);
+            navigate("/userform", {
+              state: {
+                height: location.state.height,
+                weight: location.state.weight,
+                workoutgoal: location.state.workoutgoal,
+                level: location.state.level,
+                shouldermobility: shouldercheck,
+                elbowmobility: elbowcheck,
+                anklemobility: anklecheck,
+                kneemobility: kneecheck,
+              },
+            });
           }}
           autoFocus
           style={{ marginTop: "20%" }}

@@ -46,7 +46,8 @@ router.post("/", (req, res) => {
               email: req.body.email,
               password: result,
               phoneno: req.body.phoneno,
-              age: req.body.age
+              age: req.body.age,
+              user_assigned:req.body.user_assigned
             });
             newUser
               .save()
