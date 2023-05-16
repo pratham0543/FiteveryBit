@@ -65,7 +65,6 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // console.log(JSON.stringify(values));
       var usercall='login'
       if(isTrainer===true)
         usercall='trainerlogin'
@@ -74,11 +73,14 @@ const Login = () => {
         .then((result) => {
           setopen(true);
           const userDetails = jwt_decode(result.data.token);
+          console.log(userDetails)
           localStorage.setItem("id", userDetails.userId);
           localStorage.setItem("email", userDetails.email);
           localStorage.setItem("usertype", userDetails.user_type);
           localStorage.setItem("fname", userDetails.firstname);
           localStorage.setItem("lname", userDetails.lastname);
+          localStorage.setItem("visitedmobility", userDetails.visitedmobility);
+          console.log(localStorage)
           if(isTrainer)
           localStorage.setItem("usersAssigned",userDetails.user_assigned)
           setTimeout(() => navigate("/"), 200);

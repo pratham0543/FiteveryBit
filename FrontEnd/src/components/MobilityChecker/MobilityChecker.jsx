@@ -369,7 +369,7 @@ export default function MobilityChecker() {
       const formData = new FormData();
       formData.append("video", blob);
       axios
-        .post("http://127.0.0.1:8000/mobility/rightelbow2/", formData)
+        .post("http://127.0.0.1:8000/mobility/elbow2/", formData)
         .then((response) => {
           if (response.data.result === "PASS") {
             setElbowRightExtensioncheck("success");
@@ -395,27 +395,23 @@ export default function MobilityChecker() {
   var anklecheck = location.state.anklemobility;
   var kneecheck = location.state.kneemobility;
   var elbowcheck = location.state.elbowmobility;
-  // const [shouldercheck, setshouldercheck] = useState(
-  //   location.state.shouldermobility
-  // );
-  // const [anklecheck, setanklecheck] = useState(location.state.anklemobility);
-  // const [elbowcheck, setelbowcheck] = useState(location.state.elbowmobility);
-  // const [kneecheck, setkneecheck] = useState(location.state.kneemobility);
+  console.log(shouldercheck)
+  console.log(shoulderFlexsioncheck)
 
-  if (shouldercheck === null) {
+  if (shouldercheck === "") {
     shoulderFlexsioncheck === "success" &&
     shoulderExtensioncheck === "success"
       ? (shouldercheck = "true")
       : (shouldercheck = "false");
   }
-  if (kneecheck === null) {
+  if (kneecheck === "") {
     LeftKneecheck === "success" &&
     RightKneecheck === "success"
       ? (kneecheck = "true")
       : (kneecheck = "false");
   }
 
-  if (anklecheck === null) {
+  if (anklecheck === "") {
     AnkleLeftDorsicheck === "success" &&
     AnkleRightDorsicheck === "success" &&
     AnkleLeftPlantarcheck === "success" &&
@@ -424,7 +420,7 @@ export default function MobilityChecker() {
       : (anklecheck = "false");
   }
 
-  if (elbowcheck === null) {
+  if (elbowcheck === "") {
     ElbowLeftExtensioncheck === "success" &&
     ElbowLeftFlexsioncheck === "success" &&
     ElbowRightExtensioncheck === "success" &&
@@ -432,6 +428,8 @@ export default function MobilityChecker() {
       ? (elbowcheck = "true")
       : (elbowcheck = "false");
   }
+  console.log(shouldercheck)
+  console.log(elbowcheck)
   return (
     <Grid container mt={12} mb={10} ml={5}>
       <Grid item xs={6}>
@@ -568,7 +566,7 @@ export default function MobilityChecker() {
                 elbowmobility: elbowcheck,
                 anklemobility: anklecheck,
                 kneemobility: kneecheck,
-                visitedmobility:true
+                visitedmobilityAI:"true"
               },
             });
           }}

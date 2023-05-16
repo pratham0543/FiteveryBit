@@ -17,22 +17,14 @@ router.get('/:id',(req,res)=>{
 })
 //post request
 router.post('/',(req,res)=>{
-    userschema.find({_id:req.body.userid})
-        .then(result=>{
-                const error = validate.validate(req.body)
-                if (error.error) {
-                    return res.status(400).send(error.error)
-                }
-                    const newUserExercise=new userschema({
-                        _id:new mongoose.Types.ObjectId(),
-                        userid:req.body.userid,
-                        })
-                    newUserExercise.save()
-                        .then(reslt => res.status(201).json( {message: 'Posted SuccessfulL', userDetails: reslt} ))
-                        .catch(err => res.status(500).json( {message: 'Server Encountered an Error1', error: err} ))
+        const newUserExercise=new userschema({
+        _id:new mongoose.Types.ObjectId(),
+        userid:req.body.userid,
         })
-        .catch(err=>res.status(500).json({message:"Server Encountered an Error",error:err}))
-})
+        newUserExercise.save()
+            .then(reslt => res.status(201).json( {message: 'Posted SuccessfulL', userDetails: reslt} ))
+            .catch(err => res.status(500).json( {message: 'Server Encountered an Error1', error: err} ))
+        })
 
 router.patch('/chest', (req, res) => {
     const update={chest:req.body.chest};
