@@ -253,7 +253,7 @@ def left_knee_extension(request):
                     left_back_estimate = calculate_angle(left_shoulder, left_hip, left_knee)
 
                     evaluation = "FAIL"
-                    if 170 < left_knee_estimate < 190 and 85 < left_back_estimate < 95:
+                    if 165 < left_knee_estimate < 190 and 85 < left_back_estimate < 110:
                         evaluation = "PASS"
 
                 except:
@@ -317,7 +317,7 @@ def right_knee_extension(request):
                     right_back_estimate = calculate_angle(right_shoulder, right_hip, right_knee)
 
                     evaluation = "FAIL"
-                    if 170 < right_knee_estimate < 190 and 85 < right_back_estimate < 95:
+                    if 165 < right_knee_estimate < 190 and 85 < right_back_estimate < 110:
                         evaluation = "PASS"
 
                 except:
@@ -381,7 +381,7 @@ def left_elbow_flexicon(request):
                     left_elbow_support = calculate_angle(left_elbow, left_shoulder, left_hip)
 
                     evaluation = "FAIL"
-                    if 133 < left_elbow_main < 152 and 80 < left_elbow_support < 100:
+                    if 133 < left_elbow_main < 156 and 0 < left_elbow_support < 12:
                         evaluation = "PASS"
 
                 except:
@@ -445,7 +445,7 @@ def right_elbow_flexicon(request):
                     right_elbow_support = calculate_angle(right_elbow, right_shoulder, right_hip)
 
                     evaluation = "FAIL"
-                    if 133 < right_elbow_main < 152 and 80 < right_elbow_support < 100:
+                    if 133 < right_elbow_main < 156 and 0 < right_elbow_support < 12:
                         evaluation = "PASS"
 
                 except:
@@ -762,28 +762,22 @@ def left_elbow_extension(request):
                                      landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
                     left_hip = [landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].x,
                                 landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].y]
-                    left_knee = [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x,
-                                 landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y]
-                    left_ankle = [landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].x,
-                                  landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].y]
 
                     # Calculate angle
 
                     left_upper = calculate_angle(left_wrist, left_elbow, left_shoulder)
                     left_middle = calculate_angle(left_elbow, left_shoulder, left_hip)
-                    left_bottom = calculate_angle(left_hip, left_knee, left_ankle)
 
                     evaluation = "FAIL"
 
-                    if 175 < left_upper < 185 and 80 < left_middle < 100 and 175 < left_bottom < 185:
+                    if 175 < left_upper < 185 and 0 < left_middle < 8:
                         evaluation = "PASS"
 
                 except:
                     pass
                 break
 
-        return JsonResponse({"status": 200, "result": evaluation, "left_upper": left_upper, "left_middle": left_middle,
-                             "left_bottom": left_bottom})
+        return JsonResponse({"status": 200, "result": evaluation, "left_upper": left_upper, "left_middle": left_middle})
     else:
         return JsonResponse({"status": 400, "msg": 'Invalid request method'})
 
@@ -834,20 +828,15 @@ def right_elbow_extension(request):
                                       landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].y]
                     right_hip = [landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].x,
                                  landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].y]
-                    right_knee = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x,
-                                  landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
-                    right_ankle = [landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].x,
-                                   landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].y]
 
                     # Calculate angle
 
                     right_upper = calculate_angle(right_wrist, right_elbow, right_shoulder)
                     right_middle = calculate_angle(right_elbow, right_shoulder, right_hip)
-                    right_bottom = calculate_angle(right_hip, right_knee, right_ankle)
 
                     evaluation = "FAIL"
 
-                    if 175 < right_upper < 185 and 80 < right_middle < 100 and 175 < right_bottom < 185:
+                    if 175 < right_upper < 185 and 0 < right_middle < 8:
                         evaluation = "PASS"
 
                 except:
@@ -855,7 +844,6 @@ def right_elbow_extension(request):
                 break
 
         return JsonResponse(
-            {"status": 200, "result": evaluation, "right_upper": right_upper, "right_middle": right_middle,
-             "right_bottom": right_bottom})
+            {"status": 200, "result": evaluation, "right_upper": right_upper, "right_middle": right_middle})
     else:
         return JsonResponse({"status": 400, "msg": 'Invalid request method'})
