@@ -123,7 +123,7 @@ const Navbar = () => {
                
               >
                 <MenuItem onClick={()=>setanchorEl(null)}>Dashboard</MenuItem>
-                <MenuItem onClick={()=>{localStorage.clear(); setanchorEl(null)  }}>Logout</MenuItem>
+                <MenuItem onClick={()=>{localStorage.clear(); setanchorEl(null);navigate('/')  }}>Logout</MenuItem>
                 
 
               </Menu>
@@ -296,19 +296,33 @@ const Navbar = () => {
             </ListItemButton>
           </ListItem>
           <Divider />
-          <ListItem disablePadding>
+          {/* <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <RssFeedIcon color="secondary" />
+                <FoodBankIcon color="secondary" />
               </ListItemIcon>
               <ListItemText
-                primary="Blogs"
+                primary="Workout"
                 primaryTypographyProps={{
                   fontSize: { sx: "16px", md: "14px" },
                 }}
               />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
+
+          {localStorage.getItem('usertype')==='normal'?<ListItem disablePadding>
+            <ListItemButton onClick={()=>navigate('/workout')}>
+              <ListItemIcon>
+              <FitnessCenterIcon color="secondary" />
+              </ListItemIcon>
+              <ListItemText
+                primary="Workout"
+                primaryTypographyProps={{
+                  fontSize: { sx: "16px", md: "14px" },
+                }}
+              />
+            </ListItemButton>
+          </ListItem>:<></>}
           <Divider />
         </List>
       </SwipeableDrawer>

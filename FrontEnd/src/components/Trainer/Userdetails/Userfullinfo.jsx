@@ -7,7 +7,6 @@ import {
   Card,
   CardMedia,
   CardContent,
-  
   CardActionArea,
 } from "@mui/material";
 import React, { useEffect } from "react";
@@ -34,19 +33,13 @@ import "./userfullInfo.css";
 import axios from "axios";
 const Userfullinfo = () => {
   const location = useLocation();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const user = location.state;
-  console.log(user);
+ 
   const userMobility = location.state.mobility;
   const [hoverid, sethoverid] = useState("");
 
-
-  
-  
   const handleMouseOver = (id) => sethoverid(id);
-
-
-
 
   const handleMouseOut = () => sethoverid("");
   return (
@@ -265,7 +258,9 @@ const Userfullinfo = () => {
       <Grid container justifyContent="center" spacing={2} mt={2}>
         <Grid item sx={{ width: "28%" }}>
           <Card
-            onClick={()=>navigate('/createworkout/muscle',{state:{name:"chest"}})}
+            onClick={() =>
+              navigate("/createworkout/muscle", { state: { name: "chest" } })
+            }
             className="card"
             onMouseOver={() => handleMouseOver("chest")}
             onMouseOut={handleMouseOut}
@@ -298,13 +293,15 @@ const Userfullinfo = () => {
             className="card"
             onMouseOver={() => handleMouseOver("back")}
             onMouseOut={handleMouseOut}
-            onClick={()=>navigate('/createworkout/muscle',{state:{name:"back"}})}
+            onClick={() =>
+              navigate("/createworkout/muscle", { state: { name: "back" } })
+            }
           >
             {" "}
             <CardActionArea>
               <CardMedia
                 component="img"
-                image={hoverid==='back'?backWhite:backmuscle}
+                image={hoverid === "back" ? backWhite : backmuscle}
                 alt="back"
                 sx={{
                   height: "187px",
@@ -325,16 +322,19 @@ const Userfullinfo = () => {
           </Card>
         </Grid>
         <Grid item sx={{ width: "28%" }}>
-          <Card className="card"
-          onMouseOver={()=>handleMouseOver('shoulders')}
-          onMouseOut={handleMouseOut}
-          onClick={()=>navigate('/createworkout/muscle',{state:{name:"shoulder"}})}
+          <Card
+            className="card"
+            onMouseOver={() => handleMouseOver("shoulders")}
+            onMouseOut={handleMouseOut}
+            onClick={() =>
+              navigate("/createworkout/muscle", { state: { name: "shoulder" } })
+            }
           >
             {" "}
             <CardActionArea>
               <CardMedia
                 component="img"
-                image={hoverid==='shoulders'?shouldersWhite:shoulders}
+                image={hoverid === "shoulders" ? shouldersWhite : shoulders}
                 alt="Shoulder"
                 sx={{
                   height: "187px",
@@ -356,17 +356,18 @@ const Userfullinfo = () => {
         </Grid>
         <Grid item xs={12}></Grid>
         <Grid item sx={{ width: "28%" }}>
-          <Card className="card"
-          onMouseOver={()=>handleMouseOver('legs')}
-          onMouseOut={handleMouseOut}
-          onClick={()=>navigate('/createworkout/muscle',{state:{name:"legs"}})}
-          
+          <Card
+            className="card"
+            onMouseOver={() => handleMouseOver("legs")}
+            onMouseOut={handleMouseOut}
+            onClick={() =>
+              navigate("/createworkout/muscle", { state: { name: "legs" } })
+            }
           >
-         
             <CardActionArea>
               <CardMedia
                 component="img"
-                image={hoverid==='legs'?legsWhite:legs}
+                image={hoverid === "legs" ? legsWhite : legs}
                 alt="Legs"
                 sx={{
                   height: "187px",
@@ -389,16 +390,17 @@ const Userfullinfo = () => {
         <Grid item sx={{ width: "28%" }}>
           <Card
             className="card"
-            onMouseOver={()=>handleMouseOver('arms')}
+            onMouseOver={() => handleMouseOver("arms")}
             onMouseOut={handleMouseOut}
-            onClick={()=>navigate('/createworkout/muscle',{state:{name:"arms"}})}
-            
+            onClick={() =>
+              navigate("/createworkout/muscle", { state: { name: "arms" } })
+            }
           >
             {" "}
             <CardActionArea>
               <CardMedia
                 component="img"
-                image={hoverid==='arms' ? armsWhite : arms}
+                image={hoverid === "arms" ? armsWhite : arms}
                 alt="Arms"
                 sx={{
                   height: "187px",
@@ -419,16 +421,19 @@ const Userfullinfo = () => {
           </Card>
         </Grid>
         <Grid item sx={{ width: "28%" }}>
-          <Card className="card"
-          onMouseOver={()=>handleMouseOver('abs')}
-          onMouseOut={handleMouseOut}
-          onClick={()=>navigate('/createworkout/muscle',{state:{name:"abs"}})}
+          <Card
+            className="card"
+            onMouseOver={() => handleMouseOver("abs")}
+            onMouseOut={handleMouseOut}
+            onClick={() =>
+              navigate("/createworkout/muscle", { state: { name: "abs" } })
+            }
           >
             {" "}
             <CardActionArea>
               <CardMedia
                 component="img"
-                image={hoverid==='abs'?absWhite:abs}
+                image={hoverid === "abs" ? absWhite : abs}
                 alt="abdominals"
                 sx={{
                   height: "187px",

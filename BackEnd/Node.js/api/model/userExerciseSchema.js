@@ -6,6 +6,7 @@ const userExerciseSchema = new mongoose.Schema({
   legs:mongoose.Schema.Types.Array,
   shoulder:mongoose.Schema.Types.Array,
   abs:mongoose.Schema.Types.Array,
-  arms:mongoose.Schema.Types.Array
+  arms:mongoose.Schema.Types.Array,
+  back:mongoose.Schema.Types.Array
 });
 module.exports = mongoose.model("userExerciseSchema", userExerciseSchema);

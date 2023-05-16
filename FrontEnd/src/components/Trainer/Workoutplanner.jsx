@@ -9,8 +9,9 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Snackbar,Alert
 } from "@mui/material";
-import { useLocation } from "react-router";
+import { useLocation,useNavigate } from "react-router";
 
 import chest from "../../assets/chest-workout.jpg";
 import axios from "axios";
@@ -25,6 +26,10 @@ class Workout {
   }
 }
 const Workoutplanner = () => {
+
+//open state for showing save worked or not
+const [open, setopen] = useState(false)
+const [saveWorkout, setsaveWorkout] = useState(false);
   //superset array for handling superset exercises for main exercises
   const [superset, setsuperset] = useState([[null]]);
   //main workout which will be sent to backend
@@ -32,6 +37,7 @@ const Workoutplanner = () => {
   const [muscleData, setmuscleData] = useState([]);
   const [exerciseNumber, setexerciseNumber] = useState([1]);
   const [expanded, setexpanded] = useState(false);
+  const navigate=useNavigate();
   var exercises = [];
   const location = useLocation();
   const muscleName = location.state.name;
@@ -94,15 +100,14 @@ const Workoutplanner = () => {
       const w = [...workout];
       w[index] = obj;
       setworkout(w);
-      console.log("state", workout);
+      setopen(true)
+      
     }
   };
-  console.log(workout);
+  
 
   //sending workout
   const sendWorkout = () => {
-    console.log(userid);
-    console.log(muscleName);
     const userWorkout = {
       
       userid: userid,
@@ -124,11 +129,16 @@ userWorkout.back=workout;
 else if(muscleName==='legs')
 userWorkout.legs=workout;
 
-    console.log(userWorkout);
+  
     axios.patch(`http://localhost:3200/userexercise/${muscleName}`,userWorkout)
-    .then((result)=>console.log(result.data))
+    .then((result)=>
+    {
+    setsaveWorkout(true);
+  
+    
+  })
     .catch((err)=>console.log(err.message))
-
+ 
 
   };
 
@@ -288,7 +298,27 @@ userWorkout.legs=workout;
           height="103vh"
         ></Box>
       </Stack>
+      <Snackbar open={open} autoHideDuration={1000} onClose={()=>setopen(false)}>
+        <Alert color="success" onClose={()=>setopen(false)} sx={{ width: "100%" }}>
+         Exercise Saved Successfully
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={saveWorkout} autoHideDuration={2000} onClose={()=>setsaveWorkout(false)}>
+        <Alert color="success" onClose={()=>saveWorkout(false)} sx={{ width: "100%" }}>
+         Workout Saved Successfully
+        </Alert>
+      </Snackbar>
+
+
+
     </Box>
+
+
+          // exercise save ui feedback
+         
+
+
   );
 };
 

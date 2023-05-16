@@ -10,13 +10,12 @@ import {
  
 } from "@mui/material";
 import { pink } from "@mui/material/colors";
-import testImage from '../../../assets/lazar.jpg'
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { useNavigate } from "react-router";
 const Usercard = (props) => {
   const navigate=useNavigate();
-  console.log(props.userinfo);
+  // console.log(props.userinfo);
   return (
     <Grid item xs={12} sm={3}>
       <Paper

@@ -12,7 +12,7 @@ const Userdetails = () => {
     const userID=localStorage.getItem('usersAssigned');
     axios.get(`http://localhost:3200/login/${userID}`)
     .then((res)=>{
-      console.log(res.data.result)
+      // console.log(res.data.result)
       setUsers([res.data.result])
 
     })
