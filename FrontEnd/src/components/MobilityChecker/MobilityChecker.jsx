@@ -107,8 +107,9 @@ export default function MobilityChecker() {
       const formData = new FormData();
       formData.append("video", blob);
       axios
-        .post("http://127.0.0.1:8000/mobility/knee/", formData)
+        .post("http://127.0.0.1:8000/mobility/leftknee/", formData)
         .then((response) => {
+          console.log(response);
           if (response.data.result === "PASS") {
             setLeftKneecheck("success");
           } else if (response.data.result === "FAIL") {
@@ -136,8 +137,9 @@ export default function MobilityChecker() {
       const formData = new FormData();
       formData.append("video", blob);
       axios
-        .post("http://127.0.0.1:8000/mobility/knee/", formData)
+        .post("http://127.0.0.1:8000/mobility/rightknee/", formData)
         .then((response) => {
+          console.log(response);
           if (response.data.result === "PASS") {
             setRightKneecheck("success");
           } else if (response.data.result === "FAIL") {
@@ -313,6 +315,7 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/rightelbow1/", formData)
         .then((response) => {
+          console.log(response);
           if (response.data.result === "PASS") {
             setElbowRightFlexsioncheck("success");
           } else if (response.data.result === "FAIL") {
@@ -340,8 +343,9 @@ export default function MobilityChecker() {
       const formData = new FormData();
       formData.append("video", blob);
       axios
-        .post("http://127.0.0.1:8000/mobility/leftelbow1/", formData)
+        .post("http://127.0.0.1:8000/mobility/leftelbow2/", formData)
         .then((response) => {
+          console.log(response);
           if (response.data.result === "PASS") {
             setElbowLeftExtensioncheck("success");
           } else if (response.data.result === "FAIL") {
@@ -371,6 +375,7 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/rightelbow2/", formData)
         .then((response) => {
+          console.log(response);
           if (response.data.result === "PASS") {
             setElbowRightExtensioncheck("success");
           } else if (response.data.result === "FAIL") {
@@ -395,43 +400,41 @@ export default function MobilityChecker() {
   var anklecheck = location.state.anklemobility;
   var kneecheck = location.state.kneemobility;
   var elbowcheck = location.state.elbowmobility;
-  // const [shouldercheck, setshouldercheck] = useState(
-  //   location.state.shouldermobility
-  // );
-  // const [anklecheck, setanklecheck] = useState(location.state.anklemobility);
-  // const [elbowcheck, setelbowcheck] = useState(location.state.elbowmobility);
-  // const [kneecheck, setkneecheck] = useState(location.state.kneemobility);
+  console.log(shouldercheck)
+  console.log(shoulderFlexsioncheck)
 
-  if (shouldercheck === null) {
+  if (shouldercheck === "") {
     shoulderFlexsioncheck === "success" &&
-    shoulderExtensioncheck === "success"
+      shoulderExtensioncheck === "success"
       ? (shouldercheck = "true")
       : (shouldercheck = "false");
   }
-  if (kneecheck === null) {
+  if (kneecheck === "") {
     LeftKneecheck === "success" &&
-    RightKneecheck === "success"
+      RightKneecheck === "success"
       ? (kneecheck = "true")
       : (kneecheck = "false");
   }
 
-  if (anklecheck === null) {
+  if (anklecheck === "") {
     AnkleLeftDorsicheck === "success" &&
-    AnkleRightDorsicheck === "success" &&
-    AnkleLeftPlantarcheck === "success" &&
-    AnkleRightPlantarcheck === "success"
+      AnkleRightDorsicheck === "success" &&
+      AnkleLeftPlantarcheck === "success" &&
+      AnkleRightPlantarcheck === "success"
       ? (anklecheck = "true")
       : (anklecheck = "false");
   }
 
-  if (elbowcheck === null) {
+  if (elbowcheck === "") {
     ElbowLeftExtensioncheck === "success" &&
-    ElbowLeftFlexsioncheck === "success" &&
-    ElbowRightExtensioncheck === "success" &&
-    ElbowRightFlexsioncheck === "success"
+      ElbowLeftFlexsioncheck === "success" &&
+      ElbowRightExtensioncheck === "success" &&
+      ElbowRightFlexsioncheck === "success"
       ? (elbowcheck = "true")
       : (elbowcheck = "false");
   }
+  console.log(shouldercheck)
+  console.log(elbowcheck)
   return (
     <Grid container mt={12} mb={10} ml={5}>
       <Grid item xs={6}>
@@ -439,7 +442,7 @@ export default function MobilityChecker() {
       </Grid>
       <Grid item xs={5} mt={2}>
         <Accordion>
-          <AccordionSummary sx={{backgroundColor:"primary.main",color:"white"}} expandIcon={<ExpandMoreIcon sx={{color:"white"}}/>}>
+          <AccordionSummary sx={{ backgroundColor: "primary.main", color: "white" }} expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}>
             <Typography>Shoulder Tests</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -457,7 +460,7 @@ export default function MobilityChecker() {
         </Accordion>
 
         <Accordion>
-        <AccordionSummary sx={{backgroundColor:"primary.main",color:"white"}} expandIcon={<ExpandMoreIcon sx={{color:"white"}}/>}>
+          <AccordionSummary sx={{ backgroundColor: "primary.main", color: "white" }} expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}>
             <Typography>Knee Tests</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -474,7 +477,7 @@ export default function MobilityChecker() {
           </AccordionDetails>
         </Accordion>
         <Accordion>
-        <AccordionSummary sx={{backgroundColor:"primary.main",color:"white"}} expandIcon={<ExpandMoreIcon sx={{color:"white"}}/>}>
+          <AccordionSummary sx={{ backgroundColor: "primary.main", color: "white" }} expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}>
             <Typography>Ankle Tests</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -516,7 +519,7 @@ export default function MobilityChecker() {
           </AccordionDetails>
         </Accordion>
         <Accordion>
-        <AccordionSummary sx={{backgroundColor:"primary.main",color:"white"}} expandIcon={<ExpandMoreIcon sx={{color:"white"}}/>}>
+          <AccordionSummary sx={{ backgroundColor: "primary.main", color: "white" }} expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}>
             <Typography>Elbow Tests</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -568,6 +571,7 @@ export default function MobilityChecker() {
                 elbowmobility: elbowcheck,
                 anklemobility: anklecheck,
                 kneemobility: kneecheck,
+                visitedmobilityAI: "true"
               },
             });
           }}

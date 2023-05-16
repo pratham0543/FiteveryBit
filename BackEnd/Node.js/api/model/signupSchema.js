@@ -12,13 +12,18 @@ const signupSchema = new mongoose.Schema({
   age: mongoose.Schema.Types.Number,
   workoutgoal:mongoose.Schema.Types.String,
   level:mongoose.Schema.Types.String,
+  gender:mongoose.Schema.Types.String,
   user_type: {
     type: mongoose.Schema.Types.String,
     default: "normal",
   },
   visitedmobility: {
-    type: mongoose.Schema.Types.Boolean,
-    default: false,
+    type: mongoose.Schema.Types.String,
+    default: "false",
+  },
+  visitedmobilityAI: {
+    type: mongoose.Schema.Types.String,
+    default: "false",
   },
   mobility: {
     type: Map,

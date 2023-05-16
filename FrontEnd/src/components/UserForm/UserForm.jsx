@@ -61,7 +61,7 @@ const UserForm = () => {
   const handlelevelChange = (e) => {
     setlevel(e.target.value);
   };
-  const [workoutgoal, setworkoutgoal] = React.useState(location.state.workoutplan);
+  const [workoutgoal, setworkoutgoal] = React.useState(location.state.workoutgoal);
 
   const handleworkoutgoalChange = (e) => {
     setworkoutgoal(e.target.value);
@@ -72,12 +72,23 @@ const UserForm = () => {
     height:height,
     weight:weight,
     level:level,
+    visitedmobility:"true",
+    visitedmobilityAI:location.state.visitedmobilityAI,
     workoutgoal:workoutgoal,
     mobility:{shoulder:shouldermobility,ankle:anklemobility,elbow:elbowmobility,knee:kneemobility}
   }
+  const userexercisedata={
+    userid:id
+  }
   const onsubmithandler=()=>{
+    localStorage.setItem("visitedmobility", "true");
+    console.log(localStorage.getItem("visitedmobility"))
       axios.patch("http://localhost:3200/login/update",info)
-        .then(result=>console.log(result))
+        .then(result=>{
+          axios.post("http://localhost:3200/userexercise",userexercisedata)
+          .then(resut=>navigate("/submitted"))
+          .catch(err=>console.log(err))
+        })
         .catch(err=>console.log(err))
   }
   return (
@@ -269,12 +280,27 @@ const UserForm = () => {
           </Box>
         </Box>
         <Box mt={4} ml={10}>
+          {/* <a href="/submitted">
           <Button
             type="submit"
             variant="contained"
             color="secondary"
             sx={{ color: "white" }}
-            onClick={onsubmithandler}
+            onClick={()=>{
+              onsubmithandler();
+            }}
+          >
+            Submit
+          </Button>
+          </a> */}
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            sx={{ color: "white" }}
+            onClick={()=>{
+              onsubmithandler();
+            }}
           >
             Submit
           </Button>

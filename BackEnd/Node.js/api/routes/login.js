@@ -40,6 +40,7 @@ router.post("/", (req, res) => {
                 firstname: result.firstname,
                 lastname: result.lastname,
                 user_type: result.user_type,
+                visitedmobility:result.visitedmobility
               };
               //sending json web token
               const jwt_token = jwt.sign(userDetails, process.env.ACCESS_KEY);
@@ -120,7 +121,9 @@ router.patch("/update", (req, res) => {
     weight:req.body.weight,
     workoutgoal:req.body.workoutgoal,
     level:req.body.level,
-    mobility:req.body.mobility
+    mobility:req.body.mobility,
+    visitedmobility:req.body.visitedmobility,
+    visitedmobilityAI:req.body.visitedmobilityAI
   }
   signupschema
     .findByIdAndUpdate(req.body.id, updatedUser)

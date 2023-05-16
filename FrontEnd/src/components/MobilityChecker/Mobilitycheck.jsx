@@ -26,10 +26,10 @@ const Mobilitycheck = () => {
   }, []);
   const instructions = [
     "The AI model is still in development and results might not be 100% accurate",
-    "The AI model is still in development and results might not be 100% accurate",
-    "The AI model is still in development and results might not be 100% accurate",
+    "Ensure you are sitting in a well lit room with source of light behind camera",
+    "Make sure while recording video, your whole body is visible",
   ];
-  const instructionsListItems = instructions.map((myList,index) => {
+  const instructionsListItems = instructions.map((myList, index) => {
     return <li key={index}>{myList}</li>;
   });
   const oncheckboxclick = () => {
@@ -82,9 +82,9 @@ const Mobilitycheck = () => {
       aria-labelledby="dialog-title"
       aria-describedby="dialog-description"
     >
-      <DialogTitle id="dialog-title">Instruction!</DialogTitle>
+      <DialogTitle id="dialog-title">Instructions to follow!</DialogTitle>
       <DialogContent>
-          <ul>{instructionsListItems}</ul>
+        <ul>{instructionsListItems}</ul>
         <Stack direction="row">
           <Checkbox onChange={oncheckboxclick} />
           <Typography sx={{ color: "highlight.main" }} mt={1}>
