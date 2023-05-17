@@ -162,11 +162,11 @@ const Userfullinfo = () => {
                 fontWeight="600"
                 fontSize="18px"
                 color={
-                  userMobility.shoulder === true ? "success.main" : "error.main"
+                  userMobility.shoulder === "true" ? "success.main" : "error.main"
                 }
               >
                 Shoulder{" "}
-                {userMobility.shoulder === true ? (
+                {userMobility.shoulder === "true" ? (
                   <TaskAltIcon
                     sx={{ transform: "translateY(5px)" }}
                     color="success.main"
@@ -185,11 +185,11 @@ const Userfullinfo = () => {
                 fontWeight="600"
                 fontSize="18px"
                 color={
-                  userMobility.elbow === true ? "success.main" : "error.main"
+                  userMobility.elbow === "true" ? "success.main" : "error.main"
                 }
               >
                 Elbow{" "}
-                {userMobility.elbow === true ? (
+                {userMobility.elbow === "true" ? (
                   <TaskAltIcon
                     sx={{ transform: "translateY(5px)" }}
                     color="success.main"
@@ -208,11 +208,11 @@ const Userfullinfo = () => {
                 fontWeight="600"
                 fontSize="18px"
                 color={
-                  userMobility.knee === true ? "success.main" : "error.main"
+                  userMobility.knee === "true" ? "success.main" : "error.main"
                 }
               >
                 Knee{" "}
-                {userMobility.knee === true ? (
+                {userMobility.knee === "true" ? (
                   <TaskAltIcon
                     sx={{ transform: "translateY(5px)" }}
                     color="success.main"
@@ -232,11 +232,11 @@ const Userfullinfo = () => {
                 fontWeight="600"
                 fontSize="18px"
                 color={
-                  userMobility.ankle === true ? "success.main" : "error.main"
+                  userMobility.ankle === "true" ? "success.main" : "error.main"
                 }
               >
                 Ankle{" "}
-                {userMobility.ankle === true ? (
+                {userMobility.ankle === "true" ? (
                   <TaskAltIcon
                     sx={{ transform: "translateY(5px)" }}
                     color="success.main"

@@ -49,6 +49,7 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/shoulder1/", formData)
         .then((response) => {
+          console.log("Shoulder flexion",response.data);
           if (response.data.result === "PASS") {
             setshoulderFlexsioncheck("success");
           } else if (response.data.result === "FAIL") {
@@ -80,6 +81,7 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/shoulder2/", formData)
         .then((response) => {
+          console.log("external rotation shoulder",response.data);
           if (response.data.result === "PASS") {
             setshoulderExtensioncheck("success");
           } else if (response.data.result === "FAIL") {
@@ -285,6 +287,7 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/leftelbow1/", formData)
         .then((response) => {
+          console.log("leftelbow1",response.data)
           if (response.data.result === "PASS") {
             setElbowLeftFlexsioncheck("success");
           } else if (response.data.result === "FAIL") {
@@ -315,7 +318,7 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/rightelbow1/", formData)
         .then((response) => {
-          console.log(response);
+          console.log("rightelbow1",response)
           if (response.data.result === "PASS") {
             setElbowRightFlexsioncheck("success");
           } else if (response.data.result === "FAIL") {
@@ -345,7 +348,7 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/leftelbow2/", formData)
         .then((response) => {
-          console.log(response);
+          console.log("leftelbow2",response.data)
           if (response.data.result === "PASS") {
             setElbowLeftExtensioncheck("success");
           } else if (response.data.result === "FAIL") {
@@ -375,14 +378,15 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/rightelbow2/", formData)
         .then((response) => {
-          console.log(response);
+          console.log("rightelbow2",response.data);
           if (response.data.result === "PASS") {
+            
             setElbowRightExtensioncheck("success");
           } else if (response.data.result === "FAIL") {
             setElbowRightExtensioncheck("error");
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err.message));
     });
   }
   const startRecordingElbowRightExtension = () => {

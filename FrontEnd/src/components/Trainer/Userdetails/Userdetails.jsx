@@ -14,6 +14,7 @@ const Userdetails = () => {
     .then((res)=>{
       // console.log(res.data.result)
       setUsers([res.data.result])
+      console.log(res.data.result);
 
     })
     .catch((err)=>console.log(err))

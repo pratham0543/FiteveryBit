@@ -60,9 +60,9 @@ const Usercard = (props) => {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Typography variant="body1" fontWeight="600" color={props.isAiMobility===true?'success.main':'error.main'}>
+              <Typography variant="body1" fontWeight="600" color={props.isAiMobility==="true"?'success.main':'error.main'}>
                 Aimobility:{
-                  props.isAiMobility===true?(
+                  props.isAiMobility==="true"?(
                     <TaskAltIcon sx={{transform:"translateY(5px)"}} color="success.main" />
                   ):
                   <CancelOutlinedIcon sx={{transform:"translateY(5px)"}} color="error.main" />
