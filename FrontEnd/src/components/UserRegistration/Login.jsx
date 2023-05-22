@@ -80,6 +80,7 @@ const Login = () => {
           localStorage.setItem("fname", userDetails.firstname);
           localStorage.setItem("lname", userDetails.lastname);
           localStorage.setItem("visitedmobility", userDetails.visitedmobility);
+          localStorage.setItem("workoutcreated",userDetails.workoutcreated)
           console.log(localStorage)
           if(isTrainer)
           localStorage.setItem("usersAssigned",userDetails.user_assigned)

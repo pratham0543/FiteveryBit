@@ -18,6 +18,8 @@ const validate = joi.object({
   phoneno: joi.number().required(),
   age: joi.number().required(),
   user_assigned: joi.array(),
+  gender:joi.string().required(),
+  speciality:joi.string().required()
 });
 //post request
 router.post("/", (req, res) => {
@@ -47,7 +49,9 @@ router.post("/", (req, res) => {
               password: result,
               phoneno: req.body.phoneno,
               age: req.body.age,
-              user_assigned:req.body.user_assigned
+              user_assigned:req.body.user_assigned,
+              gender:req.body.gender,
+              speciality:req.body.speciality
             });
             newUser
               .save()

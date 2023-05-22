@@ -17,6 +17,10 @@ const signupSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.String,
     default: "normal",
   },
+  workoutcreated:{
+      type:mongoose.Schema.Types.String,
+      default:"false"
+  },
   visitedmobility: {
     type: mongoose.Schema.Types.String,
     default: "false",
@@ -24,6 +28,10 @@ const signupSchema = new mongoose.Schema({
   visitedmobilityAI: {
     type: mongoose.Schema.Types.String,
     default: "false",
+  },
+  trainerassigned:{
+    type:mongoose.Schema.Types.String,
+    default:"false"
   },
   mobility: {
     type: Map,

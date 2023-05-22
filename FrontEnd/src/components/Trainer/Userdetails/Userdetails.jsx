@@ -9,12 +9,11 @@ const Userdetails = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(()=>{
-    const userID=localStorage.getItem('usersAssigned');
-    axios.get(`http://localhost:3200/login/${userID}`)
+   
+    axios.get(`http://localhost:3200/login`)
     .then((res)=>{
-      // console.log(res.data.result)
-      setUsers([res.data.result])
-      console.log(res.data.result);
+            setUsers(res.data.result)
+     
 
     })
     .catch((err)=>console.log(err))
@@ -61,17 +60,19 @@ const Userdetails = () => {
         </Typography>
         <Box p={2}>
           <Grid container justifyContent="center">
-            {users.length!==0?<Usercard
-              name={users[0].firstname + " " + users[0].lastname}
-              height={users[0].height}
-              weight={users[0].weight}
-              age={users[0].age}
-              isAiMobility={users[0].visitedmobility}
-              planType={users[0].workoutgoal}
-              level={users[0].level}
-              contactno={users[0].phoneno}
-              userinfo={users[0]}
-            />:<Typography variant="h4">Loading....</Typography>}
+            {users.length!==0?
+            
+            users.filter((check)=>check.visitedmobility==="true").map((user)=><Usercard
+            key={user._id}
+              name={user.firstname + " " + user.lastname}
+              age={user.age}
+              isAiMobility={user.visitedmobility}
+              level={user.level}
+              phoneno={user.phoneno}
+              userinfo={user}
+              gender={user.gender}
+            />)
+            :<Typography variant="h4">Loading....</Typography>}
             
           </Grid>
         </Box>

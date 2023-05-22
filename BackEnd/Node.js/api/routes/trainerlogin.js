@@ -50,6 +50,23 @@ router.post('/',(req,res)=>{
         .catch(err => res.status(500).json({ msg: 'Server encountered an error', error: err }))
 })
 
+router.patch("/updateusers", (req, res) => {
+    const updatedusers={
+        user_assigned:req.body.user_assigned
+    }
+    trainerschema
+      .findByIdAndUpdate(req.body.id, updatedusers)
+      .then((result) =>
+        res.status(200).json({ message: "Updated", updatedUser: result })
+      )
+      .catch((err) =>
+        res
+          .status(500)
+          .json({ message: "Server Encountered an Error", error: err })
+      );
+  });
+
+
 router.patch('/', (req, res) => {
     // Forgot Password
     const oldPassword = req.body.password

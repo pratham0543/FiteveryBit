@@ -49,6 +49,7 @@ export default function MobilityChecker() {
       axios
         .post("http://127.0.0.1:8000/mobility/shoulder1/", formData)
         .then((response) => {
+         
           console.log("Shoulder flexion",response.data);
           if (response.data.result === "PASS") {
             setshoulderFlexsioncheck("success");

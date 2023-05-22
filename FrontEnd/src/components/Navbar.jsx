@@ -23,7 +23,9 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
-import RssFeedIcon from "@mui/icons-material/RssFeed";
+import PeopleIcon from '@mui/icons-material/People';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate} from "react-router-dom";
@@ -236,7 +238,7 @@ const Navbar = () => {
             <ListItemButton
             onClick={localStorage.getItem("usertype") === "normal"? ()=>navigate('/userform',{state:{height:"",weight:"",workoutplan:"",level:"",shouldermobility:"",anklemobility:"",elbowmobility:"",kneemobility:"",visitedmobilityAI:"false"}}):  ()=>navigate('/workoutplanner') }
               disabled={
-                localStorage.getItem("usertype") === null || localStorage.getItem("visitedmobility")==="true"? true:false
+                localStorage.getItem("usertype") === null|| localStorage.getItem("usertype") === "admin" || localStorage.getItem("visitedmobility")==="true" ? true:false
               }
             >
               <ListItemIcon>
@@ -296,22 +298,12 @@ const Navbar = () => {
             </ListItemButton>
           </ListItem>
           <Divider />
-          {/* <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <FoodBankIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText
-                primary="Workout"
-                primaryTypographyProps={{
-                  fontSize: { sx: "16px", md: "14px" },
-                }}
-              />
-            </ListItemButton>
-          </ListItem> */}
+        
 
-          {localStorage.getItem('usertype')==='normal'?<ListItem disablePadding>
-            <ListItemButton onClick={()=>navigate('/workout')}>
+          {(localStorage.getItem('usertype')==='normal')?<ListItem disablePadding>
+            <ListItemButton onClick={()=>navigate('/workout')}  
+              disabled={localStorage.getItem('workoutcreated')===true?false:true}
+            >
               <ListItemIcon>
               <FitnessCenterIcon color="secondary" />
               </ListItemIcon>
@@ -323,7 +315,42 @@ const Navbar = () => {
               />
             </ListItemButton>
           </ListItem>:<></>}
+        
+
+          {(localStorage.getItem('usertype')==='admin')?<ListItem disablePadding>
+            <ListItemButton onClick={()=>navigate('/trainers')}  
+            >
+              <ListItemIcon>
+              <AssignmentIndIcon color="secondary" />
+              </ListItemIcon>
+              <ListItemText
+                primary="Assign Trainers"
+                primaryTypographyProps={{
+                  fontSize: { sx: "16px", md: "14px" },
+                }}
+              />
+            </ListItemButton>
+          </ListItem>:<></>}
+ <Divider/>
+
+          {(localStorage.getItem('usertype')==='admin')?<ListItem disablePadding>
+            <ListItemButton onClick={()=>navigate('/createTrainer')}  
+            
+            >
+              <ListItemIcon>
+              <PeopleIcon color="secondary" />
+              </ListItemIcon>
+              <ListItemText
+                primary="Create Trainer"
+                primaryTypographyProps={{
+                  fontSize: { sx: "16px", md: "14px" },
+                }}
+              />
+            </ListItemButton>
+          </ListItem>:<></>}
           <Divider />
+
+
         </List>
       </SwipeableDrawer>
     </>

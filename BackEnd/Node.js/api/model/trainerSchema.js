@@ -7,6 +7,8 @@ const trainerSchema=new mongoose.Schema({
   password: mongoose.Schema.Types.String,
   phoneno: mongoose.Schema.Types.Number,
   age: mongoose.Schema.Types.Number,
+  speciality:mongoose.Schema.Types.String,
+  gender:mongoose.Schema.Types.String,
   user_type:{
     type:mongoose.Schema.Types.String,
     default:"trainer"

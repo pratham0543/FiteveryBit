@@ -11,6 +11,7 @@ import {
   Button,
   Snackbar,
   Alert,
+  MenuItem,
 } from "@mui/material";
 
 import logImage from "../../assets/registration.jpg";
@@ -52,6 +53,8 @@ const validationSchema = yup.object({
     .max(10, "Number cannot exceed 10 digit limit")
     .matches("^[0-9]*$", { message: "Please enter only digit" })
     .required("Contact number is required"),
+  gender: yup.string().required("Please select a gender"),
+  speciality: yup.string()
 });
 
 const Signup = (props) => {
@@ -60,13 +63,12 @@ const Signup = (props) => {
   //this is the chekcbox state
   const [checked, setchecked] = useState(true);
 
-
-  //successful user snackbar 
+  //successful user snackbar
   const [open, setOpen] = useState(false);
 
   //unsuccessfull user snackbar
-  const [erropen,setErropen]=useState(false);
-  const [errormes, seterrormes] = useState('')
+  const [erropen, setErropen] = useState(false);
+  const [errormes, seterrormes] = useState("");
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -91,22 +93,26 @@ const Signup = (props) => {
       age: 0,
       firstname: "",
       lastname: "",
+      gender: "",
+      speciality: "a",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(JSON.stringify(values));
+      let signup = "signup";
+      if (localStorage.getItem("usertype") === "admin")
+        signup = "trainersignup";
+        console.log(signup)
       axios
-        .post("http://localhost:3200/signup", values)
+        .post(`http://localhost:3200/${signup}`, values)
         .then((result) => {
           setOpen(true);
         })
         .catch((err) => {
-          seterrormes(err.response.data.message)
+          console.log("err",err);
+          seterrormes(err.response.data.message);
           setErropen(true);
         });
-        
-
-
     },
   });
 
@@ -117,8 +123,7 @@ const Signup = (props) => {
         direction="row"
         alignItems="stretch"
         sx={{
-          position: "relative",
-          top: "72px",
+          mt: "72px",
           overflow: "hidden",
           // height: "calc(100vh - 72px)",
         }}
@@ -127,7 +132,6 @@ const Signup = (props) => {
           item
           sm={6}
           md={4}
-        
           sx={{
             backgroundImage: `url(${logImage})`,
             backgroundSize: "cover",
@@ -206,6 +210,31 @@ const Signup = (props) => {
                   fullWidth
                 />
                 <Typography fontSize="14px" mt={2}>
+                  Gender
+                </Typography>
+                <TextField
+                  select
+                  color="secondary"
+                  InputProps={{
+                    style: {
+                      fontSize: "14px",
+                    },
+                  }}
+                  fullWidth
+                  variant="outlined"
+                  id="gender"
+                  value={formik.values.gender}
+                  onChange={formik.handleChange}
+                  error={formik.touched.gender && Boolean(formik.errors.gender)}
+                  helperText={formik.touched.gender && formik.errors.gender}
+                  name="gender"
+                >
+                  <MenuItem value="Male">Male</MenuItem>
+                  <MenuItem value="Female">Female</MenuItem>
+                  <MenuItem value="Others">Others</MenuItem>
+                </TextField>
+
+                <Typography fontSize="14px" mt={2}>
                   Email
                 </Typography>
                 <TextField
@@ -223,7 +252,25 @@ const Signup = (props) => {
                   helperText={formik.touched.email && formik.errors.email}
                   fullWidth
                 />
-
+                  {localStorage.getItem("usertype")==='admin'?<> <Typography fontSize="14px" mt={2}>
+                  Trainer's specialization
+                </Typography>
+                <TextField
+                  color="secondary"
+                  type="text"
+                  InputProps={{
+                    style: {
+                      fontSize: "14px",
+                    },
+                  }}
+                  variant="outlined"
+                  id="speciality"
+                  onChange={formik.handleChange}
+                  error={formik.touched.speciality && Boolean(formik.errors.speciality)}
+                  helperText={formik.touched.speciality && formik.errors.speciality}
+                  fullWidth
+                  required
+                /></>:<></>}
                 <Typography fontSize="14px" mt={2}>
                   Contact no
                 </Typography>
@@ -327,28 +374,21 @@ const Signup = (props) => {
       {/* will show only on successfull user creation  */}
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert
-        
           color="secondary"
           onClose={handleClose}
           severity="success"
           sx={{ width: "100%" }}
         >
-         User Created Successfully
+          User Created Successfully
         </Alert>
       </Snackbar>
 
       {/* will show on error */}
       <Snackbar open={erropen} autoHideDuration={2000} onClose={handleClose}>
-        <Alert
-        color="error"
-          onClose={handleClose}
-          
-          sx={{ width: "100%" }}
-        >
-         {errormes}
+        <Alert color="error" onClose={handleClose} sx={{ width: "100%" }}>
+          {errormes}
         </Alert>
       </Snackbar>
-
     </>
   );
 };

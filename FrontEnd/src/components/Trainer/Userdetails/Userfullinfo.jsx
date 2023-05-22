@@ -46,7 +46,7 @@ const Userfullinfo = () => {
     <Box mt="73px" p={2}>
       <Typography variant="h4">Client Details</Typography>
       <Box pt={2} width="100%">
-        <Typography variant="h4" textAlign="center">
+        <Typography variant="h4" textAlign="center" textTransform="capitalize">
           {user.firstname + " " + user.lastname}
         </Typography>
         <Typography
@@ -56,7 +56,7 @@ const Userfullinfo = () => {
           textAlign="center"
           textTransform="capitalize"
         >
-          {user.workoutgoal + "-" + user.level}
+          {user.workoutgoal + " - " + user.level}
         </Typography>
       </Box>
       <Grid container mt={8} justifyContent="space-around">
@@ -141,7 +141,7 @@ const Userfullinfo = () => {
               >
                 BMI:
                 <span style={{ fontWeight: "400" }}>
-                  {" " + user.weight + " kg"}
+                  {" " + user.BMI}
                 </span>
               </Typography>
             </Paper>

@@ -136,6 +136,18 @@ router.patch("/update", (req, res) => {
         .json({ message: "Server Encountered an Error", error: err })
     );
 });
+router.patch("/updatetrainer", (req, res) => {
+  signupschema
+    .findByIdAndUpdate(req.body.id, {trainerassigned:"true"})
+    .then((result) =>
+      res.status(200).json({ message: "Updated", updatedUser: result })
+    )
+    .catch((err) =>
+      res
+        .status(500)
+        .json({ message: "Server Encountered an Error", error: err })
+    );
+});
 router.delete("/", (req, res) => {
   signupschema.find({ email: req.body.email }).then((result) => {
     if (result.length === 0) {

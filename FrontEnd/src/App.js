@@ -17,6 +17,9 @@ import Workoutplanner from "./components/Trainer/Workoutplanner";
 import Submitted from "./components/UserForm/Submitted";
 import WorkoutMain from "./components/Workout/WorkoutMain";
 import Showworkout from "./components/Workout/Showworkout";
+import Whatsapplink from "./components/WhatsappBot/Whatsapplink";
+import Trainers from "./components/Admin/Trainers";
+import AssignTrainers from "./components/Admin/AssignTrainers";
 function App(props) {
   const location=useLocation();
 
@@ -38,10 +41,12 @@ function App(props) {
         <Route path='/createworkout/muscle' element={<Workoutplanner/>}/>
         <Route path='/workout' element={<WorkoutMain/>} />
         <Route path='/showworkout/muscle'  element={<Showworkout/>}/>
-        
+        <Route path="/trainers" element={<Trainers/>}/>
+        <Route path="/createTrainer" element={<Signup/>}/>
+        <Route path='/assignTrainer' element={<AssignTrainers/>}/>
       </Routes>
       {location.pathname!=='/signup' && location.pathname!=='/login' && location.pathname!=='/mobility'?<Footer/>:<></>}
-      
+      {(localStorage.getItem('usertype')==='trainer') || localStorage.getItem('usertype')==='admin' ?<></>:<Whatsapplink/>}
       
     </>
   );
