@@ -20,7 +20,7 @@ const Showworkout = () => {
 
   return (
     <Box mt="72px">
-      <Stack direction="row" justifyContent="center">
+      <Stack direction={{sm:"column",md:"row"}} justifyContent="center">
         <Box width="40%" height="auto">
           <Typography
             variant="h4"
@@ -38,7 +38,7 @@ const Showworkout = () => {
             p={3}
           >
             {workout.map((exercise, index) => (
-              <Accordion sx={{ width: "100%", mt: 1 }} key={index}>
+              <Accordion  sx={{ width:{xs:"90%", md:"100%"}, mt: 1 }} key={index}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
                   aria-controls="panel1a-content"
@@ -186,6 +186,7 @@ const Showworkout = () => {
             backgroundPosition: "right",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
+            display:{xs:"none",md:"block"}
           }}
           minHeight="100vh"
           height="auto"

@@ -25,7 +25,7 @@ const ExerciseDetails = () => {
   const pageCount = Math.ceil(exerciseData.length / perPage);
   const offset = pageNumber * perPage;
   const currentData = exerciseData.slice(offset, offset + perPage);
-  var exercises = <Grid item xs={12}><Typography variant="h6" fontWeight="600" sx={{position:"relative",top:"25%"}}>Click on a muscle to display exercises</Typography></Grid>;
+  var exercises = <Grid item xs={12} alignSelf="center"><Typography variant="h6" fontWeight="600" >Click on a muscle to display exercises</Typography></Grid>;
 
 
   function handlePageClick({ selected: selectedPage }) {
@@ -56,10 +56,11 @@ const ExerciseDetails = () => {
     exercises = <CircularProgress color="success" />
   } else if (exerciseData.length !== 0) {
     exercises = currentData.reverse().map((exercise) => (
-      <Grid key={exercise.id} item>
+      <Grid key={exercise.id} item xs={8} sm={6} md={4} lg={3} >
         <Card
           sx={{
-            width: 300,
+            // width: 300,
+            
             minHeight: 341,
             display: "flex",
             flexDirection: "column",
@@ -118,7 +119,9 @@ const ExerciseDetails = () => {
         sx={{
           width: "100%",
           display: "flex",
+          alignContent:"center",
           flexDirection: { xs: "column", sm: "row" },
+          // justifyContent:"space-between"
         }}
         mt={2}
         mb={5}
@@ -1212,13 +1215,14 @@ const ExerciseDetails = () => {
             />
           </svg>
         </Box>
-        <Box>
+        <Box >
           <Grid
             container
             spacing={3}
             sx={{
-              justifyContent: { xs: "center", sm: "flex-start" },
+              justifyContent: { xs: "center"},
             }}
+            flexWrap="wrap"
           >
             {exercises}
           </Grid>

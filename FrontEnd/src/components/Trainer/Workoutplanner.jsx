@@ -160,7 +160,7 @@ userWorkout.legs=workout;
   // console.log(exercises);
   return (
     <Box mt="72px">
-      <Stack direction="row" justifyContent="center">
+      <Stack direction={{sm:"column",md:"row"}} justifyContent="center" alignContent="center">
         <Box width="40%" height="auto">
           <Typography
             variant="h4"
@@ -179,7 +179,7 @@ userWorkout.legs=workout;
           >
             {exerciseNumber.map((a, index) => (
               <Accordion
-                sx={{ width: "100%", mt: 1 }}
+                sx={{ width:{xs:"90%", md:"100%"}, mt: 1 }}
                 key={index}
                 expanded={expanded === `panel${index + 1}`}
                 onChange={handleExpandedAccordion(`panel${index + 1}`)}
@@ -294,8 +294,10 @@ userWorkout.legs=workout;
             backgroundPosition: "right",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
+            display:{xs:"none",md:"block"}
           }}
-          height="103vh"
+          minHeight="100vh"
+          height="auto"
         ></Box>
       </Stack>
       <Snackbar open={open} autoHideDuration={1000} onClose={()=>setopen(false)}>

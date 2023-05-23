@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box,Stack } from "@mui/material";
 import { useState } from "react";
 import deadlift from "../../../assets/deadlift.jpg";
 import "./userdetails.css";
@@ -7,7 +7,8 @@ import axios from 'axios'
 import Usercard from "./Usercard";
 const Userdetails = () => {
   const [users, setUsers] = useState([]);
-
+  const usersAssigned=JSON.parse(localStorage.getItem("usersAssigned"));
+  console.log(usersAssigned);
   useEffect(()=>{
    
     axios.get(`http://localhost:3200/login`)
@@ -58,11 +59,17 @@ const Userdetails = () => {
         <Typography variant="h4" mb={3}>
           Client Information
         </Typography>
-        <Box p={2}>
-          <Grid container justifyContent="center">
+        <Box >
+          <Stack  sx={{flexDirection:{xs:"column",sm:"row"}}}
+        justifyContent="space-around"
+        alignContent="center"
+        mt={5}
+        mb={3}
+        rowGap={4}
+        flexWrap="wrap"  >
             {users.length!==0?
             
-            users.filter((check)=>check.visitedmobility==="true").map((user)=><Usercard
+            users.filter((check)=>check.visitedmobility==="true" && check.trainerassigned===localStorage.getItem("id")).map((user)=><Usercard
             key={user._id}
               name={user.firstname + " " + user.lastname}
               age={user.age}
@@ -74,7 +81,7 @@ const Userdetails = () => {
             />)
             :<Typography variant="h4">Loading....</Typography>}
             
-          </Grid>
+          </Stack>
         </Box>
       </Box>
     </Box>

@@ -60,24 +60,24 @@ const Userfullinfo = () => {
         </Typography>
       </Box>
       <Grid container mt={8} justifyContent="space-around">
-        <Grid item xs={3}>
+        <Grid item xs={8} sm={4} md={3}    >
           <Paper
             elevation={2}
             sx={{
               backgroundImage: `url(${back})`,
-              height: "500px",
+              height:{xs:"450px" ,sm:"500px"},
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}
           ></Paper>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={8} sm={4} md={3} sx={{mt:{xs:2}}}>
           <Paper
             elevation={2}
             sx={{
               backgroundImage: `url(${front})`,
-              height: "500px",
+              height:{xs:"450px" ,sm:"500px"},
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -87,7 +87,7 @@ const Userfullinfo = () => {
       </Grid>
 
       <Grid container mt={6} justifyContent="space-around" rowSpacing={2}>
-        <Grid item xs={3} textAlign="center">
+        <Grid item xs={9} sm={4} md={3}  textAlign="center">
           <Stack spacing={2}>
             <Paper elevation={2} sx={{ padding: "16px" }}>
               <Typography
@@ -117,7 +117,7 @@ const Userfullinfo = () => {
             </Paper>
           </Stack>
         </Grid>
-        <Grid item xs={3} textAlign="center">
+        <Grid item xs={9} sm={4} md={3} textAlign="center">
           <Stack spacing={2}>
             <Paper elevation={2} sx={{ padding: "16px" }}>
               <Typography
@@ -148,15 +148,15 @@ const Userfullinfo = () => {
           </Stack>
         </Grid>
         <Grid item xs={9}>
-          <Grid item xs={12} mt={2}>
+          <Grid item  xs={12} mt={2}>
             {/* <Paper elevation={2} sx={{padding:"16px"}}> */}
             <Typography variant="body1" fontWeight="600" fontSize="18px">
               Active Mobility:
             </Typography>
             {/* </Paper> */}
           </Grid>
-          <Grid container mt={2}>
-            <Grid item xs={3}>
+          <Grid container mt={2} justifyContent="space-between">
+            <Grid item xs={5} sm={3}>
               <Typography
                 variant="body1"
                 fontWeight="600"
@@ -179,7 +179,7 @@ const Userfullinfo = () => {
                 )}
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={5} sm={3}>
               <Typography
                 variant="body1"
                 fontWeight="600"
@@ -202,7 +202,7 @@ const Userfullinfo = () => {
                 )}
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={5} sm={3}>
               <Typography
                 variant="body1"
                 fontWeight="600"
@@ -225,7 +225,7 @@ const Userfullinfo = () => {
                 )}
               </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={5} sm={3}>
               {" "}
               <Typography
                 variant="body1"
@@ -255,8 +255,8 @@ const Userfullinfo = () => {
       <Typography variant="h4" mt={6}>
         Design a workout plan
       </Typography>
-      <Grid container justifyContent="center" spacing={2} mt={2}>
-        <Grid item sx={{ width: "28%" }}>
+      <Grid container justifyContent="center"  alignContent="center" spacing={2} mt={2}>
+        <Grid item  xs={9}  sm={3}>
           <Card
             onClick={() =>
               navigate("/createworkout/muscle", { state: { name: "chest" } })
@@ -271,7 +271,7 @@ const Userfullinfo = () => {
                 image={hoverid === "chest" ? chestWhite : chest}
                 alt="chest"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -288,7 +288,7 @@ const Userfullinfo = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card
             className="card"
             onMouseOver={() => handleMouseOver("back")}
@@ -304,7 +304,7 @@ const Userfullinfo = () => {
                 image={hoverid === "back" ? backWhite : backmuscle}
                 alt="back"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -321,7 +321,7 @@ const Userfullinfo = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card
             className="card"
             onMouseOver={() => handleMouseOver("shoulders")}
@@ -337,7 +337,7 @@ const Userfullinfo = () => {
                 image={hoverid === "shoulders" ? shouldersWhite : shoulders}
                 alt="Shoulder"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -355,7 +355,7 @@ const Userfullinfo = () => {
           </Card>
         </Grid>
         <Grid item xs={12}></Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card
             className="card"
             onMouseOver={() => handleMouseOver("legs")}
@@ -370,7 +370,7 @@ const Userfullinfo = () => {
                 image={hoverid === "legs" ? legsWhite : legs}
                 alt="Legs"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -387,7 +387,7 @@ const Userfullinfo = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card
             className="card"
             onMouseOver={() => handleMouseOver("arms")}
@@ -403,7 +403,7 @@ const Userfullinfo = () => {
                 image={hoverid === "arms" ? armsWhite : arms}
                 alt="Arms"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -420,7 +420,7 @@ const Userfullinfo = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card
             className="card"
             onMouseOver={() => handleMouseOver("abs")}
@@ -436,7 +436,7 @@ const Userfullinfo = () => {
                 image={hoverid === "abs" ? absWhite : abs}
                 alt="abdominals"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />

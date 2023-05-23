@@ -10,7 +10,7 @@ const AssignTrainers = () => {
   const clients = [];
   const handleUserAssign = (userid) => {
     axios
-      .patch("http://localhost:3200/login/updatetrainer", { id: userid })
+      .patch("http://localhost:3200/login/updatetrainer", { id: userid,trainerassigned:location.state.trainer_id })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
     clients.push(userid);
@@ -40,8 +40,9 @@ const AssignTrainers = () => {
         List of <span style={{ color: "#0AAE59" }}> Clients</span>
       </Typography>
       <Stack
-        direction="row"
-        justifyContent="space-between"
+        sx={{flexDirection:{xs:"column",sm:"row"}}}
+        justifyContent="space-around"
+        alignContent="center"
         mt={5}
         mb={3}
         rowGap={4}

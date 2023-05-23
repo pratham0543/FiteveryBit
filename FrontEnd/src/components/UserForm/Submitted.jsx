@@ -7,13 +7,16 @@ const Submitted = () => {
 
   return (
     <Box
-      mt={11}
+      mt="72px"
       mb={11}
-      sx={{ height: "70vh", width: "100%" }}
+      p={2}
+      pr={0}
+      sx={{ height: "70vh" }}
       display="flex"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      whiteSpace="break-spaces"
     >
       <Typography variant="h4" mb={2}>
         <span style={{ color: "#0AAE59" }}>Thank you</span> for submitting your

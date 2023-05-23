@@ -29,12 +29,14 @@ const Trainers = () => {
         List Of <span style={{ color: "#0AAE59" }}> Trainers</span>
       </Typography>
       <Stack
-        direction="row"
-        justifyContent="space-between"
+        sx={{flexDirection:{xs:"column",sm:"row"}}}
+        justifyContent="space-around"
+        alignContent="center"
         mt={5}
         mb={3}
         rowGap={4}
         flexWrap="wrap"
+
       >
         {trainers.length !== 0 ? (
           trainers.map((trainer) => (

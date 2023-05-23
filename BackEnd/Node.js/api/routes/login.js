@@ -138,7 +138,7 @@ router.patch("/update", (req, res) => {
 });
 router.patch("/updatetrainer", (req, res) => {
   signupschema
-    .findByIdAndUpdate(req.body.id, {trainerassigned:"true"})
+    .findByIdAndUpdate(req.body.id, {trainerassigned:req.body.trainerassigned})
     .then((result) =>
       res.status(200).json({ message: "Updated", updatedUser: result })
     )

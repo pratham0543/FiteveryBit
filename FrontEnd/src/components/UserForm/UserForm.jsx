@@ -140,6 +140,7 @@ const UserForm = () => {
             onChange={handleheightChange}
             type="number"
             variant="outlined"
+            required
           />
         </Box>
 
@@ -163,6 +164,7 @@ const UserForm = () => {
             onChange={handleweightChange}
             type="number"
             variant="outlined"
+            required
           />
         </Box>
 
@@ -250,6 +252,7 @@ const UserForm = () => {
             aria-label="KneeMobility"
             name="Knee"
             sx={styles.RadioGrp}
+          
           >
             <FormControlLabel
               value="true"
