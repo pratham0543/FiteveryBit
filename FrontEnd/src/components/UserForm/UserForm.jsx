@@ -80,7 +80,8 @@ const UserForm = () => {
   const userexercisedata={
     userid:id
   }
-  const onsubmithandler=()=>{
+  const onsubmit=(e)=>{
+    e.preventDefault();
     localStorage.setItem("visitedmobility", "true");
     console.log(localStorage.getItem("visitedmobility"))
       axios.patch("http://localhost:3200/login/update",info)
@@ -112,7 +113,7 @@ const UserForm = () => {
           <span style={{ color: "#0AAE59" }}>details</span>{" "}
         </Typography>
         <hr />
-
+        <form onsubmithandler={onsubmit}>
         <Box display="flex" ml={10} mt={5}>
           <Typography sx={{ fontSize: "16px" }} mr={4}>
             Height:
@@ -134,6 +135,7 @@ const UserForm = () => {
             onChange={handleheightChange}
             type="number"
             variant="outlined"
+            required
           />
         </Box>
 
@@ -157,6 +159,7 @@ const UserForm = () => {
             onChange={handleweightChange}
             type="number"
             variant="outlined"
+            required
           />
         </Box>
 
@@ -174,12 +177,12 @@ const UserForm = () => {
           >
             <FormControlLabel
               value="true"
-              control={<Radio sx={styles.Radio} />}
+              control={<Radio sx={styles.Radio} required={true}/>}
               label="Yes"
             />
             <FormControlLabel
               value="false"
-              control={<Radio sx={styles.Radio} />}
+              control={<Radio sx={styles.Radio} required={true}/>}
               label="No"
             />
           </RadioGroup>
@@ -198,12 +201,12 @@ const UserForm = () => {
           >
             <FormControlLabel
               value="true"
-              control={<Radio sx={styles.Radio} />}
+              control={<Radio sx={styles.Radio} required={true}/>}
               label="Yes" 
             />
             <FormControlLabel
               value="false"
-              control={<Radio sx={styles.Radio} />}
+              control={<Radio sx={styles.Radio} required={true}/>}
               label="No"
             />
           </RadioGroup>
@@ -223,12 +226,12 @@ const UserForm = () => {
           >
             <FormControlLabel
               value="true"
-              control={<Radio sx={styles.Radio} />}
+              control={<Radio sx={styles.Radio} required={true}/>}
               label="Yes"
             />
             <FormControlLabel
               value="false"
-              control={<Radio sx={styles.Radio} />}
+              control={<Radio sx={styles.Radio} required={true}/>}
               label="No"
             />
           </RadioGroup>
@@ -247,19 +250,19 @@ const UserForm = () => {
           >
             <FormControlLabel
               value="true"
-              control={<Radio sx={styles.Radio} />}
+              control={<Radio sx={styles.Radio} required={true}/>}
               label="Yes"
             />
             <FormControlLabel
               value="false"
-              control={<Radio sx={styles.Radio} />}
+              control={<Radio sx={styles.Radio} required={true}/>}
               label="No"
             />
           </RadioGroup>
         </Box>
         <Box display="flex" ml={10} mt={4}>
           <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
+            <FormControl fullWidth required>
               <InputLabel>Level</InputLabel>
               <Select value={level} onChange={handlelevelChange} label="Level">
                 <MenuItem value="beginner">Beginner</MenuItem>
@@ -269,7 +272,7 @@ const UserForm = () => {
             </FormControl>
           </Box>
           <Box sx={{ minWidth: 120,marginLeft:"3em" }}>
-            <FormControl fullWidth>
+            <FormControl fullWidth required>
               <InputLabel>Workout Plan</InputLabel>
               <Select sx={{width:"10em"}} value={workoutgoal} onChange={handleworkoutgoalChange} label="Workout Plan">
                 <MenuItem value="musclegain">Muscle Gain</MenuItem>
@@ -298,9 +301,9 @@ const UserForm = () => {
             variant="contained"
             color="secondary"
             sx={{ color: "white" }}
-            onClick={()=>{
-              onsubmithandler();
-            }}
+            // onClick={()=>{
+            //   onsubmithandler();
+            // }}
           >
             Submit
           </Button>
@@ -313,6 +316,7 @@ const UserForm = () => {
             AI MOBILITY CHECKER
           </Button>
         </Box>
+        </form>
       </Box>
     </Box>
   );

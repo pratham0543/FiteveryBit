@@ -78,6 +78,21 @@ router.patch('/', (req, res) => {
         })
         .catch(err => res.status(500).json( {message: 'Server Encountered an Error', error: err} ))
 })
+router.patch("/updateusers", (req, res) => {
+    const updatedusers={
+        user_assigned:req.body.user_assigned
+    }
+    trainerschema
+      .findByIdAndUpdate(req.body.id, updatedUser)
+      .then((result) =>
+        res.status(200).json({ message: "Updated", updatedUser: result })
+      )
+      .catch((err) =>
+        res
+          .status(500)
+          .json({ message: "Server Encountered an Error", error: err })
+      );
+  });
 router.delete('/',(req,res)=>{
     trainerschema.find({ email: req.body.email })
         .then(result => {
