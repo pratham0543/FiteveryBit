@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box,Stack } from "@mui/material";
 import { useState } from "react";
 import deadlift from "../../../assets/deadlift.jpg";
 import "./userdetails.css";
@@ -7,13 +7,14 @@ import axios from 'axios'
 import Usercard from "./Usercard";
 const Userdetails = () => {
   const [users, setUsers] = useState([]);
-
+  const usersAssigned=JSON.parse(localStorage.getItem("usersAssigned"));
+  console.log(usersAssigned);
   useEffect(()=>{
-    const userID=localStorage.getItem('usersAssigned');
-    axios.get(`http://localhost:3200/login/${userID}`)
+   
+    axios.get(`http://localhost:3200/login`)
     .then((res)=>{
-      // console.log(res.data.result)
-      setUsers([res.data.result])
+            setUsers(res.data.result)
+     
 
     })
     .catch((err)=>console.log(err))
@@ -58,21 +59,29 @@ const Userdetails = () => {
         <Typography variant="h4" mb={3}>
           Client Information
         </Typography>
-        <Box p={2}>
-          <Grid container justifyContent="center">
-            {users.length!==0?<Usercard
-              name={users[0].firstname + " " + users[0].lastname}
-              height={users[0].height}
-              weight={users[0].weight}
-              age={users[0].age}
-              isAiMobility={users[0].visitedmobility}
-              planType={users[0].workoutgoal}
-              level={users[0].level}
-              contactno={users[0].phoneno}
-              userinfo={users[0]}
-            />:<Typography variant="h4">Loading....</Typography>}
+        <Box >
+          <Stack  sx={{flexDirection:{xs:"column",sm:"row"}}}
+        justifyContent="space-around"
+        alignContent="center"
+        mt={5}
+        mb={3}
+        rowGap={4}
+        flexWrap="wrap"  >
+            {users.length!==0?
             
-          </Grid>
+            users.filter((check)=>check.visitedmobility==="true" && check.trainerassigned===localStorage.getItem("id")).map((user)=><Usercard
+            key={user._id}
+              name={user.firstname + " " + user.lastname}
+              age={user.age}
+              isAiMobility={user.visitedmobility}
+              level={user.level}
+              phoneno={user.phoneno}
+              userinfo={user}
+              gender={user.gender}
+            />)
+            :<Typography variant="h4">Loading....</Typography>}
+            
+          </Stack>
         </Box>
       </Box>
     </Box>

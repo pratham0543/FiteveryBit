@@ -87,7 +87,13 @@ const UserForm = () => {
       axios.patch("http://localhost:3200/login/update",info)
         .then(result=>{
           axios.post("http://localhost:3200/userexercise",userexercisedata)
-          .then(resut=>navigate("/submitted"))
+          .then(resut=>{
+           
+            navigate("/submitted")
+            window.location.reload()
+          }
+           
+            )
           .catch(err=>console.log(err))
         })
         .catch(err=>console.log(err))
@@ -247,6 +253,7 @@ const UserForm = () => {
             aria-label="KneeMobility"
             name="Knee"
             sx={styles.RadioGrp}
+          
           >
             <FormControlLabel
               value="true"

@@ -23,7 +23,9 @@ const validate = joi.object({
     weight: joi.number(),
     age: joi.number().required(),
     user_type:joi.string(),
-    mobility:joi.object()
+    mobility:joi.object(),
+    gender:joi.string().required(),
+    speciality:joi.string().allow('')
 })
 //post request
 router.post('/',(req,res)=>{
@@ -36,7 +38,7 @@ router.post('/',(req,res)=>{
             else{
                 const error = validate.validate(req.body)
                 if (error.error) {
-                    return res.status(400).send(error.error)
+                    return res.status(400).send({"joi error":error.error})
                 }
                 //defining salt rounds for encryption
                 const saltrounds=10
@@ -50,12 +52,14 @@ router.post('/',(req,res)=>{
                             password:result,
                             phoneno:req.body.phoneno,
                             age:req.body.age,
+                            user_type:req.body.user_type,
+                            gender:req.body.gender
                         })
                         newUser.save()
                             .then(result => res.status(201).json( {message: 'User Signup SuccessfulL', userDetails: result} ))
                             .catch(err => res.status(500).json( {message: 'Server Encountered an Error1', error: err} ))
                         })
-                    .catch(err => res.status(500).json( {message: 'Server Encountered an Error7', error: err} ))
+                    .catch(err => res.status(500).json( {message: 'Server Encountered an Error', error: err} ))
             }
         })
         .catch(err=>res.status(500).json({message:"Server Encountered an Error3",error:err}))

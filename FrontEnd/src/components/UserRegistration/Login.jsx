@@ -75,15 +75,18 @@ const Login = () => {
           const userDetails = jwt_decode(result.data.token);
           console.log(userDetails)
           localStorage.setItem("id", userDetails.userId);
+        
           localStorage.setItem("email", userDetails.email);
           localStorage.setItem("usertype", userDetails.user_type);
           localStorage.setItem("fname", userDetails.firstname);
           localStorage.setItem("lname", userDetails.lastname);
           localStorage.setItem("visitedmobility", userDetails.visitedmobility);
           localStorage.setItem("loggedin","true")
+          localStorage.setItem("workoutcreated",userDetails.workoutcreated)
           console.log(localStorage)
           if(isTrainer)
-          localStorage.setItem("usersAssigned",userDetails.user_assigned)
+          localStorage.setItem("usersAssigned",JSON.stringify(userDetails.user_assigned))
+          localStorage.setItem("id", userDetails.trainerId);
           setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {

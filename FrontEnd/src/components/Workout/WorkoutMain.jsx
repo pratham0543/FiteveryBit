@@ -74,8 +74,8 @@ const WorkoutMain = () => {
       <Typography variant="h4" mt={6} textAlign="center">
         Your Personalized Workouts
       </Typography>
-      <Grid container justifyContent="center" spacing={2} mt={2} mb={3}>
-        <Grid item sx={{ width: "28%" }}>
+      <Grid container justifyContent="center"  alignContent="center" spacing={2} mt={2} mb={3}>
+        <Grid item xs={9}  sm={3}>
           <Card
             onClick={()=>navigate('/showworkout/muscle',{state:{name:"chest",workout:userExercise.chest}})}
             className="card"
@@ -88,7 +88,7 @@ const WorkoutMain = () => {
                 image={hoverid === "chest" ? chestWhite : chest}
                 alt="chest"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -105,7 +105,7 @@ const WorkoutMain = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card
             className="card"
             onMouseOver={() => handleMouseOver("back")}
@@ -119,7 +119,7 @@ const WorkoutMain = () => {
                 image={hoverid==='back'?backWhite:backmuscle}
                 alt="back"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -136,7 +136,7 @@ const WorkoutMain = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card className="card"
           onMouseOver={()=>handleMouseOver('shoulders')}
           onMouseOut={handleMouseOut}
@@ -149,7 +149,7 @@ const WorkoutMain = () => {
                 image={hoverid==='shoulders'?shouldersWhite:shoulders}
                 alt="Shoulder"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -167,7 +167,7 @@ const WorkoutMain = () => {
           </Card>
         </Grid>
         <Grid item xs={12}></Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card className="card"
           onMouseOver={()=>handleMouseOver('legs')}
           onMouseOut={handleMouseOut}
@@ -181,7 +181,7 @@ const WorkoutMain = () => {
                 image={hoverid==='legs'?legsWhite:legs}
                 alt="Legs"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -198,7 +198,7 @@ const WorkoutMain = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card
             className="card"
             onMouseOver={()=>handleMouseOver('arms')}
@@ -213,7 +213,7 @@ const WorkoutMain = () => {
                 image={hoverid==='arms' ? armsWhite : arms}
                 alt="Arms"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />
@@ -230,7 +230,7 @@ const WorkoutMain = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item sx={{ width: "28%" }}>
+        <Grid item xs={9}  sm={3}>
           <Card className="card"
           onMouseOver={()=>handleMouseOver('abs')}
           onMouseOut={handleMouseOut}
@@ -243,7 +243,7 @@ const WorkoutMain = () => {
                 image={hoverid==='abs'?absWhite:abs}
                 alt="abdominals"
                 sx={{
-                  height: "187px",
+                  height:{ xs:"150px",sm: "187px"},
                   objectFit: "contain",
                 }}
               />

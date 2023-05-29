@@ -86,7 +86,7 @@ const Videotutorial = () => {
         </form>
       </Box>
 
-      <Box mx="auto" textAlign="center" mb={3} height="450px" width="700px">
+      <Box mx="auto" textAlign="center" mb={3}  sx={{height:{xs:"260px",sm:"450px",lg:"500px"},width:{xs:"370px",sm:"620px",md:"750px",lg:"950px"}}}>
         {video}
 
         {/* <iframe
@@ -97,6 +97,7 @@ const Videotutorial = () => {
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
+          ht=260 370
         ></iframe> */}
       </Box>
     </>
