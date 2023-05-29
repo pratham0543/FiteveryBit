@@ -84,9 +84,10 @@ const Login = () => {
           localStorage.setItem("loggedin","true")
           localStorage.setItem("workoutcreated",userDetails.workoutcreated)
           console.log(localStorage)
-          if(isTrainer)
+          if(isTrainer){
           localStorage.setItem("usersAssigned",JSON.stringify(userDetails.user_assigned))
           localStorage.setItem("id", userDetails.trainerId);
+        }
           setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {
