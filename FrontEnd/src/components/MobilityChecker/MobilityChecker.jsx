@@ -481,7 +481,7 @@ export default function MobilityChecker() {
             />
           </AccordionDetails>
         </Accordion>
-        <Accordion>
+        {/* <Accordion>
           <AccordionSummary sx={{ backgroundColor: "primary.main", color: "white" }} expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}>
             <Typography>Ankle Tests</Typography>
           </AccordionSummary>
@@ -522,7 +522,7 @@ export default function MobilityChecker() {
               </AccordionDetails>
             </Accordion>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
         <Accordion>
           <AccordionSummary sx={{ backgroundColor: "primary.main", color: "white" }} expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}>
             <Typography>Elbow Tests</Typography>
