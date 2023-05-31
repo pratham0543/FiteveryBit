@@ -75,7 +75,6 @@ const [saveWorkout, setsaveWorkout] = useState(false);
       const reps = document
         .querySelector(`#superreps-${index}${i}`)
         .value.trim();
-      // console.log(name.length,sets.length,reps.length);
       if (name.length !== 0 && sets.length !== 0 && reps.length !== 0) {
         const superExercise = new Workout(name, sets, reps);
         obj.superset.push(superExercise);
@@ -90,13 +89,10 @@ const [saveWorkout, setsaveWorkout] = useState(false);
     const name = document.querySelector(`#exercise-${index}`).value.trim();
     const sets = document.querySelector(`#exercisesets-${index}`).value.trim();
     const reps = document.querySelector(`#exercisereps-${index}`).value.trim();
-    // console.log(name.length===0,sets.length===0,reps.length===0,sets.length);
     if (name.length !== 0 && sets.length !== 0 && reps.length !== 0) {
-      // console.log(name,sets,reps);
       const obj = new Workout(name, sets, reps);
       obj.superset = new Array();
       fetchSupersetExercises(index, obj);
-      // console.log("OBJECT",obj);
       const w = [...workout];
       w[index] = obj;
       setworkout(w);
@@ -151,13 +147,9 @@ userWorkout.legs=workout;
       .catch((err) => console.log(err));
   }, []);
 
-  // console.log("muscle data");
-  // console.log(muscleData);
-  // console.log("exercises");
   muscleData.forEach((exercise) => {
     exercises.push({ title: exercise.name, value: exercise.id });
   });
-  // console.log(exercises);
   return (
     <Box mt="72px">
       <Stack direction={{sm:"column",md:"row"}} justifyContent="center" alignContent="center">

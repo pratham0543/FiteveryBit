@@ -73,7 +73,7 @@ const Navbar = () => {
           {/* Logo */}
 
           <Typography
-            variant="h4 "
+            variant="h3"
             sx={{
               display: { xs: "none", sm: "none", md: "block", lg: "block" },
             }}

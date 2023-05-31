@@ -73,7 +73,7 @@ const Login = () => {
         .then((result) => {
           setopen(true);
           const userDetails = jwt_decode(result.data.token);
-          console.log(userDetails)
+          // console.log(userDetails)
           localStorage.setItem("id", userDetails.userId);
         
           localStorage.setItem("email", userDetails.email);
@@ -83,7 +83,7 @@ const Login = () => {
           localStorage.setItem("visitedmobility", userDetails.visitedmobility);
           localStorage.setItem("loggedin","true")
           localStorage.setItem("workoutcreated",userDetails.workoutcreated)
-          console.log(localStorage)
+          // console.log(localStorage)
           if(isTrainer){
           localStorage.setItem("usersAssigned",JSON.stringify(userDetails.user_assigned))
           localStorage.setItem("id", userDetails.trainerId);

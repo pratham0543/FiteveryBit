@@ -93,12 +93,9 @@ const UserForm = () => {
   const userexercisedata = {
     userid: id,
   };
-  console.log("id is "+id)
   const onsubmit = (e) => {
     e.preventDefault();
     localStorage.setItem("visitedmobility", "true");
-    console.log(localStorage.getItem("visitedmobility"));
-    console.log(localStorage.getItem("loggedin"));
     axios
       .patch("http://localhost:3200/login/update", info)
       .then((result) => {
@@ -106,7 +103,6 @@ const UserForm = () => {
         axios
           .post("http://localhost:3200/userexercise", userexercisedata)
           .then(resul=>{
-            console.log(result)
             navigate("/submitted");
           })
           .catch((err) => console.log(err));

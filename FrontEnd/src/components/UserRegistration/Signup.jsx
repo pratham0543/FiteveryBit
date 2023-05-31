@@ -98,11 +98,11 @@ const Signup = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values));
+      // console.log(JSON.stringify(values));
       let signup = "signup";
       if (localStorage.getItem("usertype") === "admin")
         signup = "trainersignup";
-        console.log(signup)
+        // console.log(signup)
       axios
         .post(`http://localhost:3200/${signup}`, values)
         .then((result) => {

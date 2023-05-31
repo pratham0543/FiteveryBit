@@ -11,7 +11,7 @@ const AssignTrainers = () => {
   const handleUserAssign = (userid) => {
     axios
       .patch("http://localhost:3200/login/updatetrainer", { id: userid,trainerassigned:location.state.trainer_id })
-      .then((res) => console.log(res.data))
+      .then(res =>console.log())
       .catch((err) => console.log(err));
     clients.push(userid);
     axios
@@ -19,7 +19,7 @@ const AssignTrainers = () => {
         id: location.state.trainer_id,
         user_assigned: clients,
       })
-      .then((res) => console.log(res.data))
+      .then((res) => console.log())
       .catch((err) => console.log(err));
   };
 
@@ -28,12 +28,12 @@ const AssignTrainers = () => {
       .get("http://localhost:3200/login")
       .then((res) =>{ 
         
-        console.log(res.data.result);
+        console.log();
         setusers(res.data.result)})
       .catch((err) => console.log(err.message));
   }, []);
 
-  console.log(clients);
+  // console.log(clients);
   return (
     <Box mt="72px" p={2}>
       <Typography variant="h4" fontWeight="600">
