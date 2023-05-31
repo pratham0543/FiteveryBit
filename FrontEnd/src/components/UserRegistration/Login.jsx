@@ -81,11 +81,13 @@ const Login = () => {
           localStorage.setItem("fname", userDetails.firstname);
           localStorage.setItem("lname", userDetails.lastname);
           localStorage.setItem("visitedmobility", userDetails.visitedmobility);
+          localStorage.setItem("loggedin","true")
           localStorage.setItem("workoutcreated",userDetails.workoutcreated)
           console.log(localStorage)
-          if(isTrainer)
+          if(isTrainer){
           localStorage.setItem("usersAssigned",JSON.stringify(userDetails.user_assigned))
           localStorage.setItem("id", userDetails.trainerId);
+        }
           setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {

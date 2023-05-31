@@ -40,7 +40,8 @@ router.post("/", (req, res) => {
                 firstname: result.firstname,
                 lastname: result.lastname,
                 user_type: result.user_type,
-                visitedmobility:result.visitedmobility
+                visitedmobility:result.visitedmobility,
+                workoutcreated:result.workoutcreated
               };
               //sending json web token
               const jwt_token = jwt.sign(userDetails, process.env.ACCESS_KEY);

@@ -13,6 +13,14 @@ const signupSchema = new mongoose.Schema({
   workoutgoal:mongoose.Schema.Types.String,
   level:mongoose.Schema.Types.String,
   gender:mongoose.Schema.Types.String,
+  workoutcreated:{
+    type:mongoose.Schema.Types.String,
+    default:"false"
+  },
+  trainerassigned:{
+    type:mongoose.Schema.Types.String,
+    default:"false"
+  },
   user_type: {
     type: mongoose.Schema.Types.String,
     default: "normal",

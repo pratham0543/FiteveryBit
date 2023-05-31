@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -13,24 +13,30 @@ import {
   RadioGroup,
   Select,
   InputLabel,
-  MenuItem
+  MenuItem,
 } from "@mui/material";
 const UserForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const[shouldermobility,setshouldermobility]=useState(location.state.shouldermobility);
+  const [shouldermobility, setshouldermobility] = useState(
+    location.state.shouldermobility
+  );
   const handleshoulderChange = (e) => {
     setshouldermobility(e.target.value);
   };
-  const[elbowmobility,setelbowmobility]=useState(location.state.elbowmobility);
+  const [elbowmobility, setelbowmobility] = useState(
+    location.state.elbowmobility
+  );
   const handleelbowChange = (e) => {
     setelbowmobility(e.target.value);
   };
-  const[anklemobility,setanklemobility]=useState(location.state.anklemobility);
+  const [anklemobility, setanklemobility] = useState(
+    location.state.anklemobility
+  );
   const handleankleChange = (e) => {
     setanklemobility(e.target.value);
   };
-  const[kneemobility,setkneemobility]=useState(location.state.kneemobility);
+  const [kneemobility, setkneemobility] = useState(location.state.kneemobility);
   const handlekneeChange = (e) => {
     setkneemobility(e.target.value);
   };
@@ -61,42 +67,52 @@ const UserForm = () => {
   const handlelevelChange = (e) => {
     setlevel(e.target.value);
   };
-  const [workoutgoal, setworkoutgoal] = React.useState(location.state.workoutgoal);
+  const [workoutgoal, setworkoutgoal] = React.useState(
+    location.state.workoutgoal
+  );
 
   const handleworkoutgoalChange = (e) => {
     setworkoutgoal(e.target.value);
   };
-  var id=localStorage.getItem("id")
-  const info={
-    id:id,
-    height:height,
-    weight:weight,
-    level:level,
-    visitedmobility:"true",
-    visitedmobilityAI:location.state.visitedmobilityAI,
-    workoutgoal:workoutgoal,
-    mobility:{shoulder:shouldermobility,ankle:anklemobility,elbow:elbowmobility,knee:kneemobility}
-  }
-  const userexercisedata={
-    userid:id
-  }
-  const onsubmithandler=()=>{
+  var id = localStorage.getItem("id");
+  const info = {
+    id: id,
+    height: height,
+    weight: weight,
+    level: level,
+    visitedmobility: "true",
+    visitedmobilityAI: location.state.visitedmobilityAI,
+    workoutgoal: workoutgoal,
+    mobility: {
+      shoulder: shouldermobility,
+      ankle: anklemobility,
+      elbow: elbowmobility,
+      knee: kneemobility,
+    },
+  };
+  const userexercisedata = {
+    userid: id,
+  };
+  console.log("id is "+id)
+  const onsubmit = (e) => {
+    e.preventDefault();
     localStorage.setItem("visitedmobility", "true");
-    console.log(localStorage.getItem("visitedmobility"))
-      axios.patch("http://localhost:3200/login/update",info)
-        .then(result=>{
-          axios.post("http://localhost:3200/userexercise",userexercisedata)
-          .then(resut=>{
-           
-            navigate("/submitted")
-            window.location.reload()
-          }
-           
-            )
-          .catch(err=>console.log(err))
-        })
-        .catch(err=>console.log(err))
-  }
+    console.log(localStorage.getItem("visitedmobility"));
+    console.log(localStorage.getItem("loggedin"));
+    axios
+      .patch("http://localhost:3200/login/update", info)
+      .then((result) => {
+        console.log(result)
+        axios
+          .post("http://localhost:3200/userexercise", userexercisedata)
+          .then(resul=>{
+            console.log(result)
+            navigate("/submitted");
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <Box
       sx={{
@@ -118,178 +134,186 @@ const UserForm = () => {
           <span style={{ color: "#0AAE59" }}>details</span>{" "}
         </Typography>
         <hr />
-
-        <Box display="flex" ml={10} mt={5}>
-          <Typography sx={{ fontSize: "16px" }} mr={4}>
-            Height:
-          </Typography>
-          <TextField
-            color="secondary"
-            label="in (meters)"
-            value={height}
-            InputLabelProps={{ shrink: true }}
-            InputProps={{
-              style: {
-                position: "relative",
-                height: "70%",
-                width: "120%",
-                fontSize: "14px",
-                border: "none",
-              },
-            }}
-            onChange={handleheightChange}
-            type="number"
-            variant="outlined"
-            required
-          />
-        </Box>
-
-        <Box display="flex" ml={10} mt={3}>
-          <Typography sx={{ fontSize: "16px" }} mr={4}>
-            Weight:
-          </Typography>
-          <TextField
-            color="secondary"
-            label="in (kgs)"
-            value={weight}
-            InputLabelProps={{ shrink: true }}
-            InputProps={{
-              style: {
-                height: "70%",
-                width: "120%",
-                fontSize: "14px",
-                border: "none",
-              },
-            }}
-            onChange={handleweightChange}
-            type="number"
-            variant="outlined"
-            required
-          />
-        </Box>
-
-        <Box display="flex" ml={10} mt={4}>
-          <Typography sx={{ fontSize: "16px" }} mr={4}>
-            Shoulder Mobility:{" "}
-          </Typography>
-          <RadioGroup
-            row
-            value={shouldermobility}
-            onChange={handleshoulderChange}
-            aria-label="ShoulderMobility"
-            name="Shoulder"
-            sx={styles.RadioGrp}
-          >
-            <FormControlLabel
-              value="true"
-              control={<Radio sx={styles.Radio} />}
-              label="Yes"
+        <form onSubmit={onsubmit}>
+          <Box display="flex" ml={10} mt={5}>
+            <Typography sx={{ fontSize: "16px" }} mr={4}>
+              Height:
+            </Typography>
+            <TextField
+              color="secondary"
+              label="in (meters)"
+              value={height}
+              InputLabelProps={{ shrink: true }}
+              InputProps={{
+                style: {
+                  position: "relative",
+                  height: "70%",
+                  width: "120%",
+                  fontSize: "14px",
+                  border: "none",
+                },
+              }}
+              onChange={handleheightChange}
+              type="number"
+              variant="outlined"
+              required
             />
-            <FormControlLabel
-              value="false"
-              control={<Radio sx={styles.Radio} />}
-              label="No"
-            />
-          </RadioGroup>
-        </Box>
-        <Box display="flex" ml={10} mt={4}>
-          <Typography mr={4} sx={{ fontSize: "16px" }}>
-            Elbow Mobility:{" "}
-          </Typography>
-          <RadioGroup
-            row
-            value={elbowmobility}
-            onChange={handleelbowChange}
-            aria-label="ElbowMobility"
-            name="Elbow"
-            sx={styles.RadioGrp}
-          >
-            <FormControlLabel
-              value="true"
-              control={<Radio sx={styles.Radio} />}
-              label="Yes" 
-            />
-            <FormControlLabel
-              value="false"
-              control={<Radio sx={styles.Radio} />}
-              label="No"
-            />
-          </RadioGroup>
-        </Box>
-
-        <Box display="flex" ml={10} mt={4}>
-          <Typography mr={4} sx={{ fontSize: "16px" }}>
-            Ankle Mobility:{" "}
-          </Typography>
-          <RadioGroup
-            row
-            value={anklemobility}
-            onChange={handleankleChange}
-            aria-label="AnkleMobility"
-            name="Ankle"
-            sx={styles.RadioGrp}
-          >
-            <FormControlLabel
-              value="true"
-              control={<Radio sx={styles.Radio} />}
-              label="Yes"
-            />
-            <FormControlLabel
-              value="false"
-              control={<Radio sx={styles.Radio} />}
-              label="No"
-            />
-          </RadioGroup>
-        </Box>
-        <Box display="flex" ml={10} mt={4}>
-          <Typography mr={4} sx={{ fontSize: "16px" }}>
-            Knee Mobility:{" "}
-          </Typography>
-          <RadioGroup
-            row
-            value={kneemobility}
-            onChange={handlekneeChange}
-            aria-label="KneeMobility"
-            name="Knee"
-            sx={styles.RadioGrp}
-          
-          >
-            <FormControlLabel
-              value="true"
-              control={<Radio sx={styles.Radio} />}
-              label="Yes"
-            />
-            <FormControlLabel
-              value="false"
-              control={<Radio sx={styles.Radio} />}
-              label="No"
-            />
-          </RadioGroup>
-        </Box>
-        <Box display="flex" ml={10} mt={4}>
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel>Level</InputLabel>
-              <Select value={level} onChange={handlelevelChange} label="Level">
-                <MenuItem value="beginner">Beginner</MenuItem>
-                <MenuItem value="intermediate">Intermediate</MenuItem>
-                <MenuItem value="advanced">Advanced</MenuItem>
-              </Select>
-            </FormControl>
           </Box>
-          <Box sx={{ minWidth: 120,marginLeft:"3em" }}>
-            <FormControl fullWidth>
-              <InputLabel>Workout Plan</InputLabel>
-              <Select sx={{width:"10em"}} value={workoutgoal} onChange={handleworkoutgoalChange} label="Workout Plan">
-                <MenuItem value="musclegain">Muscle Gain</MenuItem>
-                <MenuItem value="maintainweight">Maintain Weight</MenuItem>
-                <MenuItem value="weightloss">Weight Loss</MenuItem>
-              </Select>
-            </FormControl>
+
+          <Box display="flex" ml={10} mt={3}>
+            <Typography sx={{ fontSize: "16px" }} mr={4}>
+              Weight:
+            </Typography>
+            <TextField
+              color="secondary"
+              label="in (kgs)"
+              value={weight}
+              InputLabelProps={{ shrink: true }}
+              InputProps={{
+                style: {
+                  height: "70%",
+                  width: "120%",
+                  fontSize: "14px",
+                  border: "none",
+                },
+              }}
+              onChange={handleweightChange}
+              type="number"
+              variant="outlined"
+              required
+            />
           </Box>
-        </Box>
-        <Box mt={4} ml={10}>
-          {/* <a href="/submitted">
+
+          <Box display="flex" ml={10} mt={4}>
+            <Typography sx={{ fontSize: "16px" }} mr={4}>
+              Shoulder Mobility:{" "}
+            </Typography>
+            <RadioGroup
+              row
+              value={shouldermobility}
+              onChange={handleshoulderChange}
+              aria-label="ShoulderMobility"
+              name="Shoulder"
+              sx={styles.RadioGrp}
+            >
+              <FormControlLabel
+                value="true"
+                control={<Radio sx={styles.Radio} required={true} />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value="false"
+                control={<Radio sx={styles.Radio} required={true} />}
+                label="No"
+              />
+            </RadioGroup>
+          </Box>
+          <Box display="flex" ml={10} mt={4}>
+            <Typography mr={4} sx={{ fontSize: "16px" }}>
+              Elbow Mobility:{" "}
+            </Typography>
+            <RadioGroup
+              row
+              value={elbowmobility}
+              onChange={handleelbowChange}
+              aria-label="ElbowMobility"
+              name="Elbow"
+              sx={styles.RadioGrp}
+            >
+              <FormControlLabel
+                value="true"
+                control={<Radio sx={styles.Radio} required={true} />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value="false"
+                control={<Radio sx={styles.Radio} required={true} />}
+                label="No"
+              />
+            </RadioGroup>
+          </Box>
+
+          <Box display="flex" ml={10} mt={4}>
+            <Typography mr={4} sx={{ fontSize: "16px" }}>
+              Ankle Mobility:{" "}
+            </Typography>
+            <RadioGroup
+              row
+              value={anklemobility}
+              onChange={handleankleChange}
+              aria-label="AnkleMobility"
+              name="Ankle"
+              sx={styles.RadioGrp}
+            >
+              <FormControlLabel
+                value="true"
+                control={<Radio sx={styles.Radio} required={true} />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value="false"
+                control={<Radio sx={styles.Radio} required={true} />}
+                label="No"
+              />
+            </RadioGroup>
+          </Box>
+          <Box display="flex" ml={10} mt={4}>
+            <Typography mr={4} sx={{ fontSize: "16px" }}>
+              Knee Mobility:{" "}
+            </Typography>
+            <RadioGroup
+              row
+              value={kneemobility}
+              onChange={handlekneeChange}
+              aria-label="KneeMobility"
+              name="Knee"
+              sx={styles.RadioGrp}
+            >
+              <FormControlLabel
+                value="true"
+                control={<Radio sx={styles.Radio} required={true} />}
+                label="Yes"
+              />
+              <FormControlLabel
+                value="false"
+                control={<Radio sx={styles.Radio} required={true} />}
+                label="No"
+              />
+            </RadioGroup>
+          </Box>
+          <Box display="flex" ml={10} mt={4}>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth required>
+                <InputLabel>Level</InputLabel>
+                <Select
+                  value={level}
+                  onChange={handlelevelChange}
+                  label="Level"
+                >
+                  <MenuItem value="beginner">Beginner</MenuItem>
+                  <MenuItem value="intermediate">Intermediate</MenuItem>
+                  <MenuItem value="advanced">Advanced</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 120, marginLeft: "3em" }}>
+              <FormControl fullWidth required>
+                <InputLabel>Workout Plan</InputLabel>
+                <Select
+                  sx={{ width: "10em" }}
+                  value={workoutgoal}
+                  onChange={handleworkoutgoalChange}
+                  label="Workout Plan"
+                >
+                  <MenuItem value="musclegain">Muscle Gain</MenuItem>
+                  <MenuItem value="maintainweight">Maintain Weight</MenuItem>
+                  <MenuItem value="weightloss">Weight Loss</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Box>
+          <Box mt={4} ml={10}>
+            {/* <a href="/submitted">
           <Button
             type="submit"
             variant="contained"
@@ -302,26 +326,40 @@ const UserForm = () => {
             Submit
           </Button>
           </a> */}
-          <Button
-            type="submit"
-            variant="contained"
-            color="secondary"
-            sx={{ color: "white" }}
-            onClick={()=>{
-              onsubmithandler();
-            }}
-          >
-            Submit
-          </Button>
-          <Button
-            variant="lined"
-            color="secondary"
-            sx={{ color: "#0AAE59", marginLeft: "15%" }}
-            onClick={() => navigate("/mobility",{state:{height:height,weight:weight,workoutgoal:workoutgoal,level:level,shouldermobility:shouldermobility,anklemobility:anklemobility,elbowmobility:elbowmobility,kneemobility:kneemobility,}})}
-          >
-            AI MOBILITY CHECKER
-          </Button>
-        </Box>
+            <Button
+              type="submit"
+              variant="contained"
+              color="secondary"
+              sx={{ color: "white" }}
+              // onClick={()=>{
+              //   onsubmit();
+              // }}
+            >
+              Submit
+            </Button>
+            <Button
+              variant="lined"
+              color="secondary"
+              sx={{ color: "#0AAE59", marginLeft: "15%" }}
+              onClick={() =>
+                navigate("/mobility", {
+                  state: {
+                    height: height,
+                    weight: weight,
+                    workoutgoal: workoutgoal,
+                    level: level,
+                    shouldermobility: shouldermobility,
+                    anklemobility: anklemobility,
+                    elbowmobility: elbowmobility,
+                    kneemobility: kneemobility,
+                  },
+                })
+              }
+            >
+              AI MOBILITY CHECKER
+            </Button>
+          </Box>
+        </form>
       </Box>
     </Box>
   );
