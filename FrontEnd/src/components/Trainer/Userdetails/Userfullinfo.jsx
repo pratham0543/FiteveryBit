@@ -259,7 +259,7 @@ const Userfullinfo = () => {
         <Grid item  xs={9}  sm={3}>
           <Card
             onClick={() =>
-              navigate("/createworkout/muscle", { state: { name: "chest" } })
+              navigate("/createworkout/muscle", { state: { name: "chest",userId:user._id } })
             }
             className="card"
             onMouseOver={() => handleMouseOver("chest")}
@@ -294,7 +294,7 @@ const Userfullinfo = () => {
             onMouseOver={() => handleMouseOver("back")}
             onMouseOut={handleMouseOut}
             onClick={() =>
-              navigate("/createworkout/muscle", { state: { name: "back" } })
+              navigate("/createworkout/muscle", { state: { name: "back",userId:user._id } })
             }
           >
             {" "}
@@ -327,7 +327,7 @@ const Userfullinfo = () => {
             onMouseOver={() => handleMouseOver("shoulders")}
             onMouseOut={handleMouseOut}
             onClick={() =>
-              navigate("/createworkout/muscle", { state: { name: "shoulder" } })
+              navigate("/createworkout/muscle", { state: { name: "shoulder",userId:user._id } })
             }
           >
             {" "}
@@ -361,7 +361,7 @@ const Userfullinfo = () => {
             onMouseOver={() => handleMouseOver("legs")}
             onMouseOut={handleMouseOut}
             onClick={() =>
-              navigate("/createworkout/muscle", { state: { name: "legs" } })
+              navigate("/createworkout/muscle", { state: { name: "legs",userId:user._id } })
             }
           >
             <CardActionArea>
@@ -393,7 +393,7 @@ const Userfullinfo = () => {
             onMouseOver={() => handleMouseOver("arms")}
             onMouseOut={handleMouseOut}
             onClick={() =>
-              navigate("/createworkout/muscle", { state: { name: "arms" } })
+              navigate("/createworkout/muscle", { state: { name: "arms",userId:user._id } })
             }
           >
             {" "}
@@ -426,7 +426,7 @@ const Userfullinfo = () => {
             onMouseOver={() => handleMouseOver("abs")}
             onMouseOut={handleMouseOut}
             onClick={() =>
-              navigate("/createworkout/muscle", { state: { name: "abs" } })
+              navigate("/createworkout/muscle", { state: { name: "abs",userId:user._id } })
             }
           >
             {" "}

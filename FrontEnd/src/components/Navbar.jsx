@@ -302,7 +302,7 @@ const Navbar = () => {
 
           {(localStorage.getItem('usertype')==='normal')?<ListItem disablePadding>
             <ListItemButton onClick={()=>navigate('/workout')}  
-              disabled={localStorage.getItem('workoutcreated')===true?false:true}
+              disabled={localStorage.getItem('workoutcreated')==="true"?false:true}
             >
               <ListItemIcon>
               <FitnessCenterIcon color="secondary" />
