@@ -124,7 +124,8 @@ router.patch("/update", (req, res) => {
     level:req.body.level,
     mobility:req.body.mobility,
     visitedmobility:req.body.visitedmobility,
-    visitedmobilityAI:req.body.visitedmobilityAI
+    visitedmobilityAI:req.body.visitedmobilityAI,
+    workoutcreated:req.body.workoutcreated
   }
   signupschema
     .findByIdAndUpdate(req.body.id, updatedUser)

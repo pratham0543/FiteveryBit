@@ -21,10 +21,6 @@ export default function MobilityChecker() {
   const [shoulderExtensioncheck, setshoulderExtensioncheck] = useState("");
   const [LeftKneecheck, setLeftKneecheck] = useState("");
   const [RightKneecheck, setRightKneecheck] = useState("");
-  const [AnkleLeftDorsicheck, setAnkleLeftDorsicheck] = useState("");
-  const [AnkleRightDorsicheck, setAnkleRightDorsicheck] = useState("");
-  const [AnkleLeftPlantarcheck, setAnkleLeftPlantarcheck] = useState("");
-  const [AnkleRightPlantarcheck, setAnkleRightPlantarcheck] = useState("");
   const [ElbowLeftFlexsioncheck, setElbowLeftFlexsioncheck] = useState("");
   const [ElbowRightFlexsioncheck, setElbowRightFlexsioncheck] = useState("");
   const [ElbowLeftExtensioncheck, setElbowLeftExtensioncheck] = useState("");
@@ -161,122 +157,6 @@ export default function MobilityChecker() {
   const startRecordDelayRightKnee = () => {
     setTimeout(() => {
       startRecordingRightKnee();
-    }, 5000);
-  };
-  //left ankle dorsi flexsion
-  function stopRecordingAnkleLeftDorsi() {
-    recorderRef.current.stopRecording(() => {
-      const blob = recorderRef.current.getBlob();
-      const formData = new FormData();
-      formData.append("video", blob);
-      axios
-        .post("http://127.0.0.1:8000/mobility/leftankle1/", formData)
-        .then((response) => {
-          if (response.data.result === "PASS") {
-            setAnkleLeftDorsicheck("success");
-          } else if (response.data.result === "FAIL") {
-            setAnkleLeftDorsicheck("error");
-          }
-        })
-        .catch((err) => console.log(err));
-    });
-  }
-  const startRecordingAnkleLeftDorsi = () => {
-    recorderRef.current.startRecording();
-    setTimeout(() => {
-      stopRecordingAnkleLeftDorsi();
-    }, 5000);
-  };
-  const startRecordDelayAnkleLeftDorsi = () => {
-    setTimeout(() => {
-      startRecordingAnkleLeftDorsi();
-    }, 5000);
-  };
-  //right ankle dorsi flexsion
-  function stopRecordingAnkleRightDorsi() {
-    recorderRef.current.stopRecording(() => {
-      const blob = recorderRef.current.getBlob();
-      const formData = new FormData();
-      formData.append("video", blob);
-      axios
-        .post("http://127.0.0.1:8000/mobility/rightankle1/", formData)
-        .then((response) => {
-          if (response.data.result === "PASS") {
-            setAnkleRightDorsicheck("success");
-          } else if (response.data.result === "FAIL") {
-            setAnkleRightDorsicheck("error");
-          }
-        })
-        .catch((err) => console.log(err));
-    });
-  }
-  const startRecordingAnkleRightDorsi = () => {
-    recorderRef.current.startRecording();
-    setTimeout(() => {
-      stopRecordingAnkleRightDorsi();
-    }, 5000);
-  };
-  const startRecordDelayAnkleRightDorsi = () => {
-    setTimeout(() => {
-      startRecordingAnkleRightDorsi();
-    }, 5000);
-  };
-  //left ankle plantar flexsion
-  function stopRecordingAnkleLeftPlantar() {
-    recorderRef.current.stopRecording(() => {
-      const blob = recorderRef.current.getBlob();
-      const formData = new FormData();
-      formData.append("video", blob);
-      axios
-        .post("http://127.0.0.1:8000/mobility/leftankle2/", formData)
-        .then((response) => {
-          if (response.data.result === "PASS") {
-            setAnkleLeftPlantarcheck("success");
-          } else if (response.data.result === "FAIL") {
-            setAnkleLeftPlantarcheck("error");
-          }
-        })
-        .catch((err) => console.log(err));
-    });
-  }
-  const startRecordingAnkleLeftPlantar = () => {
-    recorderRef.current.startRecording();
-    setTimeout(() => {
-      stopRecordingAnkleLeftPlantar();
-    }, 5000);
-  };
-  const startRecordDelayAnkleLeftPlantar = () => {
-    setTimeout(() => {
-      startRecordingAnkleLeftPlantar();
-    }, 5000);
-  };
-  //right ankle plantar flexsion
-  function stopRecordingAnkleRightPlantar() {
-    recorderRef.current.stopRecording(() => {
-      const blob = recorderRef.current.getBlob();
-      const formData = new FormData();
-      formData.append("video", blob);
-      axios
-        .post("http://127.0.0.1:8000/mobility/rightankle2/", formData)
-        .then((response) => {
-          if (response.data.result === "PASS") {
-            setAnkleRightPlantarcheck("success");
-          } else if (response.data.result === "FAIL") {
-            setAnkleRightPlantarcheck("error");
-          }
-        })
-        .catch((err) => console.log(err));
-    });
-  }
-  const startRecordingAnkleRightPlantar = () => {
-    recorderRef.current.startRecording();
-    setTimeout(() => {
-      stopRecordingAnkleRightPlantar();
-    }, 5000);
-  };
-  const startRecordDelayAnkleRightPlantar = () => {
-    setTimeout(() => {
-      startRecordingAnkleRightPlantar();
     }, 5000);
   };
   //left elbow flexsion
@@ -421,15 +301,6 @@ export default function MobilityChecker() {
       : (kneecheck = "false");
   }
 
-  if (anklecheck === "") {
-    AnkleLeftDorsicheck === "success" &&
-      AnkleRightDorsicheck === "success" &&
-      AnkleLeftPlantarcheck === "success" &&
-      AnkleRightPlantarcheck === "success"
-      ? (anklecheck = "true")
-      : (anklecheck = "false");
-  }
-
   if (elbowcheck === "") {
     ElbowLeftExtensioncheck === "success" &&
       ElbowLeftFlexsioncheck === "success" &&
@@ -438,11 +309,9 @@ export default function MobilityChecker() {
       ? (elbowcheck = "true")
       : (elbowcheck = "false");
   }
-  console.log(shouldercheck)
-  console.log(elbowcheck)
   return (
     <Grid container mt={12} mb={10} ml={5}>
-      <Grid item xs={6}>
+      <Grid item xs={6} mr={5}>
         <video ref={videoRef} autoPlay />
       </Grid>
       <Grid item xs={5} mt={2}>

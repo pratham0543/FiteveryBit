@@ -28,7 +28,7 @@ function App(props) {
     <>
       {location.pathname !== "/mobility" ? <Navbar /> : <></>}
       <Routes>
-        {localStorage.getItem("loggedin") === null && (
+        {localStorage.getItem("usertype") === null && (
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
@@ -36,7 +36,7 @@ function App(props) {
             <Route path="/videoTutorials" element={<Videotutorial />} />
           </>
         )}
-        {localStorage.getItem("loggedin") === "true" && (
+        {localStorage.getItem("usertype") === "normal" && (
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
@@ -45,12 +45,30 @@ function App(props) {
             <Route path="/userform" element={<UserForm />} />
             <Route path="/mobility" element={<Mobilitycheck />} />
             <Route path="/mobilitycheck" element={<MobilityChecker />} />
-            <Route path="/workoutplanner" element={<Userdetails />} />
             <Route path="/submitted" element={<Submitted />} />
-            <Route path="/createworkout" element={<Userfullinfo />} />
-            <Route path="/createworkout/muscle" element={<Workoutplanner />} />
+
             <Route path="/workout" element={<WorkoutMain />} />
             <Route path="/showworkout/muscle" element={<Showworkout />} />
+          </>
+        )}
+
+        {localStorage.getItem("usertype") === "trainer" && (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/exerciseDetails" element={<ExerciseDetails />} />
+            <Route path="/videoTutorials" element={<Videotutorial />} />
+            <Route path="/workoutplanner" element={<Userdetails />} />
+            <Route path="/createworkout" element={<Userfullinfo />} />
+            <Route path="/createworkout/muscle" element={<Workoutplanner />} />
+          </>
+        )}
+        {localStorage.getItem("usertype") === "admin" && (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/exerciseDetails" element={<ExerciseDetails />} />
+            <Route path="/videoTutorials" element={<Videotutorial />} />
             <Route path="/trainers" element={<Trainers />} />
             <Route path="/createTrainer" element={<Signup />} />
             <Route path="/assignTrainer" element={<AssignTrainers />} />
