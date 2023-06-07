@@ -20,21 +20,8 @@ import Showworkout from "./components/Workout/Showworkout";
 import Whatsapplink from "./components/WhatsappBot/Whatsapplink";
 import Trainers from "./components/Admin/Trainers";
 import AssignTrainers from "./components/Admin/AssignTrainers";
-import { useEffect } from "react";
-import axios from "axios";
-
 
 function App(props) {
-
-  useEffect(() => {
-    axios.get('https://fiteverybit-backend-test.onrender.com/login')
-    .then(res=>console.log(res.data))
-    .catch(err=>console.log(err.message))
-  
-    
-      
-    
-  }, [])
   
 
 

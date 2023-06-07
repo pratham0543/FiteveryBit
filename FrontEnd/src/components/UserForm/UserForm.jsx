@@ -68,7 +68,7 @@ const UserForm = () => {
     setlevel(e.target.value);
   };
   const [workoutgoal, setworkoutgoal] = React.useState(
-    location.state.workoutgoal
+    location.state.workoutplan
   );
 
   const handleworkoutgoalChange = (e) => {
@@ -342,7 +342,7 @@ const UserForm = () => {
                   state: {
                     height: height,
                     weight: weight,
-                    workoutgoal: workoutgoal,
+                    workoutplan: workoutgoal,
                     level: level,
                     shouldermobility: shouldermobility,
                     anklemobility: anklemobility,

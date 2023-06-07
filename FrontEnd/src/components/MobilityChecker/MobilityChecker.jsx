@@ -439,7 +439,7 @@ export default function MobilityChecker() {
               state: {
                 height: location.state.height,
                 weight: location.state.weight,
-                workoutgoal: location.state.workoutgoal,
+                workoutplan: location.state.workoutplan,
                 level: location.state.level,
                 shouldermobility: shouldercheck,
                 elbowmobility: elbowcheck,
