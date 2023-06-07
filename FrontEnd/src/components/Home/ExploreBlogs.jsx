@@ -32,7 +32,7 @@ const ExploreBlogs = () => {
         Start your neverending journey from here{" "}
       </Typography>
       <Box
-        sx={{ width: "70%", height: {sm:"50vh",md:"90vh"}, overflowY: "scroll" }}
+        sx={{ width: "70%", height: {xs:"55vh",sm:"50vh",md:"90vh"}, overflowY: "scroll" }}
         mt={2}
         mx="auto"
       >

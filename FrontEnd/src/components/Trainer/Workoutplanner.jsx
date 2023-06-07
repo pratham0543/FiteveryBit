@@ -25,7 +25,7 @@ class Workout {
     this.superset = workout;
   }
 }
-const Workoutplanner = () => {
+const Workoutplanner = (props) => {
 
 //open state for showing save worked or not
 const [open, setopen] = useState(false)
@@ -41,7 +41,8 @@ const [saveWorkout, setsaveWorkout] = useState(false);
   var exercises = [];
   const location = useLocation();
   const muscleName = location.state.name;
-  const userid = localStorage.getItem("usersAssigned");
+  const userid = location.state.userId
+  console.log(userid);
   //handle expanded accordion
   const handleExpandedAccordion = (panel) => (e, isExpanded) => {
     setexpanded(isExpanded ? panel : false);
@@ -97,6 +98,7 @@ const [saveWorkout, setsaveWorkout] = useState(false);
       w[index] = obj;
       setworkout(w);
       setopen(true)
+      console.log(w);
       
     }
   };
@@ -129,12 +131,16 @@ userWorkout.legs=workout;
     axios.patch(`http://localhost:3200/userexercise/${muscleName}`,userWorkout)
     .then((result)=>
     {
+      console.log(result.data);
     setsaveWorkout(true);
   
     
   })
     .catch((err)=>console.log(err.message))
- 
+  
+    axios.patch('http://localhost:3200/login/update',{id:userid,workoutcreated:true})
+  .then(res=>console.log(res.data))
+  .catch(err=>console.log(err.message))
 
   };
 
@@ -292,7 +298,7 @@ userWorkout.legs=workout;
           height="auto"
         ></Box>
       </Stack>
-      <Snackbar open={open} autoHideDuration={1000} onClose={()=>setopen(false)}>
+      <Snackbar open={open} autoHideDuration={2000} onClose={()=>setopen(false)}>
         <Alert color="success" onClose={()=>setopen(false)} sx={{ width: "100%" }}>
          Exercise Saved Successfully
         </Alert>
