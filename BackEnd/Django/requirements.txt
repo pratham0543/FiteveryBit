@@ -1,0 +1,7 @@
+Django
+django-cors-headers
+djangorestframework
+numpy
+mediapipe
+cv2
+django-cors-headers
