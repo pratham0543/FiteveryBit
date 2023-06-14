@@ -9,13 +9,17 @@ const AssignTrainers = () => {
   console.log("trainer id", location.state.trainer_id);
   const clients = [];
   const handleUserAssign = (userid) => {
+    const deployed_url=`https://fiteverybit-nodeapi.onrender.com//login/updatetrainer`
+    const localhost_url="http://localhost:3200/login/updatetrainer"
     axios
-      .patch("http://localhost:3200/login/updatetrainer", { id: userid,trainerassigned:location.state.trainer_id })
+      .patch(deployed_url, { id: userid,trainerassigned:location.state.trainer_id })
       .then(res =>console.log())
       .catch((err) => console.log(err));
     clients.push(userid);
+    const deployed_url2="https://fiteverybit-nodeapi.onrender.com/trainerlogin/updateusers"
+    const localhost_url2="http://localhost:3200/trainerlogin/updateusers"
     axios
-      .patch("http://localhost:3200/trainerlogin/updateusers", {
+      .patch(deployed_url2, {
         id: location.state.trainer_id,
         user_assigned: clients,
       })
@@ -24,8 +28,10 @@ const AssignTrainers = () => {
   };
 
   useEffect(() => {
+    const deployed_logindetails='https://fiteverybit-nodeapi.onrender.com/login'
+    const localhost_urllogin="http://localhost:3200/login"
     axios
-      .get("http://localhost:3200/login")
+      .get(deployed_logindetails)
       .then((res) =>{ 
         
         console.log();

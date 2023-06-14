@@ -7,13 +7,17 @@ const Trainers = () => {
   const [trainers, settrainers] = useState([]);
   const [users, setusers] = useState([])
   useEffect(() => {
+    const deployed_trainerlogin='https://fiteverybit-nodeapi.onrender.com/trainerlogin'
+    const deployed_getTrainer='https://fiteverybit-nodeapi.onrender.com/login'
+    const url1="http://localhost:3200/trainerlogin"
+    const url2='http://localhost:3200/login'
     axios
-      .get("http://localhost:3200/trainerlogin")
+      .get(deployed_trainerlogin)
       .then((result) => {
         settrainers(result.data.result);
       })
       .catch((err) => console.log(err.message));
-      axios.get('http://localhost:3200/login')
+      axios.get(deployed_getTrainer)
       .then(res=>{
         setusers(res.data.result);
       })
