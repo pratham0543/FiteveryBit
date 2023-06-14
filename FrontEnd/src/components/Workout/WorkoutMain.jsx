@@ -27,6 +27,7 @@ const WorkoutMain = () => {
   const userid=localStorage.getItem("id")
   useEffect(()=>
   {
+    
     axios.get(`http://localhost:3200/userexercise/${userid}`,)
     .then((res)=>{
       setuserExercise(res.data.result)

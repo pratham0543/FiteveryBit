@@ -45,8 +45,10 @@ const ExerciseDetails = () => {
 
   const handleMuscleClick = (muscle) => {
     setisExercise(true);
+    const deployed_url=`https://fiteverybit-nodeapi.onrender.com/exercise/${muscle}`
+    const localhost_url=`http://localhost:3200/exercise/${muscle}`
     axios
-      .get(`http://localhost:3200/exercise/${muscle}`)
+      .get(deployed_url)
       .then((res) => {
         setexerciseData(res.data);
       })
