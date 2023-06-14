@@ -10,8 +10,9 @@ const Userdetails = () => {
   const usersAssigned=JSON.parse(localStorage.getItem("usersAssigned"));
   console.log(usersAssigned);
   useEffect(()=>{
-   
-    axios.get(`http://localhost:3200/login`)
+    const deployed_url=`https://fiteverybit-nodeapi.onrender.com/login`
+    const localhost_url=`http://localhost:3200/login`
+    axios.get(deployed_url)
     .then((res)=>{
             setUsers(res.data.result)
      

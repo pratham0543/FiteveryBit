@@ -127,8 +127,9 @@ userWorkout.back=workout;
 else if(muscleName==='legs')
 userWorkout.legs=workout;
 
-  
-    axios.patch(`http://localhost:3200/userexercise/${muscleName}`,userWorkout)
+const deployed_url=`https://fiteverybit-nodeapi.onrender.com/userexercise/${muscleName}`
+const localhost_url=`http://localhost:3200/userexercise/${muscleName}`
+    axios.patch(deployed_url,userWorkout)
     .then((result)=>
     {
       console.log(result.data);
@@ -137,16 +138,20 @@ userWorkout.legs=workout;
     
   })
     .catch((err)=>console.log(err.message))
-  
-    axios.patch('http://localhost:3200/login/update',{id:userid,workoutcreated:true})
+    const deployed_url2=`https://fiteverybit-nodeapi.onrender.com/login/update`
+const localhost_url2=`http://localhost:3200/login/update`
+    axios.patch(deployed_url2,{id:userid,workoutcreated:true})
   .then(res=>console.log(res.data))
   .catch(err=>console.log(err.message))
 
   };
 
   useEffect(() => {
+    //add loader
+    const deployed_url=`https://fiteverybit-nodeapi.onrender.com/exercise/${muscleName}`
+const localhost_url=`http://localhost:3200/exercise/${muscleName}`
     axios
-      .get(`http://localhost:3200/exercise/${muscleName}`)
+      .get(deployed_url)
       .then((res) => {
         setmuscleData(res.data);
       })
@@ -299,7 +304,7 @@ userWorkout.legs=workout;
         ></Box>
       </Stack>
       <Snackbar open={open} autoHideDuration={2000} onClose={()=>setopen(false)}>
-        <Alert color="success" onClose={()=>setopen(false)} sx={{ width: "100%" }}>
+        <Alert color="success" onClose={()=>setopen(false)}  sx={{ width: "100%" }}>
          Exercise Saved Successfully
         </Alert>
       </Snackbar>

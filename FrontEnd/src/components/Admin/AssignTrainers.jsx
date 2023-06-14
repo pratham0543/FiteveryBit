@@ -9,7 +9,7 @@ const AssignTrainers = () => {
   console.log("trainer id", location.state.trainer_id);
   const clients = [];
   const handleUserAssign = (userid) => {
-    const deployed_url=`https://fiteverybit-nodeapi.onrender.com//login/updatetrainer`
+    const deployed_url=`https://fiteverybit-nodeapi.onrender.com/login/updatetrainer`
     const localhost_url="http://localhost:3200/login/updatetrainer"
     axios
       .patch(deployed_url, { id: userid,trainerassigned:location.state.trainer_id })

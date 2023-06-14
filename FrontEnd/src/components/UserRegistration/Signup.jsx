@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
+import {CircularProgress} from "@mui/material";
 const validationSchema = yup.object({
   firstname: yup
     .string("Enter a valid name")
@@ -65,7 +66,8 @@ const Signup = (props) => {
 
   //successful user snackbar
   const [open, setOpen] = useState(false);
-
+//loader
+const [isLoading, setisLoading] = useState(false)
   //unsuccessfull user snackbar
   const [erropen, setErropen] = useState(false);
   const [errormes, seterrormes] = useState("");
@@ -98,17 +100,22 @@ const Signup = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      setisLoading(true)
       // console.log(JSON.stringify(values));
       let signup = "signup";
       if (localStorage.getItem("usertype") === "admin")
         signup = "trainersignup";
         // console.log(signup)
+       const deployed_url=`https://fiteverybit-nodeapi.onrender.com/${signup}`
+const localhost_url=`http://localhost:3200/${signup}`
       axios
-        .post(`http://localhost:3200/${signup}`, values)
+        .post(deployed_url, values)
         .then((result) => {
+          setisLoading(false)
           setOpen(true);
         })
         .catch((err) => {
+          setisLoading(false)
           console.log("err",err);
           seterrormes(err.response.data.message);
           setErropen(true);
@@ -346,14 +353,15 @@ const Signup = (props) => {
                   </Typography>
                 </Box>
                 <Box mt={2} display="flex">
-                  <Button
+                  {isLoading?<CircularProgress color="secondary" />: <Button
                     type="submit"
                     variant="contained"
                     color="secondary"
                     sx={{ color: "white" }}
                   >
                     Signup
-                  </Button>
+                  </Button>}
+                 
                   <Typography
                     sx={{ alignSelf: "center", ml: "4px" }}
                     variant="body2"
@@ -372,7 +380,7 @@ const Signup = (props) => {
       </Grid>
 
       {/* will show only on successfull user creation  */}
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={2000}  onClose={handleClose}>
         <Alert
           color="secondary"
           onClose={handleClose}
@@ -385,7 +393,7 @@ const Signup = (props) => {
 
       {/* will show on error */}
       <Snackbar open={erropen} autoHideDuration={2000} onClose={handleClose}>
-        <Alert color="error" onClose={handleClose} sx={{ width: "100%" }}>
+        <Alert color="error"  severity="error" onClose={handleClose} sx={{ width: "100%" }}>
           {errormes}
         </Alert>
       </Snackbar>
