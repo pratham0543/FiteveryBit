@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
+import CircularProgress from "@mui/material";
 import {
   Grid,
   TextField,
@@ -33,6 +34,7 @@ const validationSchema = new yup.object({
 const Login = () => {
   //code for redirecting
   const navigate = useNavigate();
+  const [isLoading, setisLoading] = useState(false)
   //state for checking trainer or not
   const [isTrainer,setisTrainer]=useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -65,12 +67,16 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      setisLoading(true)
       var usercall='login'
       if(isTrainer===true)
         usercall='trainerlogin'
+      const deployed_url=`https://fiteverybit-nodeapi.onrender.com/${usercall}`
+      const url=`http://localhost:3200/${usercall}`
       axios
-        .post(`http://localhost:3200/${usercall}`, values)
+        .post(deployed_url, values)
         .then((result) => {
+          setisLoading(false)
           setopen(true);
           const userDetails = jwt_decode(result.data.token);
           // console.log(userDetails)
@@ -91,6 +97,7 @@ const Login = () => {
           setTimeout(() => navigate("/"), 200);
         })
         .catch((err) => {
+          setisLoading(false)
           console.log("error");
           seterrOpen(true);
         });
@@ -192,14 +199,16 @@ const Login = () => {
             
               </Box>
             </Stack>
-            <Button
+
+            {isLoading?<CircularProgress color="secondary"/>:  <Button
               variant="contained"
               color="secondary"
               type="submit"
               sx={{ color: "true.main", mt: "16px" }}
             >
               Login
-            </Button>
+            </Button>}
+          
           </form>
         </Grid>
         <Grid
@@ -246,13 +255,13 @@ const Login = () => {
 
       {/* this will show on successful user login */}
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert color="success" onClose={handleClose} sx={{ width: "100%" }}>
+        <Alert color="success" onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           User Login Successful
         </Alert>
       </Snackbar>
       {/* this will show on unsuccessful user login */}
       <Snackbar open={erropen} autoHideDuration={2000} onClose={handleClose}>
-        <Alert color="error" onClose={handleClose} sx={{ width: "100%" }}>
+        <Alert color="error" onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           Email or password is incorrect. Please Try again with correct email or
           password
         </Alert>
