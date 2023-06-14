@@ -94,14 +94,18 @@ const UserForm = () => {
     userid: id,
   };
   const onsubmit = (e) => {
+    const deployed_url=`https://fiteverybit-nodeapi.onrender.com/login/update`
+    const localhost_url="http://localhost:3200/login/update"
+    const deployed_url2=`https://fiteverybit-nodeapi.onrender.com/userexercise`
+    const localhost_url2="http://localhost:3200/userexercise"
     e.preventDefault();
     localStorage.setItem("visitedmobility", "true");
     axios
-      .patch("http://localhost:3200/login/update", info)
+      .patch(deployed_url, info)
       .then((result) => {
         console.log(result)
         axios
-          .post("http://localhost:3200/userexercise", userexercisedata)
+          .post(deployed_url2, userexercisedata)
           .then(resul=>{
             navigate("/submitted");
           })
