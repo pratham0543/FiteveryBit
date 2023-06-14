@@ -27,8 +27,9 @@ const WorkoutMain = () => {
   const userid=localStorage.getItem("id")
   useEffect(()=>
   {
-    
-    axios.get(`http://localhost:3200/userexercise/${userid}`,)
+    const deployed_url=`https://fiteverybit-nodeapi.onrender.com/userexercise/${userid}`
+    const localhost_url=
+    axios.get(deployed_url)
     .then((res)=>{
       setuserExercise(res.data.result)
      })
