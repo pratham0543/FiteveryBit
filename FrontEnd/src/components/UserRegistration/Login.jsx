@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
-import CircularProgress from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import {
   Grid,
   TextField,
